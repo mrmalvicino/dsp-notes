@@ -1,0 +1,56 @@
+\chapter{Caracterización de sistemas}
+
+\begin{mdframed}[style=MyFrame1]
+    \begin{defn}
+    \end{defn}
+    \cusTi{Sistema invariante en el tiempo}
+    \cusTe{Un sistema es invariante en el tiempo si al excitarlo con $\fx[x]{t-t_0}$ genera $\fx[y]{t-t_0}$.}
+\end{mdframed}
+
+\begin{mdframed}[style=MyFrame1]
+    \begin{defn}
+    \end{defn}
+    \cusTi{Sistema estable}
+    \cusTe{Un sistema es estable si para una entrada acotada en amplitud, la salida también es acotada.}
+\end{mdframed}
+
+\begin{mdframed}[style=MyFrame1]
+    \begin{defn}
+    \end{defn}
+    \cusTi{Sistema causal}
+    \cusTe{Un sistema es causal o no anticipativo si la salida no comienza antes de aplicar la entrada.}
+\end{mdframed}
+ 
+
+\section{Función de transferencia}
+
+\begin{mdframed}[style=MyFrame1]
+    \begin{defn}
+    \end{defn}
+    \cusTi{Función de transferencia}
+    \cusTe{Dados los espectros frecuenciales de las señales de entrada $\fx[X]{s}$ y salida $\fx[Y]{s}$ de un sistema, se define el cociente de estos como la función de transferencia $H \in \setC$ dada por}
+    \begin{equation*}
+        \fx[H]{s} = \frac{\fx[Y]{s}}{\fx[X]{s}}
+    \end{equation*}
+\end{mdframed}
+
+\begin{mdframed}[style=MyFrame1]
+    \begin{prop}
+    \end{prop}
+    \noTi{Un sistema lineal e invariante en el tiempo excitado por una señal $\fx[x]{t} = A_x \fx[\cos]{\omega_x \, t + \varphi_x}$ presenta una señal de salida $\fx[y]{t} = A_y \fx[\cos]{\omega_y \, t + \varphi_y}$} tal que
+    \begin{equation*}
+        \fx[H]{\omega} = \frac{\fx[Y]{\omega}}{\fx[X]{\omega}}
+    \end{equation*}
+\end{mdframed}
+
+Considerando que $\fx[H]{\omega} = \norm{\fx[H]{\omega}} \, e^{\iu \fx[\arg]{\fx[H]{\omega}}}$ se puede demostrar la siguiente propiedad.
+
+\begin{mdframed}[style=MyFrame1]
+    \begin{prop}
+    \end{prop}
+    \begin{gather*}
+        \norm{\fx[H]{\omega_x}} = \frac{A_y}{A_x}
+        \\[1ex]
+        \fx[\arg]{\fx[H]{\omega_x}} = \varphi_y - \varphi_x
+    \end{gather*}
+\end{mdframed}

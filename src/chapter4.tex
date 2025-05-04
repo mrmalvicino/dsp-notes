@@ -1,0 +1,346 @@
+\chapter{Transformada de Fourier}
+
+
+\section{Serie de Fourier}
+
+Una función $\fx[x]{t}$ de período fundamental $T_0 = \frac{2 \, \pi}{\omega_0}$ tiene desarrollo de Fourier si cumple las \emph{condiciones de Dirichlet}:
+\begin{itemize}
+    \item Es absolutamente inegrable: $\int_{T_0} \norm{\fx[x]{t}} \, \dif t < \infty$
+    \item Tiene una cantidad finita de máximos y mínimos en $T_0$
+    \item Tiene una cantidad finita de discontinuidades en $T_0$
+\end{itemize}
+
+\begin{mdframed}[style=MyFrame1]
+    \begin{defn}
+        \label{defn:FourierSerieExp}
+    \end{defn}
+    \cusTi{Serie de Fourier: forma exponencial compleja}
+    \begin{equation*}
+        \fx[x]{t} = \sum_{\kth=-\infty}^\infty c_\kth \, e^{\iu \, \kth \, \omega_0 \, t}
+    \end{equation*}
+    \noTi{donde $c_\kth$ son los coeficientes de Fourier complejos dados por}
+    \begin{equation*}
+        c_\kth = \frac{1}{T_0} \int_{T_0} \fx[x]{t} \, e^{-\iu \, \kth \, \omega_0 \, t} \, \dif t
+    \end{equation*}
+\end{mdframed}
+
+Reacomodando la sumatoria de la definición \ref{defn:FourierSerieExp} como sigue
+\begin{align*}
+    \fx[x]{t} &=
+    \sum_{\kth=-\infty}^\infty c_\kth \, e^{\iu \, \kth \, \omega_0 \, t}
+    \\[1em]
+    &= \sum_{\kth=-\infty}^{-1} c_\kth \, e^{\iu \, \kth \, \omega_0 \, t} + c_0 + \sum_{\kth=1}^{\infty} c_\kth \, e^{\iu \, \kth \, \omega_0 \, t}
+    \\[1em]
+    &= \sum_{\kth=1}^{\infty} c_{-\kth} \, e^{-\iu \, \kth \, \omega_0 \, t} + c_0 + \sum_{\kth=1}^{\infty} c_\kth \, e^{\iu \, \kth \, \omega_0 \, t}
+\end{align*}
+
+es posible obtener la siguiente expresión equivalente:
+\begin{equation}
+    \fx[x]{t} = c_0 + \sum_{\kth=1}^{\infty} \bb{ c_\kth \, e^{\iu \, \kth \, \omega_0 \, t} + c_{-\kth} \, e^{-\iu \, \kth \, \omega_0 \, t} }
+    \label{eqn:FourierExpBis}
+\end{equation}
+
+Y aplicando la fórmula de Euler:
+\begin{align*}
+    &
+    \scale{0.80}{
+    = c_0 + \sum_{\kth=1}^{\infty} \braces{c_\kth \sqb{\fx[\cos]{\kth \, \omega_0 \, t} + \iu \fx[\sin]{\kth \, \omega_0 \, t}} + c_{-\kth} \sqb{\fx[\cos]{\kth \, \omega_0 \, t} - \iu \fx[\sin]{\kth \, \omega_0 \, t}} }
+    }
+    \\[1em]
+    &= c_0 + \sum_{\kth=1}^{\infty} \sqb{ \bb{c_\kth + c_{-\kth}} \fx[\cos]{\kth \, \omega_0 \, t} + \iu \bb{c_\kth - c_{-\kth}} \fx[\sin]{\kth \, \omega_0 \, t} }
+\end{align*}
+
+\begin{mdframed}[style=MyFrame1]
+    \begin{defn}
+        \label{defn:FourierSerieTrig}
+    \end{defn}
+    \cusTi{Serie de Fourier: forma trigonométrica}
+    \begin{equation*}
+        \fx[x]{t} = c_0 + \sum_{\kth=1}^{\infty} \sqb{a_\kth \fx[\cos]{\kth \, \omega_0 \, t} + b_\kth \fx[\sin]{\kth \, \omega_0 \, t} }
+    \end{equation*}
+    \noTi{donde $a_\kth = c_\kth + c_{-\kth}$ y $b_\kth = \iu \bb{c_\kth - c_{-\kth}}$ son los coeficientes de Fourier trigonométricos.}
+\end{mdframed}
+
+Por otro lado, si se aplica la fórmula de Euler pero esta vez en la exponencial de los coeficientes complejos de la definición \ref{defn:FourierSerieExp}:
+\begin{align*}
+    c_{\pm\kth} &= \frac{1}{T_0} \int_{T_0} \fx[x]{t} \, e^{\mp \iu \, \kth \, \omega_0 \, t} \, \dif t
+    \\
+    &= \frac{1}{T_0} \int_{T_0} \fx[x]{t} \sqb{ \fx[\cos]{\kth \, \omega_0 \, t} \mp \iu \fx[\sin]{\kth \, \omega_0 \, t} } \, \dif t
+    \\
+    &= \frac{1}{T_0} \int_{T_0} \fx[x]{t} \fx[\cos]{\kth \, \omega_0 \, t} \dif t
+    \mp \frac{\iu}{T_0} \int_{T_0} \fx[x]{t} \fx[\sin]{\kth \, \omega_0 \, t} \dif t
+\end{align*}
+
+Se definen los términos $\alpha = \int_{T_0} \fx[x]{t} \fx[\cos]{\kth \, \omega_0 \, t} \dif t$ y $\beta = \int_{T_0} \fx[x]{t} \fx[\sin]{\kth \, \omega_0 \, t} \dif t$ para simplificar la notación, tal que:
+\begin{equation*}
+     c_{\pm\kth} = \frac{\alpha}{T_0} \mp \iu \frac{\beta}{T_0}
+\end{equation*}
+
+Obteniendo las siguientes expresiones para los coeficientes trigonométricos de la definición \ref{defn:FourierSerieTrig}:
+\begin{equation*}
+    \left\{
+    \begin{aligned}
+        a_\kth &= c_\kth + c_{-\kth} = \frac{2 \, \alpha}{T_0}
+        \\
+        b_\kth &= \iu \bb{c_\kth - c_{-\kth}} = \frac{2 \, \beta}{T_0}
+    \end{aligned}
+    \right.
+\end{equation*}
+
+Esto no es casualidad y viene dado por una propiedad que sale de sumar complejos conjugados. Podemos comprobarla gráficamente. Dado que $a_\kth \in \setR$ y $b_\kth \in \setI$ son ortogonales entre sí, los coeficientes $c_{\pm\kth} \in \setC$ no forman cualquier ángulo, sino que $c_\kth$ es el conjugado de $c_{-\kth}$. A continuación se muestran con flechas en el plano complejo:
+
+\begin{center}
+    \def\svgwidth{0.6\linewidth}
+    \input{./images/fourier-abc.pdf_tex}
+\end{center}
+
+A partir del gráfico anterior, se define el complejo $C_\kth = a_\kth - \iu \, b_\kth$ representado por un punto en el vértice del triángulo gris.
+
+Luego, multiplicando y dividiendo por $\norm{C_\kth}$ la serie de la definición \ref{defn:FourierSerieTrig} se tiene
+\begin{equation*}
+    \fx[x]{t} = c_0 + \sum_{\kth=1}^{\infty} \norm{C_\kth} \sqb{ \dfrac{a_\kth}{\norm{C_\kth}} \fx[\cos]{\kth \, \omega_0 \, t} + \dfrac{b_\kth}{\norm{C_\kth}} \fx[\sin]{\kth \, \omega_0 \, t} }
+\end{equation*}
+
+Por trigonometría se tiene $\fx[\cos]{\theta_\kth} = a_\kth / \norm{C_\kth}$ mientras que $\fx[\sin]{\theta_\kth} = b_\kth / \norm{C_\kth}$ luego:
+\begin{equation*}
+    \fx[x]{t} = c_0 + \sum_{\kth=1}^{\infty} \norm{C_\kth} \sqb{ \fx[\cos]{\theta_\kth} \fx[\cos]{\kth \, \omega_0 \, t} + \fx[\sin]{\theta_\kth} \fx[\sin]{\kth \, \omega_0 \, t} }
+\end{equation*}
+
+Aplicando $\fx[\cos]{\alpha \pm \beta} = \fx[\cos]{\alpha} \fx[\cos]{\beta} \mp \fx[\sin]{\alpha} \fx[\sin]{\beta}$ se infiere:
+
+\begin{mdframed}[style=MyFrame1]
+    \begin{defn}
+        \label{defn:FourierSerieArm}
+    \end{defn}
+    \cusTi{Serie de Fourier: forma armónica}
+    \begin{equation*}
+        \fx[x]{t} = c_0 + \sum_{\kth=1}^{\infty} \norm{C_\kth} \fx[\cos]{\kth \, \omega_0 \, t - \theta_\kth}
+    \end{equation*}
+    \noTi{donde $C_\kth$ son los coeficientes de Fourier expresados en forma polar, tal que:}
+    \begin{equation*}
+    \left\{
+    \begin{aligned}
+        \norm{C_\kth} = \sqrt{a_\kth^2 + b_\kth^2}
+        \\
+        \theta_\kth = \fx[\artan]{\frac{b_\kth}{a_\kth}}
+    \end{aligned}
+    \right.
+\end{equation*}
+\end{mdframed}
+
+\begin{mdframed}[style=MyFrame2]
+    \begin{example}
+    \end{example}
+    \cusTi{De la proyección ortogonal a la serie}
+    \begin{formatI}
+        Calcular la proyección ortogonal de una onda cuadrada. Obtener los coeficientes de Fourier complejos. Demostrar que son equivalentes a una serie deducida a partir de la proyección.
+    \end{formatI}
+    \vspace{1em}
+    Sea $x$ una función por partes dada por
+    \begin{equation*}
+        \fx[x]{t} =
+        \left\{
+        \begin{matrix}
+            0 & \text{si } -\pi < t < -\frac{\pi}{2}
+            \\
+            1 & \text{si } -\frac{\pi}{2} < t < \frac{\pi}{2}
+            \\
+            0 & \text{si } \frac{\pi}{2} < t < \pi
+        \end{matrix}
+        \right.
+    \end{equation*}
+    
+    Sea $B_S$ una base de polinomios trigonométricos. A saber:
+    \begin{equation*}
+        B_S = \braces{1; \fx[\sin]{t}; \fx[\cos]{t}; \fx[\sin]{2t}; \dots; \fx[\sin]{\kth t}; \fx[\cos]{\kth t}}
+    \end{equation*}
+    
+    De manera que la proyección de $x$ sobre $S$ es:
+    \begin{multline*}
+        \fx[\proy_S]{x} =
+        \\
+        = \frac{1}{2} + \frac{2}{\pi} \sqb{\fx[\cos]{t} - \dfrac{\fx[\cos]{3t}}{3} + \dfrac{\fx[\cos]{5t}}{5} - \dfrac{\fx[\cos]{7t}}{7} \cdots}
+    \end{multline*}
+
+    Y puede ser expresada por la siguiente serie:
+    \begin{equation}
+        \fx[\proy_S]{x} = \frac{1}{2} + \frac{2}{\pi} \sum_{\kth=1}^\infty \frac{\bb{-1}^{\kth+1}}{2 \, \kth - 1} \, \ffx[\cos]{\bb{2 \, \kth -1} t}
+        \label{eqn:FourierProy}
+    \end{equation}
+
+    Para un pulso rectangular genérico
+    \begin{equation*}
+        \fx[x]{t} = A \, \fx[\Pi]{\frac{t-t_0}{\tau}}
+    \end{equation*}
+    
+    los coeficientes están dados según la definición \ref{defn:FourierSerieExp} como sigue:
+    \begin{align*}
+        c_\kth &= \frac{1}{T_0} \int_{T_0} \fx[x]{t} \, e^{-\iu \, \kth \, \omega_0 \, t} \, \dif t
+        \\[1ex]
+        &= \frac{A}{T_0} \int_{-\frac{\tau}{2}}^{\frac{\tau}{2}} e^{-\iu \, \kth \, \omega_0 \, t} \, \dif t
+        \\[1ex]
+        &= \frac{A}{T_0} \barrow{\dfrac{e^{-\iu \, \kth \, \omega_0 \, t}}{-\iu \, \kth \, \omega_0}}{-\frac{\tau}{2}}{\frac{\tau}{2}}
+        \\[1ex]
+        &= \frac{A}{-2 \, \pi \, \iu \, \kth } \bb{ e^{ -\iu \, \omega_0 \, \kth \frac{\tau}{2}} - e^{ \iu \, \omega_0 \, \kth \frac{\tau}{2}} }
+        \\[1ex]
+        &= \frac{A}{\pi \, \kth} \, \fx[\sin]{\frac{\omega_0 \, \kth \, \tau}{2}}
+        \\[1ex]
+        &= \frac{A}{\pi \, \kth} \, \fx[\sin]{\frac{\pi \, \kth \, \tau}{T_0}}
+        \\[1ex]
+        &= \frac{A \, \tau}{T_0} \cdot
+        \frac{ \fx[\sin]{\dfrac{\pi \, \kth \, \tau}{T_0}} }{ \dfrac{\pi \, \kth \, \tau}{T_0} }
+    \end{align*}
+
+    Esto es
+    \begin{equation*}
+        c_\kth = \frac{A \, \tau}{T_0} \, \fx[\sinc]{\frac{\pi \, \kth \, \tau}{T_0}}
+    \end{equation*}
+
+    Particularmente si $A=1$, $T_0=2\,\pi$, $\tau=\pi$ queda
+    \begin{equation*}
+        c_\kth = \frac{ \fx[\sin]{\frac{\kth \, \pi}{2}} }{\kth \, \pi}
+    \end{equation*}
+
+    Según la ecuación \ref{eqn:FourierExpBis} se tiene:
+    \begin{align*}
+        \fx[x]{t} &= c_0 + \sum_{\kth=1}^{\infty} \bb{ c_\kth \, e^{\iu \, \kth \, \omega_0 \, t} + c_{-\kth} \, e^{-\iu \, \kth \, \omega_0 \, t} }
+        \\
+        &= c_0 + \sum_{\kth=1}^{\infty} \frac{\fx[\sin]{\frac{\kth \, \pi}{2}}}{\kth \, \pi} \bb{ e^{\iu \, \kth \, \omega_0 \, t} + e^{-\iu \, \kth \, \omega_0 \, t} }
+    \end{align*}
+
+    Obteniendo el desarrollo en series de Fourier para una onda cuadrada:
+    \begin{equation*}
+        \fx[x]{t} = c_0 + 2 \sum_{\kth=1}^{\infty} \frac{\fx[\sin]{\frac{\kth \, \pi}{2}}}{\kth \, \pi} \, \fx[\cos]{\kth \, \omega_0 \, t}
+    \end{equation*}
+
+    Observar que este desarrollo es equivalente a la ecuación \ref{eqn:FourierProy}, ya que $\fx[\sin]{\frac{\kth \, \pi}{2}}$ vale 0 para los $\kth$ pares y $\pm1$ para los $\kth$ impares.
+\end{mdframed}
+
+\begin{mdframed}[style=MyFrame1]
+    \begin{prop}
+    \end{prop}
+    Los coeficientes $c_\kth^\nth$ de la serie de Fourier de la n-ésima derivada están dados por
+    \begin{equation*}
+        c_\kth^\nth = c_\kth \cdot \bb{\frac{\iu \, 2 \, \pi \, \kth}{T_0}}^\nth
+    \end{equation*}
+\end{mdframed}
+
+
+\section{Transformada de Fourier}
+
+Para una función $\fx[x]{t}$ real, el coeficiente complejo $c_0$ resulta ser el valor promedio de la misma:
+\begin{equation*}
+    c_0 = \frac{1}{T_0} \int_{T_0} \fx[x]{t} \, \dif t
+\end{equation*}
+
+Si se reemplaza $\fx[x]{t}$ por su desarrollo en serie (Def. \ref{defn:FourierSerieExp}), se obtiene:
+\begin{align}
+    c_0 &= \frac{1}{T_0} \int_{T_0} \bb{\sum_{\kth=-\infty}^\infty c_\kth \, e^{\iu \, \kth \, \omega_0 \, t}} \dif t
+    \notag
+    \\[1ex]
+    &= \frac{1}{T_0} \int_{T_0} \sqb{\dots c_{-1} \, e^{\iu \bb{-1} \, \omega_0 \, t} + c_0 \, e^0 + c_1 \, \, e^{\iu \bb{1} \, \omega_0 \, t} \dots} \dif t
+    \label{eqn:coeficientes}
+    \\[1ex]
+    &= \cdots \frac{1}{T_0} \int_{T_0} c_{-1} \, e^{- \iu \, \omega_0 \, t} \dif t
+    + c_0
+    + \frac{1}{T_0} \int_{T_0} c_1 \, \, e^{\iu \omega_0 \, t} \dif t \dots
+    \notag
+\end{align}
+
+Poniéndose en evidencia que la única integral no nula es $\frac{1}{T_0} \int_{T_0} c_0 \, e^0 \, \dif t = c_0$ ya que las demás son integrales de funciones periódicas evaluadas en un período, como por ejemplo lo sería $\int_0^{2\pi} \fx[\sin]{t} \, \dif t = 0$.
+
+Multiplicando a la ecuación \ref{eqn:coeficientes} el término $e^{-\iu \, \kth \, \omega_0 \, t}$ se consigue anular todos los sumandos quedando solamente el $k$-ésimo. Esto se observa aplicando distributiva:
+\begin{align*}
+    c_\kth &=
+    \scale{0.95}{
+    \frac{1}{T_0} \int_{T_0} \sqb{\dots c_{-1} \, e^{-\iu \, \omega_0 \, t} + c_0 + c_1 \, \, e^{\iu \, \omega_0 \, t} \dots} e^{-\iu \, \kth \, \omega_0 \, t} \dif t
+    }
+    \\[1ex]
+    &= 
+    \scale{0.95}{
+    \frac{1}{T_0} \int_{T_0} \sqb{\dots c_{-1} \, e^{-\iu \, \omega_0 \, t \bb{1 + k}} + c_0 \, e^{-\iu \, \kth \, \omega_0 \, t} + c_1 \, \, e^{\iu \, \omega_0 \, t \bb{1 - k}} \dots} \dif t
+    }
+\end{align*}
+
+De esta forma, podemos ver conceptualmente que para cualquier $k$ dado, el respectivo término exponencial se simplifica quedando $\frac{1}{T_0} \int_{T_0} c_k \, e^0 \, \dif t = c_k$ mientras que todos los otros términos se anulan como se mencionó anteriormente.
+
+Formalmente, entendermos que los coeficientes de Fourier están definidos como tal por ser el producto interno entre la función que se está aproximando y un subespacio de funciones integrables. Ver aproximación de señales para espacios euclideos en Notas de matemática para ingeniería de sonido.
+
+Si en vez de usar el coeficiente $k$-ésimo definimos una función que devuelva cada coeficiente que modela la amplitud de cada frecuencia $\omega = k \, \omega_0$ obtenemos:
+\begin{align*}
+    c_\kth &= \frac{1}{T_0} \int_{T_0} \fx[x]{t} \, e^{-\iu \, \kth \, \omega_0 \, t} \, \dif t
+    \\
+    &= \frac{1}{T_0} \int_{T_0} \fx[x]{t} \, e^{-\iu \, \omega \, t} \, \dif t = \fx[c]{\omega}
+\end{align*}
+
+Cualquier función periódica puede ser desarrollada en series de Fourier y los coeficientes estarían dados según la ecuación anterior para frecuencias múltiplos de la fundamental, conocidas como armónicos. A saber:
+\begin{equation*}
+    \omega = k \, \omega_0
+\end{equation*}
+
+Pero la transformada de Fourier se define para funciones no necesariamente periódicas y, además, para un dominio continuo. Observar que $\omega$ debería poder tomar cualquier valor real, mientras que a partir de $k \, \omega_0$ solo es posible obtener frecuencias discretas.
+
+Para sortear ambas cuestiones, partimos del desarrollo en serie de Fourier de una función cuyo período es infinitamente largo, con lo cual $T_0 \to \infty$. Observar que cualquier señal acotada en tiempo cumple esta hipótesis, por más que sea no periódica.
+Así, haciendo el cambio de variable $\omega = k \, \omega_0$ y considerando $c_k = \fx[c]{\omega}$ en la ecuación \ref{defn:FourierSerieExp} se tiene
+\begin{align*}
+    \fx[x]{t} &= \sum_{\kth=-\infty}^\infty c_\kth \, e^{\iu \, \kth \, \omega_0 \, t}
+    \\[1ex]
+    &= \sum_{\kth=-\infty}^\infty \left[ \frac{1}{T_0} \int_{T_0} \fx[x]{t} \, e^{-\iu \, \omega \, t} \, \dif t \right] \, e^{\iu \, \omega \, t} \text{ con } T_0 \to \infty
+    \\[1ex]
+    &= \sum_{\kth=-\infty}^\infty \left[ \frac{\omega_0}{2 \, \pi} \int_{-\infty}^{\infty} \fx[x]{t} \, e^{-\iu \, \omega \, t} \, \dif t \right] \, e^{\iu \, \omega \, t} \text{ con } \omega_0 \to 0
+\end{align*}
+
+De manera que el espectro de frecuencias es equivalente a la transformada de Fourier y se define como sigue.
+
+\begin{mdframed}[style=MyFrame1]
+    \begin{defn}
+    \end{defn}
+    \cusTi{Espectro frecuencial}
+    \begin{equation*}
+        \fx[X]{\omega} = c_k \, T_0
+    \end{equation*}
+\end{mdframed}
+
+\begin{mdframed}[style=MyFrame1]
+    \begin{defn}
+        \label{defn:FourierTrans}
+    \end{defn}
+    \cusTi{Transformada de Fourier}
+    \begin{equation*}
+        \fx[X]{\omega} = \int_{-\infty}^\infty \fx[x]{t} \, e^{-\iu \, \omega \, t} \, \dif t = \fourier{x}
+    \end{equation*}
+\end{mdframed}
+
+Quedando el desarrollo en serie de la función dado por la antitransformada:
+\begin{align*}
+    \fx[x]{t} &= \sum_{\kth=-\infty}^\infty \left[ \frac{\omega_0}{2 \, \pi} \fx[X]{\omega} \right] \, e^{\iu \, \omega \, t} \text{ con } \omega_0 \to 0
+    \\[1ex]
+    &= \frac{1}{2 \, \pi} \sum_{\kth=-\infty}^\infty \fx[X]{\omega} \, e^{\iu \, \omega \, t} \, \omega_0 \text{ con } \omega_0 \to 0
+\end{align*}
+
+\begin{mdframed}[style=MyFrame1]
+    \begin{defn}
+        \label{defn:FourierTransInv}
+    \end{defn}
+    \cusTi{Transformada de Fourier inversa}
+    \begin{equation*}
+        \fx[x]{t} = \frac{1}{2 \, \pi} \int_{-\infty}^\infty \fx[X]{\omega} \, e^{\iu \, \omega \, t} \, \dif \omega = \ffourier{X}
+    \end{equation*}
+\end{mdframed}
+
+\begin{mdframed}[style=MyFrame2]
+    \begin{example}
+    \end{example}
+    \cusTi{Espectro bipolar y forma de onda}
+    \begin{equation*}
+        \fx[x]{t} = 5 \fx[\sin]{2 \, \pi \, \SI{2}{\hertz} \, t + \pi} + 7 \fx[\sin]{2 \, \pi \, \SI{3}{\hertz} \, t - \pi/2}
+    \end{equation*}
+    \begin{center}
+        \def\svgwidth{0.6\linewidth}
+        \input{./images/fourier-waveform.pdf_tex}
+    \end{center}
+    \begin{center}
+        \def\svgwidth{\linewidth}
+        \input{./images/fourier-freq-spec.pdf_tex}
+    \end{center}
+\end{mdframed}
