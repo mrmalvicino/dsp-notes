@@ -1,0 +1,67 @@
+\chapter{Convolución}
+
+\begin{mdframed}[style=MyFrame1]
+    \begin{defn}
+    \end{defn}
+    \cusTi{Respuesta al impulso}
+    \cusTe{La respuesta al impulso de un sistema lineal e invariante en el tiempo, representado por una transformación $T$, es la señal de salida obtenida cuando este es excitado por una delta de Dirac como señal de entrada.}
+    \begin{equation*}
+        \fx[h]{t} = \fx[T]{\fx[\delta]{t}}
+    \end{equation*}
+\end{mdframed}
+
+Tomando $\fx[\delta]{t-t_0}$ como un funcional para cualquier señal $\fx[x]{t}$ contínua, según la propiedad \ref{prop:limDebil}, se tiene
+\begin{equation*}
+    \int_{-\infty}^\infty \fx[\delta]{t-t_0} \, \fx[x]{t} \, \dif t = \fx[x]{t_0}
+\end{equation*}
+
+Y renombrando la variable de integración queda
+\begin{equation*}
+    \int_{-\infty}^\infty \fx[\delta]{\tau-t_0} \, \fx[x]{\tau} \, \dif \tau = \fx[x]{t_0}
+\end{equation*}
+
+Dado que $\fx[\delta]{t} = \fx[\delta]{-t}$ para cualquier $t=t_0$ genérico
+\begin{equation*}
+    \fx[x]{t} = \int_{-\infty}^\infty \fx[\delta]{t-\tau} \, \fx[x]{\tau} \, \dif \tau
+\end{equation*}
+
+Sea $T$ una transformación dada por un sistema lineal e invariante en el tiempo.
+
+Al excitar el sistema con $\fx[x]{t}$ como señal de entrada se obtiene $\fx[y]{t} = \fx[T]{\fx[x]{t}}$ como salida. Y al aplicar $T$ queda
+\begin{equation*}
+    \fx[y]{t} = \fx[T]{ \int_{-\infty}^\infty \fx[\delta]{t-\tau} \, \fx[x]{\tau} \, \dif \tau }
+\end{equation*}
+
+que por linealidad es
+\begin{equation*}
+    \fx[y]{t} = \int_{-\infty}^\infty \fx[T]{\fx[\delta]{t-\tau}} \, \fx[x]{\tau} \, \dif \tau
+\end{equation*}
+
+y por invarianza en el tiempo $\fx[T]{\fx[\delta]{t-\tau}}$ es la respuesta al impulso, obteniendo la que se conoce como integral de convolución.
+
+\begin{mdframed}[style=MyFrame1]
+    \begin{defn}
+    \end{defn}
+    \cusTi{Integral de convolución}
+    \begin{equation*}
+        \fx[x]{t} * \fx[h]{t} = \int_{-\infty}^\infty \fx[x]{\tau} \, \fx[h]{t-\tau} \, \dif \tau
+    \end{equation*}
+\end{mdframed}
+
+Esta operación implica que la salida de un sistema LTI es la \emph{convolución} entre su respuesta al impulso y la señal de entrada.
+
+\begin{mdframed}[style=MyFrame1]
+    \begin{prop}
+    \end{prop}
+    \cusTi{Respuesta al impulso}
+    \begin{equation*}
+        \fx[y]{t} = \fx[h]{t} * \fx[x]{t}
+    \end{equation*}
+\end{mdframed}
+
+A continuación se tiene un esquema que representa gráficamente esta interpretación.
+
+\begin{center}
+    \def\svgwidth{0.8\linewidth}
+    \input{./images/system.pdf_tex}
+\end{center}
