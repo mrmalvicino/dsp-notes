@@ -1,59 +1,38 @@
 \documentclass[a5paper,12pt,twoside]{book}
 
-\input{book-packages}
-\input{book-commands}
+\input{book_packages}
+\input{book_commands}
 
-% ENTORNOS DE NUMERACIÓN
+% Numeraciones
 \newtheorem{defn}{{Definición}}[chapter]
 \newtheorem{prop}{{Propiedad}}[chapter]
 \newtheorem{example}{{Ejemplo}}[chapter]
 
-% ENTORNOS DE FORMATO
+% Entornos de formato
 \newenvironment{formatI}{\vspace{1ex}\par\small\sffamily}
 
 \begin{document}
 
-\pagestyle{fancy}
-\fancyhf{}
-\chead{\scriptsize \nouppercase\rightmark}
-\cfoot{\scriptsize \thepage}
-\pagenumbering{gobble}
-\renewcommand{\headrulewidth}{0pt}
+    % Encabezado y pie de página
+    \pagestyle{fancy}
+    \fancyhf{}
+    \chead{\scriptsize \nouppercase \rightmark}
+    \cfoot{\scriptsize \thepage}
+    \pagenumbering{gobble}
+    \renewcommand{\headrulewidth}{0pt}
 
-\frontmatter
-% \includepdf{cover}
+    \frontmatter
+    % \includepdf{cover}
+    \include{cover_page}
+    \include{preface}
+    \renewcommand{\spanishappendixname}{Anexo}
+    \tableofcontents
 
-\begin{center}
-    \begin{Huge}
-        \textbf{Notas de procesamiento de señales}
-    \end{Huge}
-
-    \vspace{1cm}
-    \textbf{Primera edición (v20230226)}
-    \vspace{2cm}
-
-    \begin{Large}
-        Malvicino, Maximiliano R.
-    \end{Large}
-\end{center}
-
-\clearpage
-\noindent
-\textbf{Prefacio}
-
-Resumen de contenidos de la materia Señales y Sistemas para Ingeniería de Sonido en la Universidad Nacional de Tres de Febrero.
-
-La versión digital más reciente de este texto puede ser descargada gratuitamente de \url{https://github.com/mrmalvicino/dsp-notes}.
-
-\renewcommand{\spanishappendixname}{Anexo}
-\tableofcontents
-
-\mainmatter
-\pagenumbering{arabic}
-
-\include{chapter1.tex}
-\include{chapter2.tex}
-\include{chapter3.tex}
-\include{chapter4.tex}
+    \mainmatter
+    \pagenumbering{arabic}
+    \include{chapter_1}
+    \include{chapter_2}
+    \include{chapter_3}
+    \include{chapter_4}
 
 \end{document}

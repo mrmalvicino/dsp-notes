@@ -249,7 +249,8 @@ Si se reemplaza $\fx[x]{t}$ por su desarrollo en serie (Def. \ref{defn:FourierSe
 
 Poniéndose en evidencia que la única integral no nula es $\frac{1}{T_0} \int_{T_0} c_0 \, e^0 \, \dif t = c_0$ ya que las demás son integrales de funciones periódicas evaluadas en un período, como por ejemplo lo sería $\int_0^{2\pi} \fx[\sin]{t} \, \dif t = 0$.
 
-Multiplicando a la ecuación \ref{eqn:coeficientes} el término $e^{-\iu \, \kth \, \omega_0 \, t}$ se consigue anular todos los sumandos quedando solamente el $k$-ésimo. Esto se observa aplicando distributiva:
+Multiplicando a la ecuación \ref{eqn:coeficientes} el término $e^{-\iu \, \kth \, \omega_0 \, t}$ se consigue anular todos los sumandos quedando solamente el $k$-ésimo.
+Esto se observa aplicando distributiva:
 \begin{align*}
     c_\kth &=
     \scale{0.95}{
@@ -264,7 +265,8 @@ Multiplicando a la ecuación \ref{eqn:coeficientes} el término $e^{-\iu \, \kth
 
 De esta forma, podemos ver conceptualmente que para cualquier $k$ dado, el respectivo término exponencial se simplifica quedando $\frac{1}{T_0} \int_{T_0} c_k \, e^0 \, \dif t = c_k$ mientras que todos los otros términos se anulan como se mencionó anteriormente.
 
-Formalmente, entendermos que los coeficientes de Fourier están definidos como tal por ser el producto interno entre la función que se está aproximando y un subespacio de funciones integrables. Ver aproximación de señales para espacios euclideos en Notas de matemática para ingeniería de sonido.
+Formalmente, entendermos que los coeficientes de Fourier están definidos como tal por ser el producto interno entre la función que se está aproximando y un subespacio de funciones integrables.
+Ver aproximación de señales para espacios euclideos en Notas de matemática para ingeniería de sonido.
 
 Si en vez de usar el coeficiente $k$-ésimo definimos una función que devuelva cada coeficiente que modela la amplitud de cada frecuencia $\omega = k \, \omega_0$ obtenemos:
 \begin{align*}
@@ -273,14 +275,17 @@ Si en vez de usar el coeficiente $k$-ésimo definimos una función que devuelva 
     &= \frac{1}{T_0} \int_{T_0} \fx[x]{t} \, e^{-\iu \, \omega \, t} \, \dif t = \fx[c]{\omega}
 \end{align*}
 
-Cualquier función periódica puede ser desarrollada en series de Fourier y los coeficientes estarían dados según la ecuación anterior para frecuencias múltiplos de la fundamental, conocidas como armónicos. A saber:
+Cualquier función periódica puede ser desarrollada en series de Fourier y los coeficientes estarían dados según la ecuación anterior para frecuencias múltiplos de la fundamental, conocidas como armónicos.
+A saber:
 \begin{equation*}
     \omega = k \, \omega_0
 \end{equation*}
 
-Pero la transformada de Fourier se define para funciones no necesariamente periódicas y, además, para un dominio continuo. Observar que $\omega$ debería poder tomar cualquier valor real, mientras que a partir de $k \, \omega_0$ solo es posible obtener frecuencias discretas.
+Pero la transformada de Fourier se define para funciones no necesariamente periódicas y, además, para un dominio continuo.
+Observar que $\omega$ debería poder tomar cualquier valor real, mientras que a partir de $k \, \omega_0$ solo es posible obtener frecuencias discretas.
 
-Para sortear ambas cuestiones, partimos del desarrollo en serie de Fourier de una función cuyo período es infinitamente largo, con lo cual $T_0 \to \infty$. Observar que cualquier señal acotada en tiempo cumple esta hipótesis, por más que sea no periódica.
+Para sortear ambas cuestiones, partimos del desarrollo en serie de Fourier de una función cuyo período es infinitamente largo, con lo cual $T_0 \to \infty$.
+Observar que cualquier señal acotada en tiempo cumple esta hipótesis, por más que sea no periódica.
 Así, haciendo el cambio de variable $\omega = k \, \omega_0$ y considerando $c_k = \fx[c]{\omega}$ en la ecuación \ref{defn:FourierSerieExp} se tiene
 \begin{align*}
     \fx[x]{t} &= \sum_{\kth=-\infty}^\infty c_\kth \, e^{\iu \, \kth \, \omega_0 \, t}

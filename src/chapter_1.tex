@@ -3,9 +3,12 @@
 
 \section{Funciones generalizadas}
 
-En el ámbito científico se denomina \emph{señal} a la variación de cierta magnitud física que se utiliza para transmitir información. Matemáticamente, una señal se suele denotar como $\fx[x]{t}$ donde $x$ hace referencia al valor que toma la magnitud en cada instante $t$ de tiempo.
+En el ámbito científico se denomina \emph{señal} a la variación de cierta magnitud física que se utiliza para transmitir información.
+Matemáticamente, una señal se suele denotar como $\fx[x]{t}$ donde $x$ hace referencia al valor que toma la magnitud en cada instante $t$ de tiempo.
 
-La naturaleza de la variación puede responder a cualquier función matemática. Pero suele ser de interés cuando el valor de la magnitud es binario o aumenta a tasa constante. Este tipo de variaciones dan a lugar las siguientes señales simples.
+La naturaleza de la variación puede responder a cualquier función matemática.
+Pero suele ser de interés cuando el valor de la magnitud es binario o aumenta a tasa constante.
+Este tipo de variaciones dan a lugar las siguientes señales simples.
 
 \concept{Escalón unitario}
 
@@ -49,7 +52,9 @@ En $t=0$ puede estar definida como -1, 1 o 0 según la aplicación.
     \input{./images/signal-sgn.pdf_tex}
 \end{center}
 
-El escalón unitario y la función signo son \emph{funciones escalonadas}. Una función escalón es una función definida por una cantidad finita de tramos finitos que toman valores constantes. Ambas se relacionan de la siguiente forma.
+El escalón unitario y la función signo son \emph{funciones escalonadas}.
+Una función escalón es una función definida por una cantidad finita de tramos finitos que toman valores constantes.
+Ambas se relacionan de la siguiente forma.
 
 \begin{mdframed}[style=MyFrame1]
     \begin{prop}
@@ -68,7 +73,8 @@ Se suele denotar como $\fx[r]{t}$ y representa una señal que aumenta a tasa con
     \input{./images/signal-unit-ramp.pdf_tex}
 \end{center}
 
-Aquellas señales que se repiten cada cierto intervalo de tiempo $T$ son llamadas \emph{periódicas}. Estas son combinaciones lineales de las dadas anteriormente y a continuación se dan algunos ejemplos.
+Aquellas señales que se repiten cada cierto intervalo de tiempo $T$ son llamadas \emph{periódicas}.
+Estas son combinaciones lineales de las dadas anteriormente y a continuación se dan algunos ejemplos.
 
 \concept{Tren de pulsos rectangulares y onda cuadrada}
 
@@ -82,9 +88,11 @@ Se suele denotar como
     \input{./images/signal-sq-wave.pdf_tex}
 \end{center}
 
-El valor pico es representado por $A$ ya que eventualmente vale 1 (como en el escalón unitario) pero puede estar escalada. También pueden darse corrimientos en tiempo según $t_0$ o desplazamientos del valor medio que la señal tome, en el eje vertical.
+El valor pico es representado por $A$ ya que eventualmente vale 1 (como en el escalón unitario) pero puede estar escalada.
+También pueden darse corrimientos en tiempo según $t_0$ o desplazamientos del valor medio que la señal tome, en el eje vertical.
 
-La relación entre el ancho ($\tau$) de los pulsos y el período ($T$) de la señal es llamada \emph{duty cycle}. En porcentajes se expresa:
+La relación entre el ancho ($\tau$) de los pulsos y el período ($T$) de la señal es llamada \emph{duty cycle}.
+En porcentajes se expresa:
 \begin{equation*}
     \text{duty cycle}  \equiv \frac{\tau}{T} \cdot 100\%
 \end{equation*}
@@ -110,20 +118,31 @@ Se suele denotar como
     \input{./images/signal-sawtooth.pdf_tex}
 \end{center}
 
-Observar, que el escalón unitario puede ser interpretado como la derivada de la rampa unitaria. Lo cual pareciera no tener sentido, porque la rampa pasa de tener una pendiente nula a una pendiente unitaria de manera no suave. Y efectivamente, en el sentido tradicional de la definición de derivada sería una interpretación errónea. Por este motivo el valor que el escalón toma en $t=0$ es arbitrario. Pero de igual manera es posible definir una función que sea la derivada del escalón unitario. En cero la función pasa de valer 0 a valer 1 abruptamente y no es posible definir la derivada en el sentido tradicional. Pero es posible dar una noción de derivada uniendo los dos tramos del escalón con una rampa que va ``desde la izquierda del cero hasta la derecha del cero'' para obtener una función continua.
+Observar, que el escalón unitario puede ser interpretado como la derivada de la rampa unitaria.
+Lo cual pareciera no tener sentido, porque la rampa pasa de tener una pendiente nula a una pendiente unitaria de manera no suave.
+Y efectivamente, en el sentido tradicional de la definición de derivada sería una interpretación errónea.
+Por este motivo el valor que el escalón toma en $t=0$ es arbitrario.
+Pero de igual manera es posible definir una función que sea la derivada del escalón unitario.
+En cero la función pasa de valer 0 a valer 1 abruptamente y no es posible definir la derivada en el sentido tradicional.
+Pero es posible dar una noción de derivada uniendo los dos tramos del escalón con una rampa que va ``desde la izquierda del cero hasta la derecha del cero'' para obtener una función continua.
 
 \begin{center}
     \def\svgwidth{0.6\linewidth}
     \input{./images/signal-impulse-2.pdf_tex}
 \end{center}
 
-Personalmente, me gusta pensar que se trata de una función que tiene 2 dimensiones temporales: una en el sentido de $t$ y otra hacia ``adentro''. De manera que es posible que la función tenga un cambio ``suave'' y discontinuo simultáneamente para un único instante $t_0$, ya que el reloj no estaría frenándose sino que estaría usando otras manecillas.
+Personalmente, me gusta pensar que se trata de una función que tiene 2 dimensiones temporales: una en el sentido de $t$ y otra hacia ``adentro''.
+De manera que es posible que la función tenga un cambio ``suave'' y discontinuo simultáneamente para un único instante $t_0$, ya que el reloj no estaría frenándose sino que estaría usando otras manecillas.
 
-Vemos que cuando el ``corte en cero'' tiende a unirse, la pendiente de la rampa que une ambos tramos es infinita, pues es una línea vertical. Este razonamiento corresponde a definir las señales a partir de lo que se conoce como \emph{funciones generalizadas}.
+Vemos que cuando el ``corte en cero'' tiende a unirse, la pendiente de la rampa que une ambos tramos es infinita, pues es una línea vertical.
+Este razonamiento corresponde a definir las señales a partir de lo que se conoce como \emph{funciones generalizadas}.
 
-Las funciones generalizadas son objetos matemáticos que pretenden extender el concepto tradicional de función, para poder definir una noción de derivada para funciones que no son derivables. Fueron introducidas por Serguéi Sóbolev en 1935 y formalizadas en 1950 por Laurent Schwartz en su \emph{teoría de distribuciones}.
+Las funciones generalizadas son objetos matemáticos que pretenden extender el concepto tradicional de función, para poder definir una noción de derivada para funciones que no son derivables.
+Fueron introducidas por Serguéi Sóbolev en 1935 y formalizadas en 1950 por Laurent Schwartz en su \emph{teoría de distribuciones}.
 
-Las funciones tradicionales se definen con una asignación entre conjuntos y una fórmula, y el cálculo infinitesimal está dado por la integral de Riemann. En cambio, \textbf{a muy grandes rasgos}, una función generalizada se define como una función partida según el entorno de un punto. El estudio infinitesimal se hace a partir de un \emph{funcional}, para luego definir la función generalizada a partir del \emph{límite débil} del funcional.
+Las funciones tradicionales se definen con una asignación entre conjuntos y una fórmula, y el cálculo infinitesimal está dado por la integral de Riemann.
+En cambio, \textbf{a muy grandes rasgos}, una función generalizada se define como una función partida según el entorno de un punto.
+El estudio infinitesimal se hace a partir de un \emph{funcional}, para luego definir la función generalizada a partir del \emph{límite débil} del funcional.
 
 \begin{mdframed}[style=MyFrame1]
     \begin{prop}
@@ -150,14 +169,18 @@ Se suele denotar como
     \right.
 \end{equation*}
 
-Y se la representa gráficamente con una flecha haciendo referencia a que en el punto $t_0$ la función toma, por un instante, un valor infinito. La \emph{altura} de la flecha indica el área ($\lambda$). Si la función tiene área unitaria, se la llama impulso unitario.
+Y se la representa gráficamente con una flecha haciendo referencia a que en el punto $t_0$ la función toma, por un instante, un valor infinito.
+La \emph{altura} de la flecha indica el área ($\lambda$).
+Si la función tiene área unitaria, se la llama impulso unitario.
 
 \begin{center}
     \def\svgwidth{0.6\linewidth}
     \input{./images/signal-impulse-1.pdf_tex}
 \end{center}
 
-Los cuadrados grises representan el área de un pulso centrado en $t_0$, inicialmente de ancho $\tau$ y amplitud $\lambda / \tau$. El área es el producto de la base por la altura, dada en este caso por $\lambda$. Al tomar el límite $\tau \to 0$ vemos que el pulso tiende a ser un impulso, ya que se hace de ancho nulo y altura infinita manteniendo su área constante.
+Los cuadrados grises representan el área de un pulso centrado en $t_0$, inicialmente de ancho $\tau$ y amplitud $\lambda / \tau$.
+El área es el producto de la base por la altura, dada en este caso por $\lambda$.
+Al tomar el límite $\tau \to 0$ vemos que el pulso tiende a ser un impulso, ya que se hace de ancho nulo y altura infinita manteniendo su área constante.
 
 Esto se debe a que el pulso $\frac{\lambda}{\tau} \, \fx[\Pi]{\frac{t-t_0}{\tau}}$ es el funcional y verifica
 \begin{equation*}
@@ -356,7 +379,9 @@ Observar que $2 \, k \in \setN \, \forall \, k$ pero, dado que se tiene que cump
     \end{equation*}
 \end{mdframed}
 
-Además, si $N=1$ fuese un período válido, la función tomaría el mismo valor en todas las muestras. Y en tal caso $x[n] = x[n_\ith]$ para todo $n_\ith$ mientras que la implicancia en la definición \ref{defn:funcDiscPeriod} es en ambos sentidos. Con lo cual, se deduce que:
+Además, si $N=1$ fuese un período válido, la función tomaría el mismo valor en todas las muestras.
+Y en tal caso $x[n] = x[n_\ith]$ para todo $n_\ith$ mientras que la implicancia en la definición \ref{defn:funcDiscPeriod} es en ambos sentidos.
+Con lo cual, se deduce que:
 
 \begin{mdframed}[style=MyFrame1]
     \begin{prop}
