@@ -10,7 +10,7 @@ Una función $\fx[x]{t}$ de período fundamental $T_0 = \frac{2 \, \pi}{\omega_0
     \item Tiene una cantidad finita de discontinuidades en $T_0$
 \end{itemize}
 
-\begin{mdframed}[style=PropertyFrame]
+\begin{mdframed}[style=DefinitionFrame]
     \begin{defn}
         \label{defn:FourierSerieExp}
     \end{defn}
@@ -50,7 +50,7 @@ Y aplicando la fórmula de Euler:
     &= c_0 + \sum_{\kth=1}^{\infty} \inBrackets{ \inParentheses{c_\kth + c_{-\kth}} \fx[\cos]{\kth \, \omega_0 \, t} + \iu \inParentheses{c_\kth - c_{-\kth}} \fx[\sin]{\kth \, \omega_0 \, t} }
 \end{align*}
 
-\begin{mdframed}[style=PropertyFrame]
+\begin{mdframed}[style=DefinitionFrame]
     \begin{defn}
         \label{defn:FourierSerieTrig}
     \end{defn}
@@ -108,7 +108,7 @@ Por trigonometría se tiene $\fx[\cos]{\theta_\kth} = a_\kth / \norm{C_\kth}$ mi
 
 Aplicando $\fx[\cos]{\alpha \pm \beta} = \fx[\cos]{\alpha} \fx[\cos]{\beta} \mp \fx[\sin]{\alpha} \fx[\sin]{\beta}$ se infiere:
 
-\begin{mdframed}[style=PropertyFrame]
+\begin{mdframed}[style=DefinitionFrame]
     \begin{defn}
         \label{defn:FourierSerieArm}
     \end{defn}
@@ -297,7 +297,7 @@ Así, haciendo el cambio de variable $\omega = k \, \omega_0$ y considerando $c_
 
 De manera que el espectro de frecuencias es equivalente a la transformada de Fourier y se define como sigue.
 
-\begin{mdframed}[style=PropertyFrame]
+\begin{mdframed}[style=DefinitionFrame]
     \begin{defn}
     \end{defn}
     \cusTi{Espectro frecuencial}
@@ -306,7 +306,7 @@ De manera que el espectro de frecuencias es equivalente a la transformada de Fou
     \end{equation*}
 \end{mdframed}
 
-\begin{mdframed}[style=PropertyFrame]
+\begin{mdframed}[style=DefinitionFrame]
     \begin{defn}
         \label{defn:FourierTrans}
     \end{defn}
@@ -323,7 +323,7 @@ Quedando el desarrollo en serie de la función dado por la antitransformada:
     &= \frac{1}{2 \, \pi} \sum_{\kth=-\infty}^\infty \fx[X]{\omega} \, e^{\iu \, \omega \, t} \, \omega_0 \text{ con } \omega_0 \to 0
 \end{align*}
 
-\begin{mdframed}[style=PropertyFrame]
+\begin{mdframed}[style=DefinitionFrame]
     \begin{defn}
         \label{defn:FourierTransInv}
     \end{defn}
