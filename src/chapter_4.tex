@@ -10,7 +10,7 @@ Una función $\fx[x]{t}$ de período fundamental $T_0 = \frac{2 \, \pi}{\omega_0
     \item Tiene una cantidad finita de discontinuidades en $T_0$
 \end{itemize}
 
-\begin{mdframed}[style=MyFrame1]
+\begin{mdframed}[style=PropertyFrame]
     \begin{defn}
         \label{defn:FourierSerieExp}
     \end{defn}
@@ -36,7 +36,7 @@ Reacomodando la sumatoria de la definición \ref{defn:FourierSerieExp} como sigu
 
 es posible obtener la siguiente expresión equivalente:
 \begin{equation}
-    \fx[x]{t} = c_0 + \sum_{\kth=1}^{\infty} \bb{ c_\kth \, e^{\iu \, \kth \, \omega_0 \, t} + c_{-\kth} \, e^{-\iu \, \kth \, \omega_0 \, t} }
+    \fx[x]{t} = c_0 + \sum_{\kth=1}^{\infty} \inParentheses{ c_\kth \, e^{\iu \, \kth \, \omega_0 \, t} + c_{-\kth} \, e^{-\iu \, \kth \, \omega_0 \, t} }
     \label{eqn:FourierExpBis}
 \end{equation}
 
@@ -44,28 +44,28 @@ Y aplicando la fórmula de Euler:
 \begin{align*}
     &
     \scale{0.80}{
-    = c_0 + \sum_{\kth=1}^{\infty} \braces{c_\kth \sqb{\fx[\cos]{\kth \, \omega_0 \, t} + \iu \fx[\sin]{\kth \, \omega_0 \, t}} + c_{-\kth} \sqb{\fx[\cos]{\kth \, \omega_0 \, t} - \iu \fx[\sin]{\kth \, \omega_0 \, t}} }
+    = c_0 + \sum_{\kth=1}^{\infty} \inBraces{c_\kth \inBrackets{\fx[\cos]{\kth \, \omega_0 \, t} + \iu \fx[\sin]{\kth \, \omega_0 \, t}} + c_{-\kth} \inBrackets{\fx[\cos]{\kth \, \omega_0 \, t} - \iu \fx[\sin]{\kth \, \omega_0 \, t}} }
     }
     \\[1em]
-    &= c_0 + \sum_{\kth=1}^{\infty} \sqb{ \bb{c_\kth + c_{-\kth}} \fx[\cos]{\kth \, \omega_0 \, t} + \iu \bb{c_\kth - c_{-\kth}} \fx[\sin]{\kth \, \omega_0 \, t} }
+    &= c_0 + \sum_{\kth=1}^{\infty} \inBrackets{ \inParentheses{c_\kth + c_{-\kth}} \fx[\cos]{\kth \, \omega_0 \, t} + \iu \inParentheses{c_\kth - c_{-\kth}} \fx[\sin]{\kth \, \omega_0 \, t} }
 \end{align*}
 
-\begin{mdframed}[style=MyFrame1]
+\begin{mdframed}[style=PropertyFrame]
     \begin{defn}
         \label{defn:FourierSerieTrig}
     \end{defn}
     \cusTi{Serie de Fourier: forma trigonométrica}
     \begin{equation*}
-        \fx[x]{t} = c_0 + \sum_{\kth=1}^{\infty} \sqb{a_\kth \fx[\cos]{\kth \, \omega_0 \, t} + b_\kth \fx[\sin]{\kth \, \omega_0 \, t} }
+        \fx[x]{t} = c_0 + \sum_{\kth=1}^{\infty} \inBrackets{a_\kth \fx[\cos]{\kth \, \omega_0 \, t} + b_\kth \fx[\sin]{\kth \, \omega_0 \, t} }
     \end{equation*}
-    \noTi{donde $a_\kth = c_\kth + c_{-\kth}$ y $b_\kth = \iu \bb{c_\kth - c_{-\kth}}$ son los coeficientes de Fourier trigonométricos.}
+    \noTi{donde $a_\kth = c_\kth + c_{-\kth}$ y $b_\kth = \iu \inParentheses{c_\kth - c_{-\kth}}$ son los coeficientes de Fourier trigonométricos.}
 \end{mdframed}
 
 Por otro lado, si se aplica la fórmula de Euler pero esta vez en la exponencial de los coeficientes complejos de la definición \ref{defn:FourierSerieExp}:
 \begin{align*}
     c_{\pm\kth} &= \frac{1}{T_0} \int_{T_0} \fx[x]{t} \, e^{\mp \iu \, \kth \, \omega_0 \, t} \, \dif t
     \\
-    &= \frac{1}{T_0} \int_{T_0} \fx[x]{t} \sqb{ \fx[\cos]{\kth \, \omega_0 \, t} \mp \iu \fx[\sin]{\kth \, \omega_0 \, t} } \, \dif t
+    &= \frac{1}{T_0} \int_{T_0} \fx[x]{t} \inBrackets{ \fx[\cos]{\kth \, \omega_0 \, t} \mp \iu \fx[\sin]{\kth \, \omega_0 \, t} } \, \dif t
     \\
     &= \frac{1}{T_0} \int_{T_0} \fx[x]{t} \fx[\cos]{\kth \, \omega_0 \, t} \dif t
     \mp \frac{\iu}{T_0} \int_{T_0} \fx[x]{t} \fx[\sin]{\kth \, \omega_0 \, t} \dif t
@@ -82,7 +82,7 @@ Obteniendo las siguientes expresiones para los coeficientes trigonométricos de 
     \begin{aligned}
         a_\kth &= c_\kth + c_{-\kth} = \frac{2 \, \alpha}{T_0}
         \\
-        b_\kth &= \iu \bb{c_\kth - c_{-\kth}} = \frac{2 \, \beta}{T_0}
+        b_\kth &= \iu \inParentheses{c_\kth - c_{-\kth}} = \frac{2 \, \beta}{T_0}
     \end{aligned}
     \right.
 \end{equation*}
@@ -98,17 +98,17 @@ A partir del gráfico anterior, se define el complejo $C_\kth = a_\kth - \iu \, 
 
 Luego, multiplicando y dividiendo por $\norm{C_\kth}$ la serie de la definición \ref{defn:FourierSerieTrig} se tiene
 \begin{equation*}
-    \fx[x]{t} = c_0 + \sum_{\kth=1}^{\infty} \norm{C_\kth} \sqb{ \dfrac{a_\kth}{\norm{C_\kth}} \fx[\cos]{\kth \, \omega_0 \, t} + \dfrac{b_\kth}{\norm{C_\kth}} \fx[\sin]{\kth \, \omega_0 \, t} }
+    \fx[x]{t} = c_0 + \sum_{\kth=1}^{\infty} \norm{C_\kth} \inBrackets{ \dfrac{a_\kth}{\norm{C_\kth}} \fx[\cos]{\kth \, \omega_0 \, t} + \dfrac{b_\kth}{\norm{C_\kth}} \fx[\sin]{\kth \, \omega_0 \, t} }
 \end{equation*}
 
 Por trigonometría se tiene $\fx[\cos]{\theta_\kth} = a_\kth / \norm{C_\kth}$ mientras que $\fx[\sin]{\theta_\kth} = b_\kth / \norm{C_\kth}$ luego:
 \begin{equation*}
-    \fx[x]{t} = c_0 + \sum_{\kth=1}^{\infty} \norm{C_\kth} \sqb{ \fx[\cos]{\theta_\kth} \fx[\cos]{\kth \, \omega_0 \, t} + \fx[\sin]{\theta_\kth} \fx[\sin]{\kth \, \omega_0 \, t} }
+    \fx[x]{t} = c_0 + \sum_{\kth=1}^{\infty} \norm{C_\kth} \inBrackets{ \fx[\cos]{\theta_\kth} \fx[\cos]{\kth \, \omega_0 \, t} + \fx[\sin]{\theta_\kth} \fx[\sin]{\kth \, \omega_0 \, t} }
 \end{equation*}
 
 Aplicando $\fx[\cos]{\alpha \pm \beta} = \fx[\cos]{\alpha} \fx[\cos]{\beta} \mp \fx[\sin]{\alpha} \fx[\sin]{\beta}$ se infiere:
 
-\begin{mdframed}[style=MyFrame1]
+\begin{mdframed}[style=PropertyFrame]
     \begin{defn}
         \label{defn:FourierSerieArm}
     \end{defn}
@@ -128,7 +128,7 @@ Aplicando $\fx[\cos]{\alpha \pm \beta} = \fx[\cos]{\alpha} \fx[\cos]{\beta} \mp 
 \end{equation*}
 \end{mdframed}
 
-\begin{mdframed}[style=MyFrame2]
+\begin{mdframed}[style=ExampleFrame]
     \begin{example}
     \end{example}
     \cusTi{De la proyección ortogonal a la serie}
@@ -152,19 +152,19 @@ Aplicando $\fx[\cos]{\alpha \pm \beta} = \fx[\cos]{\alpha} \fx[\cos]{\beta} \mp 
     
     Sea $B_S$ una base de polinomios trigonométricos. A saber:
     \begin{equation*}
-        B_S = \braces{1; \fx[\sin]{t}; \fx[\cos]{t}; \fx[\sin]{2t}; \dots; \fx[\sin]{\kth t}; \fx[\cos]{\kth t}}
+        B_S = \inBraces{1; \fx[\sin]{t}; \fx[\cos]{t}; \fx[\sin]{2t}; \dots; \fx[\sin]{\kth t}; \fx[\cos]{\kth t}}
     \end{equation*}
     
     De manera que la proyección de $x$ sobre $S$ es:
     \begin{multline*}
         \fx[\proy_S]{x} =
         \\
-        = \frac{1}{2} + \frac{2}{\pi} \sqb{\fx[\cos]{t} - \dfrac{\fx[\cos]{3t}}{3} + \dfrac{\fx[\cos]{5t}}{5} - \dfrac{\fx[\cos]{7t}}{7} \cdots}
+        = \frac{1}{2} + \frac{2}{\pi} \inBrackets{\fx[\cos]{t} - \dfrac{\fx[\cos]{3t}}{3} + \dfrac{\fx[\cos]{5t}}{5} - \dfrac{\fx[\cos]{7t}}{7} \cdots}
     \end{multline*}
 
     Y puede ser expresada por la siguiente serie:
     \begin{equation}
-        \fx[\proy_S]{x} = \frac{1}{2} + \frac{2}{\pi} \sum_{\kth=1}^\infty \frac{\bb{-1}^{\kth+1}}{2 \, \kth - 1} \, \ffx[\cos]{\bb{2 \, \kth -1} t}
+        \fx[\proy_S]{x} = \frac{1}{2} + \frac{2}{\pi} \sum_{\kth=1}^\infty \frac{\inParentheses{-1}^{\kth+1}}{2 \, \kth - 1} \, \fx[\cos]{\inParentheses{2 \, \kth -1} t}
         \label{eqn:FourierProy}
     \end{equation}
 
@@ -181,7 +181,7 @@ Aplicando $\fx[\cos]{\alpha \pm \beta} = \fx[\cos]{\alpha} \fx[\cos]{\beta} \mp 
         \\[1ex]
         &= \frac{A}{T_0} \barrow{\dfrac{e^{-\iu \, \kth \, \omega_0 \, t}}{-\iu \, \kth \, \omega_0}}{-\frac{\tau}{2}}{\frac{\tau}{2}}
         \\[1ex]
-        &= \frac{A}{-2 \, \pi \, \iu \, \kth } \bb{ e^{ -\iu \, \omega_0 \, \kth \frac{\tau}{2}} - e^{ \iu \, \omega_0 \, \kth \frac{\tau}{2}} }
+        &= \frac{A}{-2 \, \pi \, \iu \, \kth } \inParentheses{ e^{ -\iu \, \omega_0 \, \kth \frac{\tau}{2}} - e^{ \iu \, \omega_0 \, \kth \frac{\tau}{2}} }
         \\[1ex]
         &= \frac{A}{\pi \, \kth} \, \fx[\sin]{\frac{\omega_0 \, \kth \, \tau}{2}}
         \\[1ex]
@@ -203,9 +203,9 @@ Aplicando $\fx[\cos]{\alpha \pm \beta} = \fx[\cos]{\alpha} \fx[\cos]{\beta} \mp 
 
     Según la ecuación \ref{eqn:FourierExpBis} se tiene:
     \begin{align*}
-        \fx[x]{t} &= c_0 + \sum_{\kth=1}^{\infty} \bb{ c_\kth \, e^{\iu \, \kth \, \omega_0 \, t} + c_{-\kth} \, e^{-\iu \, \kth \, \omega_0 \, t} }
+        \fx[x]{t} &= c_0 + \sum_{\kth=1}^{\infty} \inParentheses{ c_\kth \, e^{\iu \, \kth \, \omega_0 \, t} + c_{-\kth} \, e^{-\iu \, \kth \, \omega_0 \, t} }
         \\
-        &= c_0 + \sum_{\kth=1}^{\infty} \frac{\fx[\sin]{\frac{\kth \, \pi}{2}}}{\kth \, \pi} \bb{ e^{\iu \, \kth \, \omega_0 \, t} + e^{-\iu \, \kth \, \omega_0 \, t} }
+        &= c_0 + \sum_{\kth=1}^{\infty} \frac{\fx[\sin]{\frac{\kth \, \pi}{2}}}{\kth \, \pi} \inParentheses{ e^{\iu \, \kth \, \omega_0 \, t} + e^{-\iu \, \kth \, \omega_0 \, t} }
     \end{align*}
 
     Obteniendo el desarrollo en series de Fourier para una onda cuadrada:
@@ -216,12 +216,12 @@ Aplicando $\fx[\cos]{\alpha \pm \beta} = \fx[\cos]{\alpha} \fx[\cos]{\beta} \mp 
     Observar que este desarrollo es equivalente a la ecuación \ref{eqn:FourierProy}, ya que $\fx[\sin]{\frac{\kth \, \pi}{2}}$ vale 0 para los $\kth$ pares y $\pm1$ para los $\kth$ impares.
 \end{mdframed}
 
-\begin{mdframed}[style=MyFrame1]
+\begin{mdframed}[style=PropertyFrame]
     \begin{prop}
     \end{prop}
     Los coeficientes $c_\kth^\nth$ de la serie de Fourier de la n-ésima derivada están dados por
     \begin{equation*}
-        c_\kth^\nth = c_\kth \cdot \bb{\frac{\iu \, 2 \, \pi \, \kth}{T_0}}^\nth
+        c_\kth^\nth = c_\kth \cdot \inParentheses{\frac{\iu \, 2 \, \pi \, \kth}{T_0}}^\nth
     \end{equation*}
 \end{mdframed}
 
@@ -235,10 +235,10 @@ Para una función $\fx[x]{t}$ real, el coeficiente complejo $c_0$ resulta ser el
 
 Si se reemplaza $\fx[x]{t}$ por su desarrollo en serie (Def. \ref{defn:FourierSerieExp}), se obtiene:
 \begin{align}
-    c_0 &= \frac{1}{T_0} \int_{T_0} \bb{\sum_{\kth=-\infty}^\infty c_\kth \, e^{\iu \, \kth \, \omega_0 \, t}} \dif t
+    c_0 &= \frac{1}{T_0} \int_{T_0} \inParentheses{\sum_{\kth=-\infty}^\infty c_\kth \, e^{\iu \, \kth \, \omega_0 \, t}} \dif t
     \notag
     \\[1ex]
-    &= \frac{1}{T_0} \int_{T_0} \sqb{\dots c_{-1} \, e^{\iu \bb{-1} \, \omega_0 \, t} + c_0 \, e^0 + c_1 \, \, e^{\iu \bb{1} \, \omega_0 \, t} \dots} \dif t
+    &= \frac{1}{T_0} \int_{T_0} \inBrackets{\dots c_{-1} \, e^{\iu \inParentheses{-1} \, \omega_0 \, t} + c_0 \, e^0 + c_1 \, \, e^{\iu \inParentheses{1} \, \omega_0 \, t} \dots} \dif t
     \label{eqn:coeficientes}
     \\[1ex]
     &= \cdots \frac{1}{T_0} \int_{T_0} c_{-1} \, e^{- \iu \, \omega_0 \, t} \dif t
@@ -254,12 +254,12 @@ Esto se observa aplicando distributiva:
 \begin{align*}
     c_\kth &=
     \scale{0.95}{
-    \frac{1}{T_0} \int_{T_0} \sqb{\dots c_{-1} \, e^{-\iu \, \omega_0 \, t} + c_0 + c_1 \, \, e^{\iu \, \omega_0 \, t} \dots} e^{-\iu \, \kth \, \omega_0 \, t} \dif t
+    \frac{1}{T_0} \int_{T_0} \inBrackets{\dots c_{-1} \, e^{-\iu \, \omega_0 \, t} + c_0 + c_1 \, \, e^{\iu \, \omega_0 \, t} \dots} e^{-\iu \, \kth \, \omega_0 \, t} \dif t
     }
     \\[1ex]
     &= 
     \scale{0.95}{
-    \frac{1}{T_0} \int_{T_0} \sqb{\dots c_{-1} \, e^{-\iu \, \omega_0 \, t \bb{1 + k}} + c_0 \, e^{-\iu \, \kth \, \omega_0 \, t} + c_1 \, \, e^{\iu \, \omega_0 \, t \bb{1 - k}} \dots} \dif t
+    \frac{1}{T_0} \int_{T_0} \inBrackets{\dots c_{-1} \, e^{-\iu \, \omega_0 \, t \inParentheses{1 + k}} + c_0 \, e^{-\iu \, \kth \, \omega_0 \, t} + c_1 \, \, e^{\iu \, \omega_0 \, t \inParentheses{1 - k}} \dots} \dif t
     }
 \end{align*}
 
@@ -297,7 +297,7 @@ Así, haciendo el cambio de variable $\omega = k \, \omega_0$ y considerando $c_
 
 De manera que el espectro de frecuencias es equivalente a la transformada de Fourier y se define como sigue.
 
-\begin{mdframed}[style=MyFrame1]
+\begin{mdframed}[style=PropertyFrame]
     \begin{defn}
     \end{defn}
     \cusTi{Espectro frecuencial}
@@ -306,7 +306,7 @@ De manera que el espectro de frecuencias es equivalente a la transformada de Fou
     \end{equation*}
 \end{mdframed}
 
-\begin{mdframed}[style=MyFrame1]
+\begin{mdframed}[style=PropertyFrame]
     \begin{defn}
         \label{defn:FourierTrans}
     \end{defn}
@@ -323,7 +323,7 @@ Quedando el desarrollo en serie de la función dado por la antitransformada:
     &= \frac{1}{2 \, \pi} \sum_{\kth=-\infty}^\infty \fx[X]{\omega} \, e^{\iu \, \omega \, t} \, \omega_0 \text{ con } \omega_0 \to 0
 \end{align*}
 
-\begin{mdframed}[style=MyFrame1]
+\begin{mdframed}[style=PropertyFrame]
     \begin{defn}
         \label{defn:FourierTransInv}
     \end{defn}
@@ -331,21 +331,4 @@ Quedando el desarrollo en serie de la función dado por la antitransformada:
     \begin{equation*}
         \fx[x]{t} = \frac{1}{2 \, \pi} \int_{-\infty}^\infty \fx[X]{\omega} \, e^{\iu \, \omega \, t} \, \dif \omega = \ffourier{X}
     \end{equation*}
-\end{mdframed}
-
-\begin{mdframed}[style=MyFrame2]
-    \begin{example}
-    \end{example}
-    \cusTi{Espectro bipolar y forma de onda}
-    \begin{equation*}
-        \fx[x]{t} = 5 \fx[\sin]{2 \, \pi \, \SI{2}{\hertz} \, t + \pi} + 7 \fx[\sin]{2 \, \pi \, \SI{3}{\hertz} \, t - \pi/2}
-    \end{equation*}
-    \begin{center}
-        \def\svgwidth{0.6\linewidth}
-        \input{./images/fourier-waveform.pdf_tex}
-    \end{center}
-    \begin{center}
-        \def\svgwidth{\linewidth}
-        \input{./images/fourier-freq-spec.pdf_tex}
-    \end{center}
 \end{mdframed}

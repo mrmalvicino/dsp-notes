@@ -1,334 +1,24 @@
-\chapter{Caracterización de señales}
+\chapter{Señales}
 
+Se denomina \emph{señal} a la variación de cierta magnitud física que se utiliza para transmitir información.
 
-\section{Funciones generalizadas}
+\begin{itemize}
+    \item
+    Una señal $\fx[x]{t}$ es \textbf{continua} si está definida para todo instante de tiempo $t \in \setR$.
+    Si además puede tomar cualquier valor $x \in \setR$, se la llama \textbf{analógica}.
 
-En el ámbito científico se denomina \emph{señal} a la variación de cierta magnitud física que se utiliza para transmitir información.
-Matemáticamente, una señal se suele denotar como $\fx[x]{t}$ donde $x$ hace referencia al valor que toma la magnitud en cada instante $t$ de tiempo.
+    \item
+    Una señal $\fx[x]{n}$ es \textbf{discreta} si está definida solo para ciertas muestras $n \in \setZ$.
+    Si es discreta en su dominio y además toma valores $x$ en un conjunto cuantizado, se la llama \textbf{digital}.
+\end{itemize}
 
-La naturaleza de la variación puede responder a cualquier función matemática.
-Pero suele ser de interés cuando el valor de la magnitud es binario o aumenta a tasa constante.
-Este tipo de variaciones dan a lugar las siguientes señales simples.
+Una señal continua puede ser transformada en discreta mediante un proceso de muestreo.
+La \textbf{frecuencia de muestreo}, denotada como $f_s$, indica cuántas muestras por segundo se extraen en el proceso.
+La señal $\fx[x]{n}$ resultante representaría una secuencia de valores obtenida al ventanear $\fx[x]{t}$ tal que $n = f_s \, t$.
 
-\concept{Escalón unitario}
+\section{Período de señales discretas}
 
-Se suele denotar como
-\begin{equation*}
-    \fx[u]{t} =
-    \left\{
-    \begin{aligned}
-        0 \text{ si $t<0$ }
-        \\
-        1 \text{ si $t>0$ }
-    \end{aligned}
-    \right.
-\end{equation*}
-
-En $t=0$ puede estar definida como 0, 1 o 1/2 según la aplicación.
-
-\begin{center}
-    \def\svgwidth{0.6\linewidth}
-    \input{./images/signal-unit-step.pdf_tex}
-\end{center}
-
-\concept{Signo}
-
-Se suele denotar como
-\begin{equation*}
-    \fx[\sgn]{t} =
-    \left\{
-    \begin{aligned}
-        -1 \text{ si $t<0$ }
-        \\
-        1 \text{ si $t>0$ }
-    \end{aligned}
-    \right.
-\end{equation*} 
-
-En $t=0$ puede estar definida como -1, 1 o 0 según la aplicación.
-
-\begin{center}
-    \def\svgwidth{0.6\linewidth}
-    \input{./images/signal-sgn.pdf_tex}
-\end{center}
-
-El escalón unitario y la función signo son \emph{funciones escalonadas}.
-Una función escalón es una función definida por una cantidad finita de tramos finitos que toman valores constantes.
-Ambas se relacionan de la siguiente forma.
-
-\begin{mdframed}[style=MyFrame1]
-    \begin{prop}
-    \end{prop}
-    \begin{equation*}
-        \fx[u]{t} = \frac{\fx[sg]{t} + 1}{2}
-    \end{equation*}
-\end{mdframed}
-
-\concept{Rampa unitaria}
-
-Se suele denotar como $\fx[r]{t}$ y representa una señal que aumenta a tasa constante.
-
-\begin{center}
-    \def\svgwidth{0.6\linewidth}
-    \input{./images/signal-unit-ramp.pdf_tex}
-\end{center}
-
-Aquellas señales que se repiten cada cierto intervalo de tiempo $T$ son llamadas \emph{periódicas}.
-Estas son combinaciones lineales de las dadas anteriormente y a continuación se dan algunos ejemplos.
-
-\concept{Tren de pulsos rectangulares y onda cuadrada}
-
-Se suele denotar como
-\begin{equation*}
-    \fx[x]{t} = A \, \fx[\Pi]{\frac{t-t_0}{\tau}}
-\end{equation*}
-
-\begin{center}
-    \def\svgwidth{0.8\linewidth}
-    \input{./images/signal-sq-wave.pdf_tex}
-\end{center}
-
-El valor pico es representado por $A$ ya que eventualmente vale 1 (como en el escalón unitario) pero puede estar escalada.
-También pueden darse corrimientos en tiempo según $t_0$ o desplazamientos del valor medio que la señal tome, en el eje vertical.
-
-La relación entre el ancho ($\tau$) de los pulsos y el período ($T$) de la señal es llamada \emph{duty cycle}.
-En porcentajes se expresa:
-\begin{equation*}
-    \text{duty cycle}  \equiv \frac{\tau}{T} \cdot 100\%
-\end{equation*}
-
-Si esta relación es de 1:2 entonces el duty cycle es de $50\%$ y en tal caso el tren de pulsos se llama \emph{onda cuadrada}.
-
-\concept{Tren de pulsos triangulares y onda triangular}
-
-Se suele denotar como
-\begin{equation*}
-    \fx[x]{t} = A - \norm{t-t_0}
-\end{equation*}
-
-\begin{center}
-    \def\svgwidth{0.8\linewidth}
-    \input{./images/signal-triang-wave.pdf_tex}
-\end{center}
-
-\concept{Diente de sierra}
-
-\begin{center}
-    \def\svgwidth{0.8\linewidth}
-    \input{./images/signal-sawtooth.pdf_tex}
-\end{center}
-
-Observar, que el escalón unitario puede ser interpretado como la derivada de la rampa unitaria.
-Lo cual pareciera no tener sentido, porque la rampa pasa de tener una pendiente nula a una pendiente unitaria de manera no suave.
-Y efectivamente, en el sentido tradicional de la definición de derivada sería una interpretación errónea.
-Por este motivo el valor que el escalón toma en $t=0$ es arbitrario.
-Pero de igual manera es posible definir una función que sea la derivada del escalón unitario.
-En cero la función pasa de valer 0 a valer 1 abruptamente y no es posible definir la derivada en el sentido tradicional.
-Pero es posible dar una noción de derivada uniendo los dos tramos del escalón con una rampa que va ``desde la izquierda del cero hasta la derecha del cero'' para obtener una función continua.
-
-\begin{center}
-    \def\svgwidth{0.6\linewidth}
-    \input{./images/signal-impulse-2.pdf_tex}
-\end{center}
-
-Personalmente, me gusta pensar que se trata de una función que tiene 2 dimensiones temporales: una en el sentido de $t$ y otra hacia ``adentro''.
-De manera que es posible que la función tenga un cambio ``suave'' y discontinuo simultáneamente para un único instante $t_0$, ya que el reloj no estaría frenándose sino que estaría usando otras manecillas.
-
-Vemos que cuando el ``corte en cero'' tiende a unirse, la pendiente de la rampa que une ambos tramos es infinita, pues es una línea vertical.
-Este razonamiento corresponde a definir las señales a partir de lo que se conoce como \emph{funciones generalizadas}.
-
-Las funciones generalizadas son objetos matemáticos que pretenden extender el concepto tradicional de función, para poder definir una noción de derivada para funciones que no son derivables.
-Fueron introducidas por Serguéi Sóbolev en 1935 y formalizadas en 1950 por Laurent Schwartz en su \emph{teoría de distribuciones}.
-
-Las funciones tradicionales se definen con una asignación entre conjuntos y una fórmula, y el cálculo infinitesimal está dado por la integral de Riemann.
-En cambio, \textbf{a muy grandes rasgos}, una función generalizada se define como una función partida según el entorno de un punto.
-El estudio infinitesimal se hace a partir de un \emph{funcional}, para luego definir la función generalizada a partir del \emph{límite débil} del funcional.
-
-\begin{mdframed}[style=MyFrame1]
-    \begin{prop}
-        \label{prop:limDebil}
-    \end{prop}
-    \cusTi{Límite débil de una distribución}
-    \cusTe{Para un funcional $\fx{x}$ y una función continua de prueba $\fx[\phi]{x}$ se cumple que}
-    \begin{equation*}
-        \lim_{x \to 0} \int \fx{x-x_0} \, \fx[\phi]{x} \, \dif x = \fx[\phi]{x_0}
-    \end{equation*}
-\end{mdframed}
-
-\concept{Delta de Dirac e impulso unitario}
-
-Se suele denotar como
-\begin{equation*}
-    \fx[\delta]{t-t_0} =
-    \left\{
-    \begin{aligned}
-        \infty \text{ si $t=t_0$ }
-        \\
-        0 \text{ si $t \neq t_0$ }
-    \end{aligned}
-    \right.
-\end{equation*}
-
-Y se la representa gráficamente con una flecha haciendo referencia a que en el punto $t_0$ la función toma, por un instante, un valor infinito.
-La \emph{altura} de la flecha indica el área ($\lambda$).
-Si la función tiene área unitaria, se la llama impulso unitario.
-
-\begin{center}
-    \def\svgwidth{0.6\linewidth}
-    \input{./images/signal-impulse-1.pdf_tex}
-\end{center}
-
-Los cuadrados grises representan el área de un pulso centrado en $t_0$, inicialmente de ancho $\tau$ y amplitud $\lambda / \tau$.
-El área es el producto de la base por la altura, dada en este caso por $\lambda$.
-Al tomar el límite $\tau \to 0$ vemos que el pulso tiende a ser un impulso, ya que se hace de ancho nulo y altura infinita manteniendo su área constante.
-
-Esto se debe a que el pulso $\frac{\lambda}{\tau} \, \fx[\Pi]{\frac{t-t_0}{\tau}}$ es el funcional y verifica
-\begin{equation*}
-    \lim_{\tau \to 0} \frac{\lambda}{\tau} \, \fx[\Pi]{\frac{t-t_0}{\tau}} = \lambda \, \fx[\delta]{t-t_0}
-\end{equation*}
-
-Ahora bien, si un impulso es la derivada de un pulso, entonces la integral del impulso que corresponde a su área está dada por la propiedad \ref{prop:limDebil} como sigue.
-\begin{equation*}
-    \lim_{\tau \to 0} \int_{-\infty}^\infty \frac{\lambda}{\tau} \, \fx[\Pi]{\frac{t-t_0}{\tau}} \, \dif t
-    = \int_{-\infty}^\infty \lambda \, \fx[\delta]{t-t_0} \, \dif t
-    = \lambda
-\end{equation*}
-
-Es decir que para el caso del impulso unitario $\lambda = 1$ obteniendo la siguiente propiedad, a partir de la que se suele definir la delta de Dirac.
-
-\begin{mdframed}[style=MyFrame1]
-    \begin{prop}
-    \end{prop}
-    \begin{equation*}
-        \int_{-\infty}^\infty \fx[\delta]{t} \, \dif t = 1
-    \end{equation*}
-\end{mdframed}
-
-\begin{mdframed}[style=MyFrame2]
-    \begin{example}
-    \end{example}
-    \cusTi{Densidad de un cuerpo puntual}
-    \begin{formatI}
-        En este ejemplo se propone una función generalizada para describir una situación física. Se pretende comprobar que se verifica la propiedad \ref{prop:limDebil}.
-    \end{formatI}
-    El volumen ($V$) de un cuerpo sólido de forma esférica y radio $r$ es
-    \begin{equation*}
-        V = \frac{4 \, \pi \, r^3}{3}
-    \end{equation*}
-    
-    Si la masa ($m$) del cuerpo está uniformemente distribuída, su densidad ($\rho$) está dada por
-    \begin{equation*}
-        \rho = \frac{m}{V}
-    \end{equation*}
-
-    Por simplicidad, se supone que la masa del cuerpo es unitaria.
-    
-    De manera que se define una \emph{función generalizada} $\delta$ que a cada punto ($\Vec{x}$) del espacio le asigna la densidad en ese punto.
-    \begin{equation*}
-        \fx[\delta]{\Vec{x}} =
-        \left\{
-        \begin{aligned}
-            \frac{3}{4 \, \pi \, r^3} \text{ si } \nnorm{\Vec{x}} \leq r
-            \\
-            0 \text{ si } \nnorm{\Vec{x}} > r
-        \end{aligned}
-        \right.
-    \end{equation*}
-            
-    Suponer que el cuerpo sea puntual implica evaluar $r \to 0$ de manera que la densidad ($\delta$) queda dada por
-    \begin{equation*}
-        \fx[\delta]{\Vec{x}} =
-        \left\{
-        \begin{aligned}
-            \infty \text{ si } \nnorm{\Vec{x}} = 0
-            \\
-            0 \text{ si } \nnorm{\Vec{x}} > 0
-        \end{aligned}
-        \right.
-    \end{equation*}
-    
-    A partir del diferencial de masa, se obtiene la misma integrando miembro a miembro:
-    \begin{gather*}
-        \dif m = \fx[\delta]{\Vec{x}} \, \dif V
-        \\
-        m = \int \fx[\delta]{\Vec{x}} \, \dif V
-    \end{gather*}
-
-    En el volumen que encierra el cuerpo, la masa es unitaria por hipótesis. Pero para los puntos del espacio que no sean ocupados por el cuerpo, la masa es nula. Luego
-    \begin{equation*}
-        \int_V \fx[\delta]{\Vec{x}} \, \dif V =
-        \left\{
-        \begin{aligned}
-            1 \text{ si } \nnorm{\Vec{x}} \in V
-            \\
-            0 \text{ si } \nnorm{\Vec{x}} \notin V
-        \end{aligned}
-        \right.
-    \end{equation*}
-
-    De manera que este es un ejemplo donde se cumple la propiedad \ref{prop:limDebil} para la función de prueba $\phi$ unitaria y $\Vec{x}_0$ en el origen. El funcional, en este caso, sería $\fx[\delta]{\Vec{x}}$ antes de tomar el límite cuando $r \to 0$.
-\end{mdframed}
-
-
-\section{Energía y potencia de señales}
-
-\begin{align*}
-        \sub{E}{tot} \text{ converge} & \implies \sub{P}{tot} \to 0
-        \\
-        \sub{P}{tot} \text{ converge} & \implies \sub{E}{tot} \to \infty
-        \\
-        \sub{P}{tot} \to \infty & \implies \sub{E}{tot} \to \infty
-    \end{align*}
-
-\begin{mdframed}[style=MyFrame1]
-    \begin{defn}
-    \end{defn}
-    \cusTi{Energía de una señal}
-    \begin{equation*}
-        E = \int_{-\infty}^{\infty} \norm{\fx[x]{t}}^2 \dif t
-    \end{equation*}
-\end{mdframed}
-
-\begin{mdframed}[style=MyFrame1]
-    \begin{defn}
-    \end{defn}
-    \cusTi{Potencia de una señal}
-    \begin{equation*}
-        P = \lim_{\Delta t \to \infty} \frac{1}{\Delta t} \int_{-\frac{T}{2}}^{\frac{T}{2}} \norm{\fx[x]{t}}^2 \dif t
-    \end{equation*}
-\end{mdframed}
-
-
-\section{Suma no correlacionada}
-
-La suma de señales de diferente frecuencia puede ser expresada por
-\begin{align*}
-    \fx[x]{t} &= e^{\iu \omega_1 t} + e^{\iu \omega_2 t}
-    \\
-    &= e^{\iu \frac{\omega_1 + \omega_2}{2} t} \left( e^{\iu \omega_0 t} \pm e^{-\iu \omega_0 t} \right)
-    \\
-    &= \left\{
-    \begin{aligned}
-        2 \, e^{\iu \frac{\omega_1 + \omega_2}{2} t} \, \fx[\cos]{\omega_0 \, t}
-        \\
-        2 \, \iu \, e^{\iu \frac{\omega_1 + \omega_2}{2} t} \, \fx[\sin]{\omega_0 \, t}
-    \end{aligned}
-    \right.
-    \\[1ex]
-    \text{Donde } \frac{\omega_1+\omega_2}{2} \pm \omega_0 &=
-    \left\{
-    \begin{aligned}
-        & \omega_1
-        \\
-        & \omega_2
-    \end{aligned}
-    \right.
-\end{align*}
-
-
-\section{Señales discretas}
-
-\begin{mdframed}[style=MyFrame1]
+\begin{mdframed}[style=PropertyFrame]
     \begin{defn}
         \label{defn:funcDiscPeriod}
     \end{defn}
@@ -371,7 +61,7 @@ Pudiendo definir para $k=1$ el período fundamental
 
 Observar que $2 \, k \in \setN \, \forall \, k$ pero, dado que se tiene que cumplir que $N \in \setN$ y $\Omega \in \setR$, para que una función discreta sea periódica se tiene que verificar que $\Omega$ sea múltiplo de $\pi$.
 
-\begin{mdframed}[style=MyFrame1]
+\begin{mdframed}[style=PropertyFrame]
     \begin{prop}
     \end{prop}
     \begin{equation*}
@@ -383,8 +73,259 @@ Además, si $N=1$ fuese un período válido, la función tomaría el mismo valor
 Y en tal caso $x[n] = x[n_\ith]$ para todo $n_\ith$ mientras que la implicancia en la definición \ref{defn:funcDiscPeriod} es en ambos sentidos.
 Con lo cual, se deduce que:
 
-\begin{mdframed}[style=MyFrame1]
+\begin{mdframed}[style=PropertyFrame]
     \begin{prop}
     \end{prop}
     \noTi{El mínimo período es $N=2$ con lo cual $\Omega_0 = \pi$ es la máxima frecuencia.}
+\end{mdframed}
+
+\section{Señales simples}
+
+\concept{Escalón unitario}
+
+\begin{equation*}
+    \fx[u]{t} =
+    \left\{
+    \begin{aligned}
+        0 \text{ si $t<0$}
+        \\
+        1 \text{ si $t>0$}
+    \end{aligned}
+    \right.
+\end{equation*}
+
+En $t=0$ puede estar definida como 0, 1 o 1/2 según la aplicación.
+
+\begin{center}
+    \def\svgwidth{0.6\linewidth}
+    \input{./images/signal-unit-step.pdf_tex}
+\end{center}
+
+\concept{Signo}
+
+\begin{equation*}
+    \fx[\sgn]{t} =
+    \left\{
+    \begin{aligned}
+        -1 \text{ si $t<0$}
+        \\
+        1 \text{ si $t>0$}
+    \end{aligned}
+    \right.
+\end{equation*}
+
+En $t=0$ puede estar definida como -1, 1 o 0 según la aplicación.
+
+\begin{center}
+    \def\svgwidth{0.6\linewidth}
+    \input{./images/signal-sgn.pdf_tex}
+\end{center}
+
+El escalón unitario y la función signo son \emph{funciones escalonadas}.
+Ambas se relacionan de la siguiente forma.
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{prop}
+    \end{prop}
+    \begin{equation*}
+        \fx[u]{t} = \frac{\fx[\sgn]{t} + 1}{2}
+    \end{equation*}
+\end{mdframed}
+
+\concept{Rampa unitaria}
+
+Se suele denotar como $\fx[r]{t}$ y representa una señal que aumenta a tasa constante.
+
+\begin{center}
+    \def\svgwidth{0.6\linewidth}
+    \input{./images/signal-unit-ramp.pdf_tex}
+\end{center}
+
+\concept{Tren de pulsos rectangulares y onda cuadrada}
+
+\begin{equation*}
+    \fx[x]{t} = A \, \pulse[t_0]{t}{\tau}
+\end{equation*}
+
+\begin{center}
+    \def\svgwidth{0.8\linewidth}
+    \input{./images/signal-sq-wave.pdf_tex}
+\end{center}
+
+El valor pico es representado por $A$ ya que eventualmente vale 1 (como en el escalón unitario) pero puede estar escalada.
+También pueden darse corrimientos en tiempo según $t_0$ o desplazamientos del valor medio que la señal tome, en el eje vertical.
+
+La relación entre el ancho ($\tau$) de los pulsos y el período ($T$) de la señal es llamada \emph{duty cycle}.
+En porcentajes se expresa:
+\begin{equation*}
+    \text{duty cycle}  \equiv \frac{\tau}{T} \cdot 100\%
+\end{equation*}
+
+Si esta relación es de 1:2 entonces el duty cycle es de $50\%$ y en tal caso el tren de pulsos se llama \emph{onda cuadrada}.
+
+\concept{Tren de pulsos triangulares y onda triangular}
+
+\begin{equation*}
+    \fx[x]{t} = A - \norm{t-t_0}
+\end{equation*}
+
+\begin{center}
+    \def\svgwidth{0.8\linewidth}
+    \input{./images/signal-triang-wave.pdf_tex}
+\end{center}
+
+
+\section{Funciones generalizadas}
+
+El escalón unitario puede ser interpretado como la derivada de la rampa unitaria.
+Esto pareciera no tener sentido, porque la pendiente de la rampa pasa de ser nula a ser unitaria de manera no suave.
+Y efectivamente, en el sentido tradicional de la definición de derivada sería una interpretación errónea.
+Por este motivo el valor que el escalón toma en $t=0$ es arbitrario.
+Pero de igual manera es posible definir una función que sea la derivada del escalón unitario.
+En cero la función pasa de valer 0 a valer 1 abruptamente y no es posible definir la derivada en el sentido tradicional.
+Pero es posible dar una noción de derivada uniendo los dos tramos del escalón con una rampa que va ``desde la izquierda del cero hasta la derecha del cero'' para obtener una función continua.
+
+\begin{center}
+    \def\svgwidth{0.6\linewidth}
+    \input{./images/signal-impulse-2.pdf_tex}
+\end{center}
+
+Personalmente, me gusta pensar que se trata de una función que tiene 2 dimensiones temporales: una en el sentido de $t$ y otra hacia ``adentro''.
+De manera que es posible que la función tenga un cambio ``suave'' y discontinuo simultáneamente para un único instante $t_0$.
+Así, el reloj no estaría frenándose sino que estaría usando otras manecillas.
+
+Vemos que cuando el ``corte en cero'' tiende a unirse, la rampa que une ambos tramos es una línea vertical con pendiente infinita.
+Este razonamiento sale de entender las señales como \emph{funciones generalizadas}.
+
+Las funciones generalizadas son objetos matemáticos que pretenden extender el concepto tradicional de función, para poder definir una noción de derivada para funciones que no son derivables.
+Fueron introducidas por Serguéi Sóbolev en 1935 y formalizadas en 1950 por Laurent Schwartz en su \emph{teoría de distribuciones}.
+
+Las funciones tradicionales se definen con una asignación entre conjuntos y una fórmula, y el cálculo infinitesimal está dado por la integral de Riemann.
+En cambio, \textbf{a muy grandes rasgos}, una función generalizada se define como una función partida según el entorno de un punto.
+El estudio infinitesimal se hace a partir de un \emph{funcional}, para luego definir la función generalizada a partir del \emph{límite débil} del funcional.
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{prop}
+        \label{prop:limDebil}
+    \end{prop}
+    \cusTi{Límite débil de una distribución}
+    \cusTe{Para un funcional $\fx{x}$ y una función continua de prueba $\fx[\phi]{x}$ se cumple que}
+    \begin{equation*}
+        \lim_{x \to 0} \int \fx{x-x_0} \, \fx[\phi]{x} \, \dif x = \fx[\phi]{x_0}
+    \end{equation*}
+\end{mdframed}
+
+\concept{Delta de Dirac e impulso unitario}
+
+Se suele denotar como
+\begin{equation*}
+    \fx[\delta]{t-t_0} =
+    \left\{
+    \begin{aligned}
+        \infty \text{ si $t=t_0$ }
+        \\
+        0 \text{ si $t \neq t_0$ }
+    \end{aligned}
+    \right.
+\end{equation*}
+
+Y se la representa gráficamente con una flecha haciendo referencia a que en el punto $t_0$ la función toma, por un instante, un valor infinito.
+La \emph{altura} de la flecha indica el área ($\lambda$).
+Si la función tiene área unitaria, se la llama impulso unitario.
+
+\begin{center}
+    \def\svgwidth{0.6\linewidth}
+    \input{./images/signal-impulse-1.pdf_tex}
+\end{center}
+
+Los cuadrados grises representan el área de un pulso centrado en $t_0$, inicialmente de ancho $\tau$ y amplitud $\lambda / \tau$.
+El área es el producto de la base por la altura, dada en este caso por $\lambda$.
+Al tomar el límite $\tau \to 0$ vemos que el pulso tiende a ser un impulso.
+El ancho tiende a ser nulo y la altura infinita pero manteniéndose el área constante.
+
+Esto se debe a que $\frac{\lambda}{\tau} \, \pulse[t_0]{t}{\tau}$ es el funcional tal que
+\begin{equation*}
+    \lim_{\tau \to 0} \frac{\lambda}{\tau} \, \pulse[t_0]{t}{\tau} = \lambda \, \fx[\delta]{t-t_0}
+\end{equation*}
+
+Al integrar, según la propiedad \ref{prop:limDebil} se tiene
+\begin{equation*}
+    \lim_{\tau \to 0} \int_{-\infty}^\infty \frac{\lambda}{\tau} \, \pulse[t_0]{t}{\tau} \, \dif t
+    = \int_{-\infty}^\infty \lambda \, \fx[\delta]{t-t_0} \, \dif t
+    = \lambda
+\end{equation*}
+
+Para el caso del impulso unitario, donde $\lambda = 1$, queda:
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{prop}
+    \end{prop}
+    \begin{equation*}
+        \int_{-\infty}^\infty \fx[\delta]{t} \, \dif t = 1
+    \end{equation*}
+\end{mdframed}
+
+\section{Energía y potencia de señales}
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{defn}
+    \end{defn}
+    \cusTi{Energía de una señal continua}
+    \begin{equation*}
+        E = \int_{-\infty}^{\infty} \norm{\fx[x]{t}}^2 \dif t
+    \end{equation*}
+\end{mdframed}
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{defn}
+    \end{defn}
+    \cusTi{Potencia de una señal continua}
+    \begin{equation*}
+        P = \lim_{T \to \infty} \frac{1}{2T} \int_{-T}^{T} \norm{\fx[x]{t}}^2 \dif t
+    \end{equation*}
+\end{mdframed}
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{defn}
+    \end{defn}
+    \cusTi{Energía de una señal discreta}
+    \begin{equation*}
+        E = \sum_{n=-\infty}^{\infty} \norm{\fx[x]{n}}^2
+    \end{equation*}
+\end{mdframed}
+
+La potencia de una señal discreta tiene una pequeña diferencia con su contraparte continua.
+Es necesario dividir por $2N+1$ ya que el promedio incluye la muestra $n=0$.
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{defn}
+    \end{defn}
+    \cusTi{Potencia de una señal discreta}
+    \begin{equation*}
+        P = \lim_{N \to \infty} \inBrackets{\displaystyle \frac{1}{2N+1} \displaystyle \sum_{n=-N}^{N} \norm{\fx[x]{n}}^2}
+    \end{equation*}
+\end{mdframed}
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{prop}
+    \end{prop}
+    \begin{equation*}
+        \sub{E}{tot} \text{ converge} \implies \sub{P}{tot} \to 0
+    \end{equation*}
+\end{mdframed}
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{prop}
+    \end{prop}
+    \begin{equation*}
+        \sub{P}{tot} \text{ converge} \implies \sub{E}{tot} \to \infty
+    \end{equation*}
+\end{mdframed}
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{prop}
+    \end{prop}
+    \begin{equation*}
+        \sub{P}{tot} \to \infty \implies \sub{E}{tot} \to \infty
+    \end{equation*}
 \end{mdframed}

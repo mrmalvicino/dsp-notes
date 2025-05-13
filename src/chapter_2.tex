@@ -1,56 +1,338 @@
-\chapter{Caracterización de sistemas}
+\chapter{Sistemas}
 
-\begin{mdframed}[style=MyFrame1]
+Un sistema es una operación que transforma una señal de entrada $x$ en una señal de salida $y$.
+Puede modificar la señal de diversas maneras, según la naturaleza de la transformación.
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{defn}
+    \end{defn}
+    \cusTi{Transformación asociada a un sistema}
+    \cusTe{}
+    \[
+        \fx[y]{t} = \fx[T]{\fx[x]{t}}
+    \]
+\end{mdframed}
+
+\begin{itemize}
+    \item
+    \textbf{Modificación de amplitud:}
+    Puede escalar los valores de la señal, amplificándolos o atenuándolos.
+    \item
+    \textbf{Modificación en tiempo:}
+    Puede desplazar la señal, invertirla temporalmente o comprimirla.
+    \item
+    \textbf{Filtrado:}
+    Puede atenuar o eliminar ciertas componentes de frecuencia de la señal.
+    \item
+    \textbf{Integración y derivación:}
+    Puede aplicar acumuladores o destacar cambios de una señal continua.
+    \item
+    \textbf{No lineales:}
+    La distorción introduce frecuencias que no existían.
+    La modulación cambia la forma de la señal.
+\end{itemize}
+
+\section{Clasificación de sistemas}
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{defn}
+    \end{defn}
+    \cusTi{Sistema lineal}
+    \cusTe{Un sistema es lineal si se puede aplicar el principio de superposición:}
+    \[
+        \fx[T]{a \, \fx[x_1]{t} + b \, \fx[x_2]{t}} = a \, \fx[y_1]{t} + b \, \fx[y_2]{t}
+    \]
+\end{mdframed}
+
+\begin{mdframed}[style=PropertyFrame]
     \begin{defn}
     \end{defn}
     \cusTi{Sistema invariante en el tiempo}
-    \cusTe{Un sistema es invariante en el tiempo si al excitarlo con $\fx[x]{t-t_0}$ genera $\fx[y]{t-t_0}$.}
+    \cusTe{Un sistema es invariante en el tiempo si su comportamiento no cambia con el tiempo.}
+    \[
+        \fx[T]{\fx[x]{t-t_0}} =\fx[y]{t-t_0}
+    \]
 \end{mdframed}
 
-\begin{mdframed}[style=MyFrame1]
+\begin{mdframed}[style=PropertyFrame]
     \begin{defn}
     \end{defn}
     \cusTi{Sistema estable}
     \cusTe{Un sistema es estable si para una entrada acotada en amplitud, la salida también es acotada.}
 \end{mdframed}
 
-\begin{mdframed}[style=MyFrame1]
+\begin{mdframed}[style=PropertyFrame]
     \begin{defn}
     \end{defn}
     \cusTi{Sistema causal}
     \cusTe{Un sistema es causal o no anticipativo si la salida no comienza antes de aplicar la entrada.}
 \end{mdframed}
- 
 
 \section{Función de transferencia}
 
-\begin{mdframed}[style=MyFrame1]
+La función de transferencia es una herramienta fundamental para el análisis de sistemas lineales e invariantes en el tiempo (LTI).
+Describe cómo el sistema modifica las diferentes componentes de frecuencia de una señal.
+Permite estudiar el comportamiento del sistema sin necesidad de resolver la ecuación diferencial que lo define.
+Representa la relación entre la entrada y la salida del sistema en términos de frecuencia compleja.
+
+\begin{mdframed}[style=PropertyFrame]
     \begin{defn}
     \end{defn}
     \cusTi{Función de transferencia}
-    \cusTe{Dados los espectros frecuenciales de las señales de entrada $\fx[X]{s}$ y salida $\fx[Y]{s}$ de un sistema, se define el cociente de estos como la función de transferencia $H \in \setC$ dada por}
-    \begin{equation*}
+    \cusTe{Dado un sistema lineal e invariante en el tiempo se define la función de transferencia}
+    \[
         \fx[H]{s} = \frac{\fx[Y]{s}}{\fx[X]{s}}
-    \end{equation*}
+    \]
+    donde $\fx[X]{s}$ e $\fx[Y]{s}$ son los espectros de las señales de entrada y salida, y $s = \sigma + \iu \omega$ la variable de Laplace.
 \end{mdframed}
 
-\begin{mdframed}[style=MyFrame1]
+La parte real, $\sigma$, determina el crecimiento o decrecimiento exponencial.
+Mientras que la parte imaginaria, $\omega$, determina la frecuencia angular de la señal.
+Evaluar $\sigma = 0$ resulta útil porque permite estudiar cómo responde el sistema a señales senoidales.
+
+Estudiando la respuesta cuando la entrada es $e^{\iu \omega \, t}$ es posible calcular $\fx[H]{\iu \omega}$.
+Para este caso particular, la función de transferencia termina siendo un número complejo independiente del tiempo.
+Y la expresión encontrada a partir de esta situación particular, es válida para cualquier señal de entrada.
+
+\begin{mdframed}[style=PropertyFrame]
     \begin{prop}
     \end{prop}
-    \noTi{Un sistema lineal e invariante en el tiempo excitado por una señal $\fx[x]{t} = A_x \fx[\cos]{\omega_x \, t + \varphi_x}$ presenta una señal de salida $\fx[y]{t} = A_y \fx[\cos]{\omega_y \, t + \varphi_y}$} tal que
-    \begin{equation*}
-        \fx[H]{\omega} = \frac{\fx[Y]{\omega}}{\fx[X]{\omega}}
-    \end{equation*}
+    Si un sistema LTI es alimentado con una señal de entrada $\fx[x]{t} = e^{\iu \omega \, t}$ entonces
+    \[
+        \fx[H]{\iu \omega} = \frac{\fx[y]{t}}{\fx[x]{t}}
+    \]
 \end{mdframed}
 
-Considerando que $\fx[H]{\omega} = \norm{\fx[H]{\omega}} \, e^{\iu \fx[\arg]{\fx[H]{\omega}}}$ se puede demostrar la siguiente propiedad.
+\section{Espectro bilateral}
 
-\begin{mdframed}[style=MyFrame1]
+El espectro bilateral es una representación que muestra la distribución de las componentes de frecuencia de una señal.
+Indica el aporte en amplitud y en fase de cada frecuencia para formar la totalidad de la señal.
+
+En la realidad solo existen frecuencias mayores a cero.
+Las señales reales pueden ser representadas por cosenos, que son funciones pares.
+Por esto, el signo de su argumento (dado por el signo de la frecuencia) no afecta la representación.
+\[
+    \fx[\cos]{\omega \, t} = \fx[\cos]{- \omega \, t}
+\]
+
+Pero al usar modelos matemáticos que tienen un dominio complejo, es necesario considerar las frecuencias negativas.
+\[
+    e^{\iu \omega \, t} \neq e^{- \iu \omega \, t}
+\]
+
+Esto se evidencia con la siguiente ecuación, que permite representar una señal real como una suma de exponenciales complejas.
+\[
+    \fx[\cos]{\omega \, t} = \frac{e^{\iu \omega \, t} + e^{- \iu \omega \, t}}{2}
+\]
+
+Las señales reales pueden ser representadas por una suma de senoidales simples.
+En ese desarrollo, eventualmente podría haber sumandos que sean senos o cosenos de amplitud negativa.
+Pero por convención, es necesario reemplaar estos sumandos por el \textbf{coseno positivo} equivalente mediante un defasaje arbitrario.
+
+\section{Simetría hermitiana}
+
+Se tiene un sistema LIT que se exita con la señal
+\[
+    \fx[x]{t} = A_x \, \fx[\cos]{\omega_x \, t + \theta_x}
+\]
+
+Podemos asumir entonces, que la salida va a ser una señal senoidal de igual frecuencia.
+Pero la amplitud y fase eventualmente se verán modificadas.
+\[
+    \fx[y]{t} = A_y \, \fx[\cos]{\omega_x \, t + \theta_y}
+\]
+
+Por ser la entrada una señal senoidal simple, la función de transferencia estará dada por
+\[
+    \fx[H]{\iu \omega} = \norm{\fx[H]{\iu \omega}} \, e^{\iu \, \fx[\arg]{\fx[H]{\iu \omega}}}
+\]
+tal que
+\[
+    \fx[y]{t} = \fx[H]{\iu \omega} \, \fx[x]{t}
+\]
+
+Sabiendo que
+\[
+    z + \conj{z} = 2 \, \norm{z} \fx[\cos]{\fx[\arg]{z}}
+    = \norm{z} e^{\iu \fx[\arg]{z}} + \norm{z} e^{- \iu \fx[\arg]{z}}
+\]
+podemos escribir la señal de entrada como
+\[
+    \fx[x]{t} = \frac{A_x}{2} e^{\iu \inParentheses{\omega_x \, t + \theta_x}}
+    + \frac{A_x}{2} e^{- \iu \inParentheses{\omega_x \, t + \theta_x}}
+\]
+
+Dado que el sistema es lineal, pordemos aplicar superposición.
+Osea que la transformación a todo el espectro es equivalente a la transformación de cada frecuencia:
+\begin{align*}
+    \fx[y]{t} & = \sum_{\nth=1}^{2} \fx[H]{\iu \omega_\nth}
+    \, \alpha_\nth
+    \, e^{\iu \inParentheses{\omega_\nth t + \theta_\nth}}
+    \\
+    & = \sum_{\nth=1}^{2} \norm{\fx[H]{\iu \omega_\nth}}
+    \, \alpha_\nth
+    \, e^{\iu \inParentheses{\omega_\nth t + \theta_\nth + \fx[\arg]{\fx[H]{\iu \omega_\nth}}}}
+\end{align*}
+
+La señal de salida queda luego dada por
+\begin{multline*}
+    \fx[y]{t} = \norm{\fx[H]{\iu \omega_x}}
+    \, \frac{A_x}{2}
+    \, e^{\iu \inParentheses{\omega_x t + \theta_x + \fx[\arg]{\fx[H]{\iu \omega_x}}}}
+    \\
+    + \norm{\fx[H]{- \iu \omega_x}}
+    \, \frac{A_x}{2}
+    \, e^{\iu \inParentheses{- \omega_x t - \theta_x + \fx[\arg]{\fx[H]{- \iu \omega_x}}}}
+\end{multline*}
+
+Dado que la señal de entrada es real, la señal de salida debe tener parte imaginaria nula:
+\begin{equation*}
+    \fx[x]{t} \in \setR \implies \fx[\Im]{\fx[y]{t}} = 0
+\end{equation*}
+
+A saber, la parte imaginaria de un complejo es:
+\begin{equation*}
+    \fx[\Im]{z} = \fx[\Im]{\norm{z} \, e^{\iu \, \fx[\arg]{z}}}
+    = \norm{z} \, \fx[\sin]{\fx[\arg]{z}}
+\end{equation*}
+
+Igualando la parte imaginaria de $\fx[y]{t}$ a cero, se obtiene la siguiente ecuación:
+\begin{multline*}
+    \norm{\fx[H]{\iu \omega_x}}
+    \, \frac{A_x}{2}
+    \, \fx[\sin]{\omega_x t + \theta_x + \fx[\arg]{\fx[H]{\iu \omega_x}}}
+    =
+    \\
+    =
+    - \norm{\fx[H]{- \iu \omega_x}}
+    \, \frac{A_x}{2}
+    \, \fx[\sin]{- \omega_x t - \theta_x + \fx[\arg]{\fx[H]{- \iu \omega_x}}}
+\end{multline*}
+
+Dado que $\fx[\sin]{-\varphi} = - \fx[\sin]{\varphi}$ se tiene:
+\begin{multline*}
+    \norm{\fx[H]{\iu \omega_x}}
+    \, \fx[\sin]{\omega_x t + \theta_x + \fx[\arg]{\fx[H]{\iu \omega_x}}}
+    =
+    \\
+    =
+    \norm{\fx[H]{- \iu \omega_x}}
+    \, \fx[\sin]{\omega_x t + \theta_x - \fx[\arg]{\fx[H]{- \iu \omega_x}}}
+\end{multline*}
+
+De manera que para que se cumpla la igualdad, el espectro de frecuencias tiene que tener amplitud par y fase impar.
+
+\begin{mdframed}[style=PropertyFrame]
     \begin{prop}
     \end{prop}
+    \cusTi{Simetría hermitiana}
+    \cusTe{Un sistema lineal e invariante en el tiempo exitado por una señal senoidal simple de frecuencia $\omega_x$ verifica:}
+    \begin{align*}
+        \norm{\fx[H]{\iu \omega_x}} & = \norm{\fx[H]{- \iu \omega_x}}
+        \\
+        \fx[\arg]{\fx[H]{\iu \omega_x}} & = - \fx[\arg]{\fx[H]{- \iu \omega_x}}
+    \end{align*}
+\end{mdframed}
+
+\begin{mdframed}[style=ExampleFrame]
+    \begin{example}
+    \end{example}
+    Una señal periódica $\fx[x]{t}$ con nivel DC nulo y período $T_0$ se puede representar con una suma infinita de exponenciales complejas.
+    Sus coeficientes $c_k$ están dados para $k>0$ por:
+    \[
+        c_k = \frac{4 \iu^k}{k}
+    \]
+
+    Obtener el espectro de salida para un sistema con la siguiente función de transferencia:
+    \[
+        \fx[H]{\iu \omega} =
+        \pulse{f \, T_0}{5}
+        \, e^\frac{\iu \pi \, f \, T_0}{4}
+    \]
+    
+    \concept{Resolución:}
+    
+    La sucesión dada es la siguiente:
+    \begin{align*}
+        \inBraces{c_k}
+        & = \inBraces{\cdots \frac{-4}{5 \iu} ; -1 ; \frac{4}{3 \iu} ; 2 ; \frac{-4}{\iu} ; 4 \iu ; -2 ; \frac{-4}{3 \iu} ; 1 ; \frac{4}{5 \iu} \cdots}
+        \\
+        & = \inBraces{\cdots \frac{4 \iu}{5} ; -1 ; \frac{-4 \iu}{3} ; 2 ; 4 \iu ; 4 \iu ; -2 ; \frac{4 \iu}{3} ; 1 ; \frac{-4 \iu}{5} \cdots}
+    \end{align*}
+
+    Pero según el enunciado, la señal $\fx[x]{t}$ está dada por aquellos coeficientes donde $k>0$:
+    \[
+        \inBraces{c_k} = \inBraces{4 \iu ; -2 ; \frac{4 \iu}{3} ; 1 ; \frac{-4 \iu}{5} \cdots}
+    \]
+
+    Notar que el espectro bilateral de $\fx[x]{t}$ está dado por el módulo y el argumento de los coeficientes.
+    En el desarrollo en series de $\fx[x]{t}$, la exponencial que tiene la variable temporal es una oscilación simple.
+    Son los coeficientes $c_k$ los que determinan el aporte de la magnitud y la fase de cada frecuencia.
+    Por ejemplo, para $k=5$ se tiene que el sumando es
+    \[
+        c_5 \, e^{\iu \omega_0 \, t}
+        = \frac{4 \iu}{5} \, e^{\iu \omega_0 \, t}
+        = \frac{4}{5} \, e^{\iu \frac{\pi}{2}} \, e^{\iu \omega_0 \, t}
+        = \frac{4}{5} \, e^{\iu \inParentheses{\omega_0 \, t + \frac{\pi}{2}}}
+    \]
+    haciéndose evidente que el módulo y el argumento de $c_5$ son iguales al módulo y la fase de todo el sumando.
+
+    Por lo tanto, el espectro de la señal $\fx[x]{t}$ es
+    \begin{center}
+        \includegraphics[width=\linewidth]{./images/ej_siemtria_hermitiana_x.png}
+    \end{center}
+
+    La función de transferencia es:
+    \[
+        \fx[H]{\iu \omega} = \pulse{\omega}{5 \, \omega_0} \, e^{-\frac{\iu \, \pi \, \omega}{4 \, \omega_0}}
+    \]
+    pues
+    \[
+        \left\{
+        \begin{aligned}
+            & \frac{f \, T_0}{5}
+            = \frac{1}{5} \, f \, T_0
+            = \frac{1}{5} \, \frac{\omega}{2 \pi} \, \frac{2 \pi}{\omega_0}
+            = \frac{\omega}{5 \, \omega_0}
+            \\[1em]
+            & \frac{\iu \pi \, f \, T_0}{4}
+            = \frac{\iu \pi}{4} \, f \, T_0
+            = \frac{\iu \pi}{4} \, \frac{\omega}{2 \pi} \, \frac{2 \pi}{\omega_0}
+            = \frac{\iu \, \pi \, \omega}{4 \, \omega_0}
+        \end{aligned}
+        \right.
+    \]
+
+    Luego:
     \begin{gather*}
-        \norm{\fx[H]{\omega_x}} = \frac{A_y}{A_x}
-        \\[1ex]
-        \fx[\arg]{\fx[H]{\omega_x}} = \varphi_y - \varphi_x
+        \norm{\fx[H]{\omega}} =
+        \left\{
+        \begin{aligned}
+            & 1 \text{ si } \omega \in [-2 \, \omega_0 ; 2 \, \omega_0]
+            \\
+            & 0 \text{ si } \omega \notin [-2 \, \omega_0 ; 2 \, \omega_0]
+        \end{aligned}
+        \right.
+        \\[1em]
+        \fx[\arg]{\fx[H]{\omega}} =
+        - \frac{\pi \, \omega}{4 \, \omega_0}
     \end{gather*}
+
+    Y el espectro de la función de transferencia es:
+    \begin{center}
+        \includegraphics[width=\linewidth]{./images/ej_siemtria_hermitiana_h.png}
+    \end{center}
+
+    Multiplicando las magnitudes y sumando las fases de $\fx[x]{t}$ con las de $\fx[H]{\omega}$, se obtiene:
+    \begin{center}
+        \includegraphics[width=\linewidth]{./images/ej_siemtria_hermitiana_y.png}
+    \end{center}
 \end{mdframed}
+
+\section{Fase lineal}
+
+\section{Sistemas típicos}
+
+\section{Interconexión de sistemas}
+
+\section{Filtros}
