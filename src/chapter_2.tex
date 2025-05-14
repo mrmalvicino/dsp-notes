@@ -236,6 +236,7 @@ De manera que para que se cumpla la igualdad, el espectro de frecuencias tiene q
 
 \begin{mdframed}[style=ExampleFrame]
     \begin{example}
+        \label{ej:hermitiana}
     \end{example}
     Una señal periódica $\fx[x]{t}$ con nivel DC nulo y período $T_0$ se puede representar con una suma infinita de exponenciales complejas.
     Sus coeficientes $c_k$ están dados para $k>0$ por:
@@ -330,6 +331,78 @@ De manera que para que se cumpla la igualdad, el espectro de frecuencias tiene q
 \end{mdframed}
 
 \section{Fase lineal}
+
+Al pasar una señal por cualquier sistema LTI, cada componente frecuencial sufre un defasaje.
+Este cambio en la fase genera un retraso temporal en el espectro de la señal, conocido como retardo de grupo.
+
+\begin{mdframed}[style=DefinitionFrame]
+    \begin{defn}
+        \label{defn:groupDelay}
+    \end{defn}
+    \cusTi{Retardo de grupo}
+    \[
+        \fx[\tau_g]{\omega} = - \frac{\dif}{\dif \omega} \fx[\varphi]{\omega}
+    \]
+    donde
+    \[
+        \fx[\varphi]{\omega} = \fx[\arg]{\fx[H]{\omega}}
+    \]
+\end{mdframed}
+
+Si el sistema es de \emph{fase lineal}, el tiempo de retraso por defasaje es el mismo para todas las frecuencias.
+El gráfico de $\fx[\varphi]{\omega}$ resulta ser una recta y su pendiente es el retardo de grupo.
+
+A partir de la ecuación de la recta
+\[
+    \fx[\varphi]{\omega} = - \tau_g \inParentheses{\omega - \omega_0} + \varphi_0
+\]
+vemos que el defasaje es proporcional a la frecuencia, y $\tau_g$ es el factor de proporción.
+Reacomodando esta expresión, se obtiene la siguiente relación.
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{prop}
+    \end{prop}
+    Para un sistema LTI con fase lineal se cumple que
+    \[
+        \tau_g = - \frac{\Delta \varphi}{\Delta \omega}
+    \]
+\end{mdframed}
+
+\begin{mdframed}[style=ExampleFrame]
+    \begin{example}
+    \end{example}
+    Analicemos, del ejemplo \ref{ej:hermitiana}, el defasaje producido por un filtro de fase lineal:
+    \[
+        \fx[\varphi]{\omega} = - \frac{\pi \, \omega}{4 \, \omega_0}
+    \]
+
+    El retardo de grupo está dado, según la definición \ref{defn:groupDelay}, por:
+    \[
+        \tau_g = \frac{\pi}{4 \, \omega_0}
+    \]
+
+    Recordemos que $\omega_0$ era una constante definida en el enunciado como un parámetro del filtro.
+    Para efectos prácticos podemos suponer que $f_0 = \kHz$, luego
+    \[
+        \omega_0 = 2 \, \pi \, \SI{1000}{\radian\per\second}
+    \]
+    y el retardo de grupo es
+    \[
+        \tau_g = \SI{0.125}{\milli\second}
+    \]
+
+    A continuación se tiene un gráfico de las componentes senoidales de $\fx[H]{\iu \omega}$ con y sin retraso.
+    Vemos que ambas frecuencias retrasan $\SI{0.125}{\milli\second}$.
+    Pero este corrimiento temporal implica un defasaje distinto para cada frecuencia.
+
+    \begin{center}
+        \includegraphics[width=\linewidth]{./images/ej_fase_lineal_1.png}
+    \end{center}
+
+    \begin{center}
+        \includegraphics[width=\linewidth]{./images/ej_fase_lineal_2.png}
+    \end{center}
+\end{mdframed}
 
 \section{Sistemas típicos}
 
