@@ -361,6 +361,7 @@ Reacomodando esta expresión, se obtiene la siguiente relación.
 
 \begin{mdframed}[style=PropertyFrame]
     \begin{prop}
+        \label{prop:groupDelay}
     \end{prop}
     Para un sistema LTI con fase lineal se cumple que
     \[
@@ -397,11 +398,21 @@ Reacomodando esta expresión, se obtiene la siguiente relación.
 
     \begin{center}
         \includegraphics[width=\linewidth]{./images/ej_fase_lineal_1.png}
-    \end{center}
-
-    \begin{center}
         \includegraphics[width=\linewidth]{./images/ej_fase_lineal_2.png}
     \end{center}
+
+    Verifiquemos que el retardo de fase es igual para todas las frecuencias, además de las 2 graficadas.
+    Según la propiedad \ref{prop:groupDelay}, para 2 frecuencias cualquiera y sus respectivos retardos, la proporción es constante:
+    \begin{align*}
+        \tau_g
+        & = \frac{\frac{\pi}{2} - \frac{\pi}{4}}{2 \pi \inParentheses{\kHz[2] - \kHz[1]}}
+        \\[1em]
+        & = \frac{\frac{3}{4} \pi - \frac{\pi}{4}}{2 \pi \inParentheses{\kHz[3] - \kHz[1]}}
+        \\[1em]
+        & = \frac{\frac{3}{4} \pi - \frac{\pi}{2}}{2 \pi \inParentheses{\kHz[3] - \kHz[2]}}
+        \\[1em]
+        & = \SI{0.125}{\milli\second}
+    \end{align*}
 \end{mdframed}
 
 \section{Sistemas típicos}
