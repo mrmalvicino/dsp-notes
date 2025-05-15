@@ -96,6 +96,7 @@ Y la expresión encontrada a partir de esta situación particular, es válida pa
 
 \begin{mdframed}[style=PropertyFrame]
     \begin{prop}
+        \label{prop:funcionDeTransferencia}
     \end{prop}
     Si un sistema LTI es alimentado con una señal de entrada $\fx[x]{t} = e^{\iu \omega \, t}$ entonces
     \[
@@ -418,5 +419,112 @@ Reacomodando esta expresión, se obtiene la siguiente relación.
 \section{Sistemas típicos}
 
 \section{Interconexión de sistemas}
+
+es común construir sistemas complejos a partir de la combinación de subsistemas más simples.
+Existen tres formas típicas de interconectar sistemas:
+
+\subsection{Conexión en serie}
+
+Dos o más sistemas se conectan uno a continuación del otro, de modo que la salida de uno es la entrada del siguiente.
+Cada sistema modifica la señal sucesivamente.
+
+\begin{center}
+    \def\svgwidth{0.8\linewidth}
+    \input{./images/conexion_serie.pdf_tex}
+\end{center}
+
+Podemos aplicar la propiedad \ref{prop:funcionDeTransferencia} para obtener la salida de $H_1$.
+Luego, $H_1 \, \fx[x]{t}$ va a ser la entrada de $H_2$, de manera que la salida de $H_2$ es:
+\begin{align*}
+    \fx[y]{t}
+    & = H_1 \, H_2 \, \fx[x]{t}
+    \\
+    & = \sub{H}{eq} \, \fx[x]{t}
+\end{align*}
+
+La función de transferencia equivalente será el producto de las funciones individuales:
+\[
+    \sub{H}{eq} = H_1 \cdot H_2
+\]
+
+\subsection{Conexión en paralelo}
+
+Los sistemas reciben la misma entrada simultáneamente, y sus salidas se suman.
+
+\begin{center}
+    \def\svgwidth{0.8\linewidth}
+    \input{./images/conexion_paralelo.pdf_tex}
+\end{center}
+
+Vemos que a la salida de cada sistema, se tiene $H_1 \, \fx[x]{t}$ y $H_2 \, \fx[x]{t}$.
+Luego, la salida del sistema total será:
+\begin{align*}
+    \fx[y]{t}
+    & = H_1 \, \fx[x]{t} \pm H_2 \, \fx[x]{t}
+    \\
+    & = \inParentheses{H_1 \pm H_2} \, \fx[x]{t}
+    \\
+    & = \sub{H}{eq} \, \fx[x]{t}
+\end{align*}
+
+La función de transferencia equivalente es la suma de las funciones individuales:
+\[
+    \sub{H}{eq} = H_1 \pm H_2
+\]
+
+\subsection{Retroalimentación}
+
+Una parte de la salida se realimenta a la entrada, eventualmente pasando por otro sistema.
+
+\begin{center}
+    \def\svgwidth{0.8\linewidth}
+    \input{./images/conexion_retroalimentacion.pdf_tex}
+\end{center}
+
+La salida estará dada por
+\[
+    \fx[y]{t} = \sub{H}{eq} \, \fx[x]{t}
+\]
+
+Esta salida tiene que pasar por $H_2$, obteniendo
+\[
+    H_2 \, \sub{H}{eq} \, \fx[x]{t}
+\]
+
+Esta señal se suma con $\fx[x]{t}$, obteniendo
+\[
+    \fx[x]{t} \pm H_2 \, \sub{H}{eq} \, \fx[x]{t}
+\]
+
+Finalmente, la señal pasa por $H_1$, quedando la salida:
+\[
+    \fx[y]{t} = H_1 \inBrackets{\fx[x]{t} \pm H_2 \, \sub{H}{eq} \, \fx[x]{t}}
+\]
+
+Al igualar las dos ecuaciones de $\fx[y]{t}$, se despeja $\sub{H}{eq}$ de:
+\[
+    \sub{H}{eq} \, \fx[x]{t}
+    = H_1 \inBrackets{\fx[x]{t} \pm H_2 \, \sub{H}{eq} \, \fx[x]{t}}
+\]
+
+Para esto, se exita el sistema con $\fx[x]{t} = e^{\iu \, \omega \, t}$.
+Luego, se divide por $e^{\iu \, \omega \, t}$ y se obtiene la función de transferencia equivalente.
+\begin{align*}
+    \inParentheses{1 \pm \sub{H}{eq} \, H_2} H_1
+    & = \sub{H}{eq}
+    \\
+    H_1 \pm \sub{H}{eq} \, H_2 \, H_1
+    & = \sub{H}{eq}
+    \\
+    H_1
+    & = \sub{H}{eq} \mp \sub{H}{eq} \, H_2 \, H_1
+    \\
+    H_1
+    & = \sub{H}{eq} \inParentheses{1 \mp H_1 \, H_2}
+\end{align*}
+quedando
+\[
+    \sub{H}{eq} = \frac{H_1}{1 \mp H_1 \, H_2}
+\]
 
 \section{Filtros}
