@@ -90,8 +90,10 @@ La parte real, $\sigma$, determina el crecimiento o decrecimiento exponencial.
 Mientras que la parte imaginaria, $\omega$, determina la frecuencia angular de la señal.
 Evaluar $\sigma = 0$ resulta útil porque permite estudiar cómo responde el sistema a señales senoidales.
 
-Estudiando la respuesta cuando la entrada es $e^{\iu \omega \, t}$ es posible calcular $\fx[H]{\iu \omega}$.
-Para este caso particular, la función de transferencia termina siendo un número complejo independiente del tiempo.
+El análisis de sistemas se facilita enormemente al estudiar su comportamiento frente a una señal compleja exponencial.
+La señal $\fx[x]{t} = e^{\iu \omega t}$ es una \emph{autofunción} de los sistemas LTI.
+Esto significa que la salida del sistema será la misma señal multiplicada por una constante compleja que depende de la frecuencia, pero no del tiempo.
+Esta constante es precisamente la función de transferencia, que describe cómo se modifican la amplitud y la fase de cada componente frecuencial.
 Y la expresión encontrada a partir de esta situación particular, es válida para cualquier señal de entrada.
 
 \begin{mdframed}[style=PropertyFrame]
@@ -418,9 +420,84 @@ Reacomodando esta expresión, se obtiene la siguiente relación.
 
 \section{Sistemas típicos}
 
+El procedimiento general para determinar la función de transferencia consiste en aplicar al sistema una entrada de la forma \( \fx[x]{t} = e^{\iu \omega t} \), obtener la salida correspondiente \( \fx[y]{t} \), y luego calcular el cociente:
+
+\[
+    \fx[H]{\iu \omega} = \frac{\fx[y]{t}}{\fx[x]{t}}
+\]
+
+\subsection{Multiplicador por constante}
+
+Este sistema simplemente multiplica la señal de entrada por una constante $C \in \setC$:
+\[
+    \fx[y]{t} = C \, \fx[x]{t}
+\]
+
+Si la entrada es $\fx[x]{t} = e^{\iu \omega t}$, la salida será $\fx[y]{t} = C \, e^{\iu \omega t}$:
+\[
+    \fx[H]{\iu \omega} = \frac{C \, e^{\iu \omega t}}{e^{\iu \omega t}} = C
+\]
+
+\subsection{Retardador}
+
+Este sistema desplaza la señal en el tiempo una cantidad $t_0$ hacia el futuro:
+\[
+    \fx[y]{t} = \fx[x]{t - t_0}
+\]
+
+Si la entrada es $\fx[x]{t} = e^{\iu \omega t}$, la salida será:
+\begin{align*}
+    \fx[y]{t}
+    & = e^{\iu \, \omega \, (t - t_0)}
+    \\
+    & = e^{-\iu \, \omega \, t_0} \, e^{\iu \omega t}
+\end{align*}
+
+Entonces, la función de transferencia es:
+\[
+    \fx[H]{\iu \omega} = e^{- \iu \, \omega \, t_0}
+\]
+
+\subsection{Derivador}
+
+Este sistema devuelve la derivada de la señal de entrada:
+\[
+    \fx[y]{t} = \frac{\dif}{\dif t} \fx[x]{t}
+\]
+
+Para $\fx[x]{t} = e^{\iu \omega t}$, la derivada es:
+\[
+    \fx[y]{t} = \iu \omega \, e^{\iu \omega t}
+\]
+
+Entonces:
+\[
+    \fx[H]{\iu \omega} = \iu \omega
+\]
+
+\subsection{Integrador}
+
+Este sistema devuelve la integral de la señal de entrada:
+\[
+    \fx[y]{t} = \int_{-\infty}^{t} \fx[x]{\tau} \, \dif \tau
+\]
+
+Si $\fx[x]{t} = e^{\iu \omega t}$, entonces:
+\begin{align*}
+    \fx[y]{t}
+    & = \int_{-\infty}^{t} e^{\iu \omega \tau} \, \dif \tau
+    \\
+    & = \frac{1}{\iu \omega} \, e^{\iu \omega t} + C
+\end{align*}
+
+Ignorando la constante de integración si el sistema es de tipo \inQuotes{respuesta al impulso cero}, se tiene:
+\[
+    \fx[H]{\iu \omega} = \frac{1}{\iu \omega}
+\]
+
 \section{Interconexión de sistemas}
 
-es común construir sistemas complejos a partir de la combinación de subsistemas más simples.
+Es común construir sistemas complejos a partir de la combinación de subsistemas más simples.
 Existen tres formas típicas de interconectar sistemas:
 
 \subsection{Conexión en serie}
