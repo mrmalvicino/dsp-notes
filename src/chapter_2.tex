@@ -115,37 +115,48 @@ En la realidad solo existen frecuencias mayores a cero.
 Las señales reales pueden ser representadas por cosenos, que son funciones pares.
 Por esto, el signo de su argumento (dado por el signo de la frecuencia) no afecta la representación.
 \[
-    \fx[\cos]{\omega \, t} = \fx[\cos]{- \omega \, t}
+    \fx[\cos]{\omega \, t + \varphi} = \fx[\cos]{- \omega \, t - \varphi}
 \]
 
-Pero al usar modelos matemáticos que tienen un dominio complejo, es necesario considerar las frecuencias negativas.
+Pero al usar modelos matemáticos que tienen un dominio complejo es necesario considerar las frecuencias negativas, pues
 \[
-    e^{\iu \omega \, t} \neq e^{- \iu \omega \, t}
+    e^{\iu (\omega \, t + \varphi)} \neq e^{- \iu (\omega \, t + \varphi)}
 \]
 
-Esto se evidencia con la siguiente ecuación, que permite representar una señal real como una suma de exponenciales complejas.
+Esto se evidencia con la siguiente propiedad de los números complejos.
+Podemos representar una señal senoidal simple de argumento real como una suma de exponenciales de argumento complejo según:
 \[
-    \fx[\cos]{\omega \, t} = \frac{e^{\iu \omega \, t} + e^{- \iu \omega \, t}}{2}
+    \fx[\cos]{\omega \, t + \varphi} = \frac{e^{\iu (\omega \, t + \varphi)} + e^{- \iu (\omega \, t + \varphi)}}{2}
 \]
 
-Las señales reales pueden ser representadas por una suma de senoidales simples.
+A su vez, las señales reales pueden ser representadas por una suma de senoidales simples.
 En ese desarrollo, eventualmente podría haber sumandos que sean senos o cosenos de amplitud negativa.
 Pero por convención, es necesario reemplaar estos sumandos por el \textbf{coseno positivo} equivalente mediante un defasaje arbitrario.
 
-\section{Simetría hermitiana}
+El espectro bilateral consiste en dos gráficos que representan la \textbf{magnitud} y la \textbf{fase} que tiene cada una de las exponenciales simples de diferente \textbf{frecuencia} que forman la señal.
+
+Si la señal tiene algún sumando constante, se puede representar como un coseno de frecuencia nula:
+\[
+    c = c \, \fx[\cos]{\omega \, t + \varphi} \text{ con } \omega = 0 \land \varphi = 0
+\]
+
+Por lo tanto, el gráfico de magnitud va a tener la totalidad de la componente constante en $\omega = 0$.
+Pero para las demás componentes $\omega \neq 0$, se va a tener la mitad de la amplitud ya que se grafica el espectro dado por las exponenciales.
+
+\subsection{Simetría hermitiana}
 
 Se tiene un sistema LIT que se exita con la señal
 \[
-    \fx[x]{t} = A_x \, \fx[\cos]{\omega_x \, t + \theta_x}
+    \fx[x]{t} = A_x \, \fx[\cos]{\omega_x \, t + \varphi_x}
 \]
 
 Podemos asumir entonces, que la salida va a ser una señal senoidal de igual frecuencia.
 Pero la amplitud y fase eventualmente se verán modificadas.
 \[
-    \fx[y]{t} = A_y \, \fx[\cos]{\omega_x \, t + \theta_y}
+    \fx[y]{t} = A_y \, \fx[\cos]{\omega_x \, t + \varphi_y}
 \]
 
-Por ser la entrada una señal senoidal simple, la función de transferencia estará dada por
+La función de transferencia estará dada por
 \[
     \fx[H]{\iu \omega} = \norm{\fx[H]{\iu \omega}} \, e^{\iu \, \fx[\arg]{\fx[H]{\iu \omega}}}
 \]
@@ -161,8 +172,8 @@ Sabiendo que
 \]
 podemos escribir la señal de entrada como
 \[
-    \fx[x]{t} = \frac{A_x}{2} e^{\iu \inParentheses{\omega_x \, t + \theta_x}}
-    + \frac{A_x}{2} e^{- \iu \inParentheses{\omega_x \, t + \theta_x}}
+    \fx[x]{t} = \frac{A_x}{2} e^{\iu \inParentheses{\omega_x \, t + \varphi_x}}
+    + \frac{A_x}{2} e^{- \iu \inParentheses{\omega_x \, t + \varphi_x}}
 \]
 
 Dado que el sistema es lineal, pordemos aplicar superposición.
@@ -170,22 +181,22 @@ Osea que la transformación a todo el espectro es equivalente a la transformaci�
 \begin{align*}
     \fx[y]{t} & = \sum_{\nth=1}^{2} \fx[H]{\iu \omega_\nth}
     \, \alpha_\nth
-    \, e^{\iu \inParentheses{\omega_\nth t + \theta_\nth}}
+    \, e^{\iu \inParentheses{\omega_\nth t + \varphi_\nth}}
     \\
     & = \sum_{\nth=1}^{2} \norm{\fx[H]{\iu \omega_\nth}}
     \, \alpha_\nth
-    \, e^{\iu \inParentheses{\omega_\nth t + \theta_\nth + \fx[\arg]{\fx[H]{\iu \omega_\nth}}}}
+    \, e^{\iu \inParentheses{\omega_\nth t + \varphi_\nth + \fx[\arg]{\fx[H]{\iu \omega_\nth}}}}
 \end{align*}
 
 La señal de salida queda luego dada por
 \begin{multline*}
     \fx[y]{t} = \norm{\fx[H]{\iu \omega_x}}
     \, \frac{A_x}{2}
-    \, e^{\iu \inParentheses{\omega_x t + \theta_x + \fx[\arg]{\fx[H]{\iu \omega_x}}}}
+    \, e^{\iu \inParentheses{\omega_x t + \varphi_x + \fx[\arg]{\fx[H]{\iu \omega_x}}}}
     \\
     + \norm{\fx[H]{- \iu \omega_x}}
     \, \frac{A_x}{2}
-    \, e^{\iu \inParentheses{- \omega_x t - \theta_x + \fx[\arg]{\fx[H]{- \iu \omega_x}}}}
+    \, e^{\iu \inParentheses{- \omega_x t - \varphi_x + \fx[\arg]{\fx[H]{- \iu \omega_x}}}}
 \end{multline*}
 
 Dado que la señal de entrada es real, la señal de salida debe tener parte imaginaria nula:
@@ -203,24 +214,24 @@ Igualando la parte imaginaria de $\fx[y]{t}$ a cero, se obtiene la siguiente ecu
 \begin{multline*}
     \norm{\fx[H]{\iu \omega_x}}
     \, \frac{A_x}{2}
-    \, \fx[\sin]{\omega_x t + \theta_x + \fx[\arg]{\fx[H]{\iu \omega_x}}}
+    \, \fx[\sin]{\omega_x t + \varphi_x + \fx[\arg]{\fx[H]{\iu \omega_x}}}
     =
     \\
     =
     - \norm{\fx[H]{- \iu \omega_x}}
     \, \frac{A_x}{2}
-    \, \fx[\sin]{- \omega_x t - \theta_x + \fx[\arg]{\fx[H]{- \iu \omega_x}}}
+    \, \fx[\sin]{- \omega_x t - \varphi_x + \fx[\arg]{\fx[H]{- \iu \omega_x}}}
 \end{multline*}
 
 Dado que $\fx[\sin]{-\varphi} = - \fx[\sin]{\varphi}$ se tiene:
 \begin{multline*}
     \norm{\fx[H]{\iu \omega_x}}
-    \, \fx[\sin]{\omega_x t + \theta_x + \fx[\arg]{\fx[H]{\iu \omega_x}}}
+    \, \fx[\sin]{\omega_x t + \varphi_x + \fx[\arg]{\fx[H]{\iu \omega_x}}}
     =
     \\
     =
     \norm{\fx[H]{- \iu \omega_x}}
-    \, \fx[\sin]{\omega_x t + \theta_x - \fx[\arg]{\fx[H]{- \iu \omega_x}}}
+    \, \fx[\sin]{\omega_x t + \varphi_x - \fx[\arg]{\fx[H]{- \iu \omega_x}}}
 \end{multline*}
 
 De manera que para que se cumpla la igualdad, el espectro de frecuencias tiene que tener amplitud par y fase impar.
@@ -418,6 +429,25 @@ Reacomodando esta expresión, se obtiene la siguiente relación.
     \end{align*}
 \end{mdframed}
 
+\section{Respuesta al impulso}
+
+Otra forma de caracterizar un sistema lineal e invariante en el tiempo (LTI) es a través de su respuesta al impulso.
+Esta se define como la salida del sistema cuando la entrada es el impulso de Dirac, denotado por $\fx[\delta]{t}$.
+
+Si un sistema LTI recibe como entrada la función $\fx[\delta]{t}$ y genera una salida $\fx[h]{t}$, se dice que $\fx[h]{t}$ es la respuesta al impulso del sistema.
+
+\begin{mdframed}[style=DefinitionFrame]
+    \begin{defn}
+    \end{defn}
+    \cusTi{Respuesta al impulso}
+    \cusTe{Dado un sistema LTI representado por una transformación $T$, su respuesta al impulso es}
+    \begin{equation*}
+        \fx[h]{t} = \fx[T]{\fx[\delta]{t}}
+    \end{equation*}
+\end{mdframed}
+
+En el capítulo \ref{chapter:convolucion} se muestra que esta función contiene la información necesaria para describir el comportamiento del sistema ante cualquier entrada.
+
 \section{Sistemas típicos}
 
 El procedimiento general para determinar la función de transferencia consiste en aplicar al sistema una entrada de la forma \( \fx[x]{t} = e^{\iu \omega t} \), obtener la salida correspondiente \( \fx[y]{t} \), y luego calcular el cociente:
@@ -603,5 +633,3 @@ quedando
 \[
     \sub{H}{eq} = \frac{H_1}{1 \mp H_1 \, H_2}
 \]
-
-\section{Filtros}

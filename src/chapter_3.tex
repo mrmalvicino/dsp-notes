@@ -1,14 +1,5 @@
 \chapter{Convolución}
-
-\begin{mdframed}[style=DefinitionFrame]
-    \begin{defn}
-    \end{defn}
-    \cusTi{Respuesta al impulso}
-    \cusTe{La respuesta al impulso de un sistema lineal e invariante en el tiempo, representado por una transformación $T$, es la señal de salida obtenida cuando este es excitado por una delta de Dirac como señal de entrada.}
-    \begin{equation*}
-        \fx[h]{t} = \fx[T]{\fx[\delta]{t}}
-    \end{equation*}
-\end{mdframed}
+\label{chapter:convolucion}
 
 Tomando $\fx[\delta]{t-t_0}$ como un funcional para cualquier señal $\fx[x]{t}$ contínua, según la propiedad \ref{prop:limDebil}, se tiene
 \begin{equation*}
@@ -53,7 +44,6 @@ Esta operación implica que la salida de un sistema LTI es la \emph{convolución
 \begin{mdframed}[style=PropertyFrame]
     \begin{prop}
     \end{prop}
-    \cusTi{Respuesta al impulso}
     \begin{equation*}
         \fx[y]{t} = \fx[h]{t} * \fx[x]{t}
     \end{equation*}

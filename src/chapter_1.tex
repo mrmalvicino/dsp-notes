@@ -215,7 +215,7 @@ El estudio infinitesimal se hace a partir de un \emph{funcional}, para luego def
     \end{equation*}
 \end{mdframed}
 
-\concept{Delta de Dirac e impulso unitario}
+\section{Delta de Dirac o impulso}
 
 Se suele denotar como
 \begin{equation*}
@@ -262,6 +262,18 @@ Para el caso del impulso unitario, donde $\lambda = 1$, queda:
     \end{prop}
     \begin{equation*}
         \int_{-\infty}^\infty \fx[\delta]{t} \, \dif t = 1
+    \end{equation*}
+\end{mdframed}
+
+Observar que la delta es nula para todo $t \neq t_0$ y vale $\infty$ en $t = t_0$.
+Multiplicarla por un escalar $\lambda$, no modifica su valor, que es infinito, pero sí su área.
+Multiplicarla por una función $\fx{t}$ modificaría el área del impulso según el valor que $f$ tome en $t_0$.
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{prop}
+    \end{prop}
+    \begin{equation*}
+        \fx[\delta]{t-t_0} \, \fx{t} = \fx{t_0} \, \fx[\delta]{t-t_0}
     \end{equation*}
 \end{mdframed}
 
