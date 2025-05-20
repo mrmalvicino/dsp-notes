@@ -25,6 +25,8 @@
 \newcommand{\ave}[1]{\bar{#1}} % Valor promedio de #1
 \newcommand{\rms}[1]{{\sub{#1}{ef}}} % Valor eficaz de #1
 \newcommand{\peak}[1]{{\sub{#1}{pk}}} % Valor pico de #1
+\newcommand{\convol}[2][h]{\displaystyle \int_{-\infty}^\infty \fx[#2]{\tau} \, \fx[#1]{t-\tau} \, \dif \tau}
+\newcommand{\deriv}[2][]{\frac{\dif #1}{\dif #2}}
 
 % COMANDOS PARA NOTACIÓN DE ELEMENTOS Y OPERADORES
 \newcommand{\class}[1][1]{\mathcal{C}^{#1}} % Clase o cantidad de derivadas parciales contínuas

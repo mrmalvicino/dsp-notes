@@ -1,57 +1,250 @@
 \chapter{Convolución}
 \label{chapter:convolucion}
 
-Tomando $\fx[\delta]{t-t_0}$ como un funcional para cualquier señal $\fx[x]{t}$ contínua, según la propiedad \ref{prop:limDebil}, se tiene
-\begin{equation*}
+La convolución modela cómo un sistema acumula los efectos de una señal a lo largo del tiempo.
+Pondera cada valor de entrada según la respuesta al impulso del sistema aplicada instante a instante.
+
+Esta operación permite calcular la salida de un sistema LTI ante cualquier señal de entrada.
+Para ello, basta con conocer la respuesta al impulso del sistema y realizar la convolución con la señal deseada.
+
+La respuesta al impulso es, por definición, la salida del sistema cuando se lo excita con una delta de Dirac.
+Y la salida ante una entrada arbitraria se obtiene convolucionando dicha entrada con la respuesta impulsiva del sistema.
+
+\begin{center}
+    \def\svgwidth{0.6\linewidth}
+    \input{./images/system.pdf_tex}
+\end{center}
+
+\section{Integral de convolución}
+
+Tomando $\fx[\delta]{t-t_0}$ como un funcional para una señal contínua $\fx[x]{t}$, según la propiedad \ref{prop:limDebil}, se tiene
+\[
     \int_{-\infty}^\infty \fx[\delta]{t-t_0} \, \fx[x]{t} \, \dif t = \fx[x]{t_0}
-\end{equation*}
-
-Y renombrando la variable de integración queda
-\begin{equation*}
+\]
+y renombrando la variable de integración queda
+\[
     \int_{-\infty}^\infty \fx[\delta]{\tau-t_0} \, \fx[x]{\tau} \, \dif \tau = \fx[x]{t_0}
-\end{equation*}
+\]
 
-Dado que $\fx[\delta]{t} = \fx[\delta]{-t}$ para cualquier $t=t_0$ genérico
-\begin{equation*}
+Dado que $\fx[\delta]{t} = \fx[\delta]{-t}$ se tiene para un $t=t_0$ genérico
+\[
     \fx[x]{t} = \int_{-\infty}^\infty \fx[\delta]{t-\tau} \, \fx[x]{\tau} \, \dif \tau
-\end{equation*}
+\]
 
-Sea $T$ una transformación dada por un sistema lineal e invariante en el tiempo.
-
-Al excitar el sistema con $\fx[x]{t}$ como señal de entrada se obtiene $\fx[y]{t} = \fx[T]{\fx[x]{t}}$ como salida. Y al aplicar $T$ queda
-\begin{equation*}
+Sea $T$ una transformación dada por un sistema LTI.
+Al excitar el sistema con $\fx[x]{t}$ se obtiene $\fx[y]{t} = \fx[T]{\fx[x]{t}}$ como salida, dada por
+\[
     \fx[y]{t} = \fx[T]{ \int_{-\infty}^\infty \fx[\delta]{t-\tau} \, \fx[x]{\tau} \, \dif \tau }
-\end{equation*}
-
-que por linealidad es
-\begin{equation*}
+\]
+que por linealidad queda
+\[
     \fx[y]{t} = \int_{-\infty}^\infty \fx[T]{\fx[\delta]{t-\tau}} \, \fx[x]{\tau} \, \dif \tau
-\end{equation*}
-
-y por invarianza en el tiempo $\fx[T]{\fx[\delta]{t-\tau}}$ es la respuesta al impulso, obteniendo la que se conoce como integral de convolución.
+\]
+y por invarianza en el tiempo, $\fx[T]{\fx[\delta]{t-\tau}}$ es la respuesta al impulso (Def. \ref{defn:respuestaAlImpulso}).
 
 \begin{mdframed}[style=DefinitionFrame]
     \begin{defn}
     \end{defn}
     \cusTi{Integral de convolución}
-    \begin{equation*}
-        \fx[x]{t} * \fx[h]{t} = \int_{-\infty}^\infty \fx[x]{\tau} \, \fx[h]{t-\tau} \, \dif \tau
-    \end{equation*}
+    \[
+        \fx[y]{t}
+        = \fx[x]{t} * \fx[h]{t}
+        = \convol{x}
+    \]
 \end{mdframed}
 
-Esta operación implica que la salida de un sistema LTI es la \emph{convolución} entre su respuesta al impulso y la señal de entrada.
+\section{Propiedades de la convolución}
+
+\subsection{Existencia del elemento neutro}
+
+La convolución de un impulso con la respuesta impulsiva de un sistema está dada por
+\[
+    \fx[\delta]{t} * \fx[h]{t} = \convol{\delta}
+\]
+
+Pero, según la propiedad \ref{prop:propiedadDeMuestreo}, $\fx[\delta]{\tau}$ pellisca el valor que $h$ toma en $\tau = 0$:
+\[
+    \fx[\delta]{t} * \fx[h]{t}
+    = \int_{-\infty}^\infty \fx[\delta]{\tau} \, \fx[h]{t} \, \dif \tau
+\]
+
+Como $\fx[h]{t}$ es independiente de $\tau$, es constante durante la integración:
+\[
+    \fx[\delta]{t} * \fx[h]{t}
+    = \fx[h]{t} \, \int_{-\infty}^\infty \fx[\delta]{\tau} \, \dif \tau
+\]
+y según la propiedad \ref{prop:integralDeImpulsoUnitario}, la integal vale 1 quedando
+\[
+    \fx[\delta]{t} * \fx[h]{t} = \fx[h]{t}
+\]
+
+Lo cual era de esperarse ya que por definición, si un sistema es alimentado con $\fx[x]{t} = \fx[\delta]{t}$, la salida es la respuesta al impulso.
+Y por convolución, la salida tiene que ser la convolución entre $\fx[h]{t}$ y la entrada, que en este caso es $\fx[\delta]{t}$.
+
+Ahora bien, esta operación la podemos hacer para cualesquiera dos funciones.
+En el contexto de las señales, interpretamos $\fx[x]{t} = \fx[\delta]{t}$ como la señal de entrada y $\fx[y]{t} = \fx[h]{t}$ como la señal de salida.
+Pero si convolucionamos $\fx[\delta]{t}$ con una función genérica $\fx[g]{t}$, llegaríamos a la misma conclusión descrita en la propiedad a continuación.
 
 \begin{mdframed}[style=PropertyFrame]
     \begin{prop}
     \end{prop}
-    \begin{equation*}
-        \fx[y]{t} = \fx[h]{t} * \fx[x]{t}
-    \end{equation*}
+    \[
+        \fx[\delta]{t} * \fx[g]{t} = \fx[g]{t}
+    \]
 \end{mdframed}
 
-A continuación se tiene un esquema que representa gráficamente esta interpretación.
+
+\subsection{Desplazamiento en tiempo}
+
+Se tiene la convolución
+\[
+    \fx[\delta]{t - t_0} * \fx[g]{t}
+    = \int_{-\infty}^\infty \fx[\delta]{\tau - \tau_0} \, \fx[g]{t - \tau} \, \dif \tau
+\]
+
+Aplicando la propiedad \ref{prop:propiedadDeMuestreo} queda
+\begin{align*}
+    \fx[\delta]{t - t_0} * \fx[g]{t}
+    & = \int_{-\infty}^\infty \fx[\delta]{\tau - \tau_0} \, \fx[g]{t - \tau_0} \, \dif \tau
+    \\[1em]
+    & = \fx[g]{t - \tau_0} \, \int_{-\infty}^\infty \fx[\delta]{\tau - \tau_0} \, \dif \tau
+\end{align*}
+
+y aplicando la propiedad \ref{prop:integralDeImpulsoUnitario} queda
+\[
+    \fx[\delta]{t - t_0} * \fx[g]{t}
+    = \fx[g]{t - \tau_0}
+\]
+
+Notar que $\tau_0 = t_0$ fue un cambio de variable hecho para definir la convolución.
+Restaurando la notación $t_0$ que originalmente tenía la función $\fx[\delta]{t - t_0}$ se tiene la siguiente propiedad.
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{prop}
+    \end{prop}
+    \[
+        \fx[\delta]{t - t_0} * \fx[g]{t} = \fx[g]{t - t_0}
+    \]
+\end{mdframed}
+
+\subsection{Propiedad conmutativa}
+
+El orden de las funciones que se convolucionan no altera el resultado.
+Podríamos visualizar esta conclusión en los siguientes diagramas, que son equivalentes.
+
+\begin{center}
+    \def\svgwidth{0.4\linewidth}
+    \input{./images/prop_conmutativa.pdf_tex}
+\end{center}
+
+Esta propiedad se puede demostrar haciendo un cambio de variable al aplicar su definición matemática:
+\[
+    \fx{t} * \fx[g]{t}
+    = \convol[g]{f}
+    \text{ con } \tau \in \inBrackets{-\infty; \infty}
+\]
+
+Sea $\theta = t - \tau$, entonces $\tau = t - \theta$ y $\dif \tau = - \dif \theta$ obteniendo
+\[
+    \fx{t} * \fx[g]{t}
+    = - \int_{\theta = \infty}^{\theta = -\infty} \fx[f]{t - \theta} \, \fx[g]{\theta} \, \dif \theta
+\]
+que es una expresión equivalente a convolucionar $\fx[g]{t} * \fx{t}$ por definición.
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{prop}
+    \end{prop}
+    \[
+        \fx{t} * \fx[g]{t} = \fx[g]{t} * \fx{t}
+    \]
+\end{mdframed}
+
+\subsection{Propiedad asociativa}
+
+Esta propiedad permite agrupar las convoluciones sin importar el orden en que se apliquen.
+Esto es fundamental en sistemas en serie, como se muestra en el siguiente diagrama.
 
 \begin{center}
     \def\svgwidth{0.8\linewidth}
-    \input{./images/system.pdf_tex}
+    \input{./images/prop_asociativa.pdf_tex}
 \end{center}
+
+Es posible hacer la convolución entre la entrada y el primer sistema y luego convolucionar el resultado con el segundo sistema.
+Y esto sería equivalente a calcular una respuesta al impulso equivalente para ambos sistemas y convolucionarla con la entrada.
+
+Matemáticamente, podemos denotarlo así:
+\[
+    \inBrackets{\fx[x]{t} * \fx[h_1]{t}} * \fx[h_2]{t}
+    = \fx[x]{t} * \inBrackets{\fx[h_1]{t} * \fx[h_2]{t}}
+\]
+
+De esta forma, podemos establecer el equivalente a los dos sistemas en serie convolucionando sus respuestas impulsivas.
+
+Observar que en el dominio del tiempo \textbf{no se multiplican} los sistemas en serie como sí pasaba en el dominio de la frecuencia.
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{prop}
+    \end{prop}
+    \[
+        \fx[\sub{h}{eq}]{t} = \fx[h_1]{t} * \fx[h_2]{t}
+    \]
+\end{mdframed}
+
+\subsection{Propiedad distibutiva}
+
+La respuesta de un sistema LTI ante la suma de dos señales de entrada es igual a la suma de las respuestas individuales de cada señal.
+Podemos hacer una analogía con los en sistemas en serie, como se muestra en el siguiente diagrama.
+
+\begin{center}
+    \def\svgwidth{0.8\linewidth}
+    \input{./images/prop_distributiva.pdf_tex}
+\end{center}
+
+Es posible calcular por separado la salida que produce una señal de entrada al atravesar dos sistemas LTI en paralelo, y luego sumar ambas salidas.
+Esto resulta equivalente a sumar previamente las respuestas al impulso de los dos sistemas, obteniendo así una única respuesta impulsiva equivalente, y luego convolucionarla con la entrada.
+
+Matemáticamente, podemos denotarlo así:
+\[
+    \fx[x]{t} * \fx[h_1]{t} \pm \fx[x]{t} * \fx[h_2]{t}
+    = \fx[x]{t} * \inBrackets{\fx[h_1]{t} \pm \fx[h_2]{t}}
+\]
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{prop}
+    \end{prop}
+    \[
+        \fx[\sub{h}{eq}]{t} = \fx[h_1]{t} \pm \fx[h_2]{t}
+    \]
+\end{mdframed}
+
+\subsection{Derivación en tiempo}
+
+La derivación en tiempo de la convolución está dada por
+\[
+    \deriv{t} \inBrackets{\fx[f]{t} * \fx[g]{t}} = \deriv{t} \inBrackets{\convol[g]{f}}
+\]
+
+Pero $\fx[f]{\tau}$ es independiente del tiempo, por lo que
+\[
+    \deriv{t} \inBrackets{\fx[f]{t} * \fx[g]{t}}
+    = \fx[f]{t} * \deriv{t} \fx[g]{t}
+\]
+y por propiedad conmutativa, esto es válido para ambas funciones.
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{prop}
+    \end{prop}
+    \[
+        \deriv{t} \inBrackets{\fx[f]{t} * \fx[g]{t}}
+        = \deriv{t} \fx[f]{t} * \fx[g]{t}
+        = \fx[f]{t} * \deriv{t} \fx[g]{t}
+    \]
+\end{mdframed}
+
+Esta propiedad es particularmente útil en la práctica a la hora de encontrar la respuesta al impulso de un sistema.
+Como no es posible sintetizar una delta de Dirac en la realidad, es posible inyectar un escalón unitario y obtener su derivada:
+
+Si $\fx[x]{t} = \fx[u]{t}$ entonces $\fx[y]{t} = \fx[u]{t} * \fx[h]{t}$, luego
+\[
+    \deriv{t} \fx[y]{t} = \deriv{t} \fx[u]{t} * \fx[h]{t} = \fx[\delta]{t} * \fx[h]{t} = \fx[h]{t}
+\]

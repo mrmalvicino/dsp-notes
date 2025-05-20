@@ -1,6 +1,6 @@
-%% Creator: Inkscape 1.1 (c68e22c387, 2021-05-23), www.inkscape.org
+%% Creator: Inkscape 1.2.2 (b0a84865, 2022-12-01), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'system.pdf' (pdf, eps, ps)
+%% Accompanies image file 'prop_distributiva.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{340.15748031bp}%
+    \setlength{\unitlength}{546.16497751bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,17 +50,18 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.5)%
+  \begin{picture}(1,0.35069312)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{system.pdf}}%
-    \put(0.2,0.275){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.17605141\unitlength}\raggedright in\end{minipage}}}%
-    \put(0.7,0.275){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.17605141\unitlength}\raggedright out\end{minipage}}}%
-    \put(0.43,0.22){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.20093406\unitlength}\raggedright (LTI)\end{minipage}}}%
-    \put(0.16,0.4){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\fx[x]{t}$\end{tabular}}}}%
-    \put(0.7,0.4){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\fx[y]{t}$\end{tabular}}}}%
-    \put(0.16,0.06){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\fx[\delta]{t}$\end{tabular}}}}%
-    \put(0.7,0.06){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\fx[h]{t}$\end{tabular}}}}%
-    \put(0.48,0.25){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$T$\end{tabular}}}}%
+    \put(0.02309675,0.16557226){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0.0833333}\smash{\begin{tabular}[t]{l}$\fx[x]{t}$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{prop_distributiva.pdf}}%
+    \put(0.80770854,0.1663608){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0.0833333}\smash{\begin{tabular}[t]{l}$\fx[y]{t}$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{prop_distributiva.pdf}}%
+    \put(0.62191199,0.1663608){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0.0833333}\smash{\begin{tabular}[t]{l}$\pm$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{prop_distributiva.pdf}}%
+    \put(0.41764769,0.22874095){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0.0833333}\smash{\begin{tabular}[t]{l}$\fx[h_1]{t}$\end{tabular}}}}%
+    \put(0.41764769,0.09691079){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0.0833333}\smash{\begin{tabular}[t]{l}$\fx[h_2]{t}$\end{tabular}}}}%
+    \put(0.55039144,0.26506311){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0.0833333}\smash{\begin{tabular}[t]{l}$x*h_1$\end{tabular}}}}%
+    \put(0.54520135,0.06058863){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0.0833333}\smash{\begin{tabular}[t]{l}$x*h_2$\end{tabular}}}}%
   \end{picture}%
 \endgroup%
