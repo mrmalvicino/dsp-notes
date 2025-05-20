@@ -27,7 +27,7 @@ La señal $\fx[x]{n}$ resultante representaría una secuencia de valores obtenid
     \begin{equation*}
         x[n] = x[n+N]
     \end{equation*}
-    \noTi{donde $N \in \setN$ es el período.}
+    donde $N \in \setN$ es el período.
 \end{mdframed}
 
 Sea $\Omega \in \setR$ la frecuencia angular, por definición se tiene
@@ -76,45 +76,74 @@ Con lo cual, se deduce que:
 \begin{mdframed}[style=PropertyFrame]
     \begin{prop}
     \end{prop}
-    \noTi{El mínimo período es $N=2$ con lo cual $\Omega_0 = \pi$ es la máxima frecuencia.}
+    El mínimo período es $N=2$ con lo cual $\Omega_0 = \pi$ es la máxima frecuencia.
 \end{mdframed}
 
-\section{Señales simples}
+\section{Funciones generalizadas}
 
-\concept{Escalón unitario}
+Las funciones generalizadas son objetos matemáticos que pretenden extender el concepto tradicional de función, para poder definir una noción de derivada para funciones que no son derivables.
+Fueron introducidas por Serguéi Sóbolev en 1935 y formalizadas en 1950 por Laurent Schwartz en su \emph{Teoría de distribuciones}.
 
-\begin{equation*}
-    \fx[u]{t} =
-    \left\{
-    \begin{aligned}
-        0 \text{ si $t<0$}
-        \\
-        1 \text{ si $t>0$}
-    \end{aligned}
-    \right.
-\end{equation*}
+Las funciones tradicionales se definen con una asignación entre conjuntos y una fórmula, y el cálculo infinitesimal está dado por la integral de Riemann.
+En cambio, \textbf{a muy grandes rasgos}, una función generalizada se define como una función partida según el entorno de un punto.
+El estudio infinitesimal se hace a partir de un \emph{funcional}, para luego definir la función generalizada a partir del \emph{límite débil} del funcional.
 
-En $t=0$ puede estar definida como 0, 1 o 1/2 según la aplicación.
+\begin{mdframed}[style=PropertyFrame]
+    \begin{prop}
+        \label{prop:limDebil}
+    \end{prop}
+    \cusTi{Límite débil de una distribución}
+    \cusTe{Para un funcional $\fx{x}$ y una función continua de prueba $\fx[\phi]{x}$ se cumple que}
+    \begin{equation*}
+        \lim_{x \to 0}{\int \fx{x-x_0} \, \fx[\phi]{x} \, \dif x} = \fx[\phi]{x_0}
+    \end{equation*}
+\end{mdframed}
+
+\subsection{Escalón unitario}
+
+El Escalón unitario representa una activación instantánea en $t_0$.
+Se utiliza comúnmente para modelar señales que \inQuotes{comienzan} en un instante específico y permanecen activas a partir de allí.
+
+\begin{mdframed}[style=DefinitionFrame]
+    \begin{defn}
+    \end{defn}
+    \cusTi{Escalón unitario}
+    \[
+        \fx[u]{t - t_0} =
+        \left\{
+        \begin{aligned}
+            0 \text{ si $t < t_0$}
+            \\
+            1 \text{ si $t > t_0$}
+        \end{aligned}
+        \right.
+    \]
+\end{mdframed}
 
 \begin{center}
     \def\svgwidth{0.6\linewidth}
     \input{./images/signal-unit-step.pdf_tex}
 \end{center}
 
-\concept{Signo}
+\subsection{Función Signo}
 
-\begin{equation*}
-    \fx[\sgn]{t} =
-    \left\{
-    \begin{aligned}
-        -1 \text{ si $t<0$}
-        \\
-        1 \text{ si $t>0$}
-    \end{aligned}
-    \right.
-\end{equation*}
+La función Signo es una función a trozos que indica el signo de un número real.
 
-En $t=0$ puede estar definida como -1, 1 o 0 según la aplicación.
+\begin{mdframed}[style=DefinitionFrame]
+    \begin{defn}
+    \end{defn}
+    \cusTi{Función Signo}
+    \[
+        \fx[\sgn]{t - t_0} =
+        \left\{
+        \begin{aligned}
+            -1 \text{ si $t < t_0$}
+            \\
+            1 \text{ si $t > t_0$}
+        \end{aligned}
+        \right.
+    \]
+\end{mdframed}
 
 \begin{center}
     \def\svgwidth{0.6\linewidth}
@@ -132,7 +161,7 @@ Ambas se relacionan de la siguiente forma.
     \end{equation*}
 \end{mdframed}
 
-\concept{Rampa unitaria}
+\subsection{Rampa unitaria}
 
 Se suele denotar como $\fx[r]{t}$ y representa una señal que aumenta a tasa constante.
 
@@ -141,102 +170,61 @@ Se suele denotar como $\fx[r]{t}$ y representa una señal que aumenta a tasa con
     \input{./images/signal-unit-ramp.pdf_tex}
 \end{center}
 
-\concept{Tren de pulsos rectangulares y onda cuadrada}
+\subsection{Derivación de distribuciones}
 
-\begin{equation*}
-    \fx[x]{t} = A \, \pulse[t_0]{t}{\tau}
-\end{equation*}
-
-\begin{center}
-    \def\svgwidth{0.8\linewidth}
-    \input{./images/signal-sq-wave.pdf_tex}
-\end{center}
-
-El valor pico es representado por $A$ ya que eventualmente vale 1 (como en el escalón unitario) pero puede estar escalada.
-También pueden darse corrimientos en tiempo según $t_0$ o desplazamientos del valor medio que la señal tome, en el eje vertical.
-
-La relación entre el ancho ($\tau$) de los pulsos y el período ($T$) de la señal es llamada \emph{duty cycle}.
-En porcentajes se expresa:
-\begin{equation*}
-    \text{duty cycle}  \equiv \frac{\tau}{T} \cdot 100\%
-\end{equation*}
-
-Si esta relación es de 1:2 entonces el duty cycle es de $50\%$ y en tal caso el tren de pulsos se llama \emph{onda cuadrada}.
-
-\concept{Tren de pulsos triangulares y onda triangular}
-
-\begin{equation*}
-    \fx[x]{t} = A - \norm{t-t_0}
-\end{equation*}
-
-\begin{center}
-    \def\svgwidth{0.8\linewidth}
-    \input{./images/signal-triang-wave.pdf_tex}
-\end{center}
-
-
-\section{Funciones generalizadas}
-
-El escalón unitario puede ser interpretado como la derivada de la rampa unitaria.
+Observar que el escalón unitario puede ser interpretado como la derivada de la rampa unitaria.
 Esto pareciera no tener sentido, porque la pendiente de la rampa pasa de ser nula a ser unitaria de manera no suave.
 Y efectivamente, en el sentido tradicional de la definición de derivada sería una interpretación errónea.
 Por este motivo el valor que el escalón toma en $t=0$ es arbitrario.
+
 Pero de igual manera es posible definir una función que sea la derivada del escalón unitario.
 En cero la función pasa de valer 0 a valer 1 abruptamente y no es posible definir la derivada en el sentido tradicional.
-Pero es posible dar una noción de derivada uniendo los dos tramos del escalón con una rampa que va ``desde la izquierda del cero hasta la derecha del cero'' para obtener una función continua.
+Pero es posible dar una noción de derivada uniendo los dos tramos del escalón con una recta que va \inQuotes{desde la izquierda del cero hasta la derecha del cero} para obtener una función continua.
 
 \begin{center}
     \def\svgwidth{0.6\linewidth}
     \input{./images/signal-impulse-2.pdf_tex}
 \end{center}
 
-Personalmente, me gusta pensar que se trata de una función que tiene 2 dimensiones temporales: una en el sentido de $t$ y otra hacia ``adentro''.
-De manera que es posible que la función tenga un cambio ``suave'' y discontinuo simultáneamente para un único instante $t_0$.
+Personalmente, me gusta pensar que se trata de una función que tiene 2 dimensiones temporales: una en el sentido de $t$ y otra hacia \inQuotes{adentro}.
+De manera que es posible que la función tenga un cambio \inQuotes{suave} y discontinuo simultáneamente para un único instante $t_0$.
 Así, el reloj no estaría frenándose sino que estaría usando otras manecillas.
 
-Vemos que cuando el ``corte en cero'' tiende a unirse, la rampa que une ambos tramos es una línea vertical con pendiente infinita.
-Este razonamiento sale de entender las señales como \emph{funciones generalizadas}.
+Vemos que cuando el \inQuotes{corte en cero} tiende a unirse, la recta que une ambos tramos es una línea vertical con pendiente infinita.
 
-Las funciones generalizadas son objetos matemáticos que pretenden extender el concepto tradicional de función, para poder definir una noción de derivada para funciones que no son derivables.
-Fueron introducidas por Serguéi Sóbolev en 1935 y formalizadas en 1950 por Laurent Schwartz en su \emph{teoría de distribuciones}.
+La derivada del escalón sería una función que determine su pendiente instante a instante.
+Y la pendiente del escalón es nula para todo $t < 0$, es infinitamente inclinada en $t = 0$ y vuelve a ser nula para $t > 0$.
 
-Las funciones tradicionales se definen con una asignación entre conjuntos y una fórmula, y el cálculo infinitesimal está dado por la integral de Riemann.
-En cambio, \textbf{a muy grandes rasgos}, una función generalizada se define como una función partida según el entorno de un punto.
-El estudio infinitesimal se hace a partir de un \emph{funcional}, para luego definir la función generalizada a partir del \emph{límite débil} del funcional.
+\subsection{Impulso o delta de Dirac}
 
-\begin{mdframed}[style=PropertyFrame]
-    \begin{prop}
-        \label{prop:limDebil}
-    \end{prop}
-    \cusTi{Límite débil de una distribución}
-    \cusTe{Para un funcional $\fx{x}$ y una función continua de prueba $\fx[\phi]{x}$ se cumple que}
-    \begin{equation*}
-        \lim_{x \to 0} \int \fx{x-x_0} \, \fx[\phi]{x} \, \dif x = \fx[\phi]{x_0}
-    \end{equation*}
+El impulso de Dirac, también conocido como delta de Dirac, es una distribución generalizada.
+Su principal utilidad es representar idealizaciones matemáticas de fenómenos físicos que ocurren en un instante de tiempo infinitesimal, como un golpe o una activación instantánea.
+
+\begin{mdframed}[style=DefinitionFrame]
+    \begin{defn}
+    \end{defn}
+    \cusTi{Impulso de Dirac}
+    \[
+        \fx[\delta]{t-t_0} =
+        \left\{
+        \begin{aligned}
+            \infty \text{ si $t=t_0$ }
+            \\
+            0 \text{ si $t \neq t_0$ }
+        \end{aligned}
+        \right.
+    \]
 \end{mdframed}
 
-\section{Delta de Dirac o impulso}
-
-Se suele denotar como
-\begin{equation*}
-    \fx[\delta]{t-t_0} =
-    \left\{
-    \begin{aligned}
-        \infty \text{ si $t=t_0$ }
-        \\
-        0 \text{ si $t \neq t_0$ }
-    \end{aligned}
-    \right.
-\end{equation*}
-
-Y se la representa gráficamente con una flecha haciendo referencia a que en el punto $t_0$ la función toma, por un instante, un valor infinito.
-La \emph{altura} de la flecha indica el área ($\lambda$).
-Si la función tiene área unitaria, se la llama impulso unitario.
+Se la representa gráficamente con una flecha que hace referencia a que en el punto $t_0$ la función toma, por un instante, un valor infinito.
 
 \begin{center}
     \def\svgwidth{0.6\linewidth}
     \input{./images/signal-impulse-1.pdf_tex}
 \end{center}
+
+La \emph{altura} de la flecha, denotada por $\lambda$, indica el área.
+Si la función tiene área unitaria, recibe el nombre de impulso unitario.
 
 Los cuadrados grises representan el área de un pulso centrado en $t_0$, inicialmente de ancho $\tau$ y amplitud $\lambda / \tau$.
 El área es el producto de la base por la altura, dada en este caso por $\lambda$.
@@ -272,10 +260,44 @@ Multiplicarla por una función $\fx{t}$ modificaría el área del impulso según
 \begin{mdframed}[style=PropertyFrame]
     \begin{prop}
     \end{prop}
+    \cusTi{Propiedad de muestreo}
     \begin{equation*}
         \fx[\delta]{t-t_0} \, \fx{t} = \fx{t_0} \, \fx[\delta]{t-t_0}
     \end{equation*}
 \end{mdframed}
+
+\subsection{Tren de pulsos rectangulares}
+
+\begin{equation*}
+    \fx[x]{t} = A \, \pulse[t_0]{t}{\tau}
+\end{equation*}
+
+\begin{center}
+    \def\svgwidth{0.8\linewidth}
+    \input{./images/signal-sq-wave.pdf_tex}
+\end{center}
+
+El valor pico es representado por $A$ ya que eventualmente vale 1 (como en el escalón unitario) pero puede estar escalada.
+También pueden darse corrimientos en tiempo según $t_0$ o desplazamientos del valor medio que la señal tome, en el eje vertical.
+
+La relación entre el ancho ($\tau$) de los pulsos y el período ($T$) de la señal es llamada \emph{duty cycle}.
+En porcentajes se expresa:
+\begin{equation*}
+    \text{duty cycle}  \equiv \frac{\tau}{T} \cdot 100\%
+\end{equation*}
+
+Si esta relación es de 1:2 entonces el duty cycle es de $50\%$ y en tal caso el tren de pulsos se llama \emph{onda cuadrada}.
+
+\subsection{Tren de pulsos triangulares}
+
+\begin{equation*}
+    \fx[x]{t} = A - \norm{t-t_0}
+\end{equation*}
+
+\begin{center}
+    \def\svgwidth{0.8\linewidth}
+    \input{./images/signal-triang-wave.pdf_tex}
+\end{center}
 
 \section{Energía y potencia de señales}
 
