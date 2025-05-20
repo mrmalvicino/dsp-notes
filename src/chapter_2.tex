@@ -450,79 +450,103 @@ En el capítulo \ref{chapter:convolucion} se muestra que esta función contiene 
 
 \section{Sistemas típicos}
 
-El procedimiento general para determinar la función de transferencia consiste en aplicar al sistema una entrada de la forma \( \fx[x]{t} = e^{\iu \omega t} \), obtener la salida correspondiente \( \fx[y]{t} \), y luego calcular el cociente:
-
+El procedimiento para determinar la función de transferencia consiste en aplicar al sistema una entrada de la forma \( \fx[x]{t} = e^{\iu \omega t} \).
+De esta forma, es posible obtener la salida correspondiente \( \fx[y]{t} \) para luego calcular el cociente
 \[
     \fx[H]{\iu \omega} = \frac{\fx[y]{t}}{\fx[x]{t}}
 \]
 
+Para calcular la respuesta al impulso por definición, hay que evaluar $\fx[x]{t} = \fx[\delta]{t}$.
+Así, la salida obtenida será
+\[
+    \fx[y]{t} = \fx[h]{t}
+\]
+
 \subsection{Multiplicador por constante}
 
-Este sistema simplemente multiplica la señal de entrada por una constante $C \in \setC$:
+Este sistema \textbf{multiplica} la señal por una constante:
 \[
     \fx[y]{t} = C \, \fx[x]{t}
 \]
 
-Si la entrada es $\fx[x]{t} = e^{\iu \omega t}$, la salida será $\fx[y]{t} = C \, e^{\iu \omega t}$:
+Si $\fx[x]{t} = e^{\iu \omega t}$, la salida será
 \[
-    \fx[H]{\iu \omega} = \frac{C \, e^{\iu \omega t}}{e^{\iu \omega t}} = C
+    \fx[y]{t} = C \, e^{\iu \omega t}
+\]
+luego, la \textbf{respuesta en frecuencia} es
+\[
+    \fx[H]{\iu \omega} = C
+\]
+
+La \textbf{respuesta al impulso} está dada por
+\[
+    \fx[h]{t} = C \, \fx[\delta]{t}
 \]
 
 \subsection{Retardador}
 
-Este sistema desplaza la señal en el tiempo una cantidad $t_0$ hacia el futuro:
+Este sistema \textbf{desplaza en el tiempo} la señal una cantidad $t_0$ hacia el futuro:
 \[
     \fx[y]{t} = \fx[x]{t - t_0}
 \]
 
-Si la entrada es $\fx[x]{t} = e^{\iu \omega t}$, la salida será:
+Si $\fx[x]{t} = e^{\iu \omega t}$, la salida será
 \begin{align*}
     \fx[y]{t}
     & = e^{\iu \, \omega \, (t - t_0)}
     \\
     & = e^{-\iu \, \omega \, t_0} \, e^{\iu \omega t}
 \end{align*}
-
-Entonces, la función de transferencia es:
+luego, la \textbf{respuesta en frecuencia} es
 \[
     \fx[H]{\iu \omega} = e^{- \iu \, \omega \, t_0}
 \]
 
+La \textbf{respuesta al impulso} está dada por
+\[
+    \fx[h]{t} = \fx[\delta]{t - t_0}
+\]
+
 \subsection{Derivador}
 
-Este sistema devuelve la derivada de la señal de entrada:
+Este sistema \textbf{devuelve la derivada} de la señal:
 \[
     \fx[y]{t} = \frac{\dif}{\dif t} \fx[x]{t}
 \]
 
-Para $\fx[x]{t} = e^{\iu \omega t}$, la derivada es:
+Si $\fx[x]{t} = e^{\iu \omega t}$, la salida será
 \[
     \fx[y]{t} = \iu \omega \, e^{\iu \omega t}
 \]
-
-Entonces:
+luego, la \textbf{respuesta en frecuencia} es
 \[
     \fx[H]{\iu \omega} = \iu \omega
 \]
 
+La \textbf{respuesta al impulso} está dada por
+\[
+    \fx[h]{t} = \frac{\dif}{\dif t} \fx[\delta]{t}
+\]
+
 \subsection{Integrador}
 
-Este sistema devuelve la integral de la señal de entrada:
+Este sistema \textbf{devuelve la integral} de la señal:
 \[
     \fx[y]{t} = \int_{-\infty}^{t} \fx[x]{\tau} \, \dif \tau
 \]
 
-Si $\fx[x]{t} = e^{\iu \omega t}$, entonces:
-\begin{align*}
-    \fx[y]{t}
-    & = \int_{-\infty}^{t} e^{\iu \omega \tau} \, \dif \tau
-    \\
-    & = \frac{1}{\iu \omega} \, e^{\iu \omega t} + C
-\end{align*}
-
-Ignorando la constante de integración si el sistema es de tipo \inQuotes{respuesta al impulso cero}, se tiene:
+Si $\fx[x]{t} = e^{\iu \omega t}$, la salida será
+\[
+    \fx[y]{t} = \frac{1}{\iu \omega} \, e^{\iu \omega t}
+\]
+luego, la \textbf{respuesta en frecuencia} es
 \[
     \fx[H]{\iu \omega} = \frac{1}{\iu \omega}
+\]
+
+La \textbf{respuesta al impulso} está dada por
+\[
+    \fx[h]{t} = \fx[u]{t}
 \]
 
 \section{Interconexión de sistemas}
