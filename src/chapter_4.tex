@@ -1,0 +1,52 @@
+\chapter{Diagramas de flujo de señales}
+
+Los diagramas en bloques muestran el flujo de la señal a través de las distintas operaciones que conforman un sistema
+Permiten visualizar cómo se transforma la entrada en la salida mediante una secuencia de procesos
+
+A partir de un diagrama de flujo, es posible obtener la respuesta al impulso o la respuesta en frecuencia del sistema completo.
+Cada bloque del diagrama puede representarse de distintas formas, equivalentes entre sí:
+
+\begin{itemize}
+    \item Por su \textbf{respuesta al impulso} individual $\fx[h_\ith]{t}$
+    \item Por su \textbf{respuesta en frecuencia} individual $\fx[H_\ith]{\iu \omega}$
+    \item Por la \textbf{operación que realiza} (multiplicación, retardo, derivación, integración, etc.)
+\end{itemize}
+
+Un diagrama de flujo compuesto por derivadores, integradores y sumadores puede transformarse en una ecuación diferencial.
+A la inversa, un sistema descrito por una ecuación diferencial lineal con coeficientes constantes tiene una representación equivalente en forma de diagrama de flujo.
+
+\section{Respuesta en frecuencia}
+
+Si la entrada al sistema es una exponencial compleja $e^{\iu \omega t}$ se recorre el diagrama reemplazando esta señal y aplicando las operaciones correspondientes.
+Como $e^{\iu \omega t}$ es autovector de los sistemas LTI, la salida será de la forma
+\[
+    \fx[y]{t} = \fx[H]{\iu \omega} \, e^{\iu \omega t}
+\]
+donde $\fx[H]{\iu \omega}$ es la respuesta en frecuencia del sistema completo.
+
+\section{Composición en el dominio de la frecuencia}
+
+Si cada bloque está representado por su respuesta en frecuencia $\fx[H_\ith]{\iu \omega}$, la respuesta en frecuencia total del sistema, $\fx[\sub{H}{eq}]{\iu \omega}$ , se obtiene:
+\begin{itemize}
+    \item \textbf{Multiplicando} las respuestas en frecuencia de bloques en \textbf{serie},
+    \item \textbf{Sumando} las respuestas de bloques en \textbf{paralelo},
+    \item Aplicando las transformaciones correspondientes si hay \textbf{retroalimentaciones}.
+\end{itemize}
+
+\section{Respuesta al impulso}
+
+Si la entrada es $\fx[x]{t} = \fx[\delta]{t}$, se recorren los bloques con esta señal y se obtiene la salida $\fx[y]{t}$.
+Por definición, $\fx[y]{t} = \fx[h]{t}$ corresponde a la respuesta al impulso del sistema.
+Una vez obtenida, cualquier salida ante entrada arbitraria se calcula por convolución:
+\[
+    \fx[y]{t} = \fx[h]{t} * \fx[x]{t}
+\]
+
+\section{Convolución entre bloques}
+
+Es posible que cada bloque del diagrama está representado por su respuesta al impulso $\fx[h_\ith]{t}$.
+La respuesta impulsiva total del sistema $\fx[\sub{h}{eq}]{t}$ se obtiene mediante la convolución sucesiva de las respuestas individuales, respetando la estructura del diagrama.
+Finalmente, la salida para cualquier entrada $\fx[x]{t}$ se obtiene como
+\[
+    \fx[y]{t} = \fx[\sub{h}{eq}]{t} * \fx[x]{t}
+\]
