@@ -1,5 +1,6 @@
 import sys
 import os
+import numpy as np
 
 base_path = os.path.abspath(os.path.join(os.getcwd(), "../../dsp-package"))
 sys.path.append(base_path)

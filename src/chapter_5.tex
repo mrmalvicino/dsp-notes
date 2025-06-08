@@ -290,9 +290,9 @@ Así, haciendo el cambio de variable $\omega = k \, \omega_0$ y considerando $c_
 \begin{align*}
     \fx[x]{t} &= \sum_{\kth=-\infty}^\infty c_\kth \, e^{\iu \, \kth \, \omega_0 \, t}
     \\[1ex]
-    &= \sum_{\kth=-\infty}^\infty \left[ \frac{1}{T_0} \int_{T_0} \fx[x]{t} \, e^{-\iu \, \omega \, t} \, \dif t \right] \, e^{\iu \, \omega \, t} \text{ con } T_0 \to \infty
+    &= \sum_{\kth=-\infty}^\infty \left[ \frac{1}{T_0} \int_{T_0} \fx[x]{t} \, e^{-\iu \, \omega \, t} \, \dif t \right] \, \complexExp \text{ con } T_0 \to \infty
     \\[1ex]
-    &= \sum_{\kth=-\infty}^\infty \left[ \frac{\omega_0}{2 \, \pi} \int_{-\infty}^{\infty} \fx[x]{t} \, e^{-\iu \, \omega \, t} \, \dif t \right] \, e^{\iu \, \omega \, t} \text{ con } \omega_0 \to 0
+    &= \sum_{\kth=-\infty}^\infty \left[ \frac{\omega_0}{2 \, \pi} \int_{-\infty}^{\infty} \fx[x]{t} \, e^{-\iu \, \omega \, t} \, \dif t \right] \, \complexExp \text{ con } \omega_0 \to 0
 \end{align*}
 
 De manera que el espectro de frecuencias es equivalente a la transformada de Fourier y se define como sigue.
@@ -318,9 +318,9 @@ De manera que el espectro de frecuencias es equivalente a la transformada de Fou
 
 Quedando el desarrollo en serie de la función dado por la antitransformada:
 \begin{align*}
-    \fx[x]{t} &= \sum_{\kth=-\infty}^\infty \left[ \frac{\omega_0}{2 \, \pi} \fx[X]{\omega} \right] \, e^{\iu \, \omega \, t} \text{ con } \omega_0 \to 0
+    \fx[x]{t} &= \sum_{\kth=-\infty}^\infty \left[ \frac{\omega_0}{2 \, \pi} \fx[X]{\omega} \right] \, \complexExp \text{ con } \omega_0 \to 0
     \\[1ex]
-    &= \frac{1}{2 \, \pi} \sum_{\kth=-\infty}^\infty \fx[X]{\omega} \, e^{\iu \, \omega \, t} \, \omega_0 \text{ con } \omega_0 \to 0
+    &= \frac{1}{2 \, \pi} \sum_{\kth=-\infty}^\infty \fx[X]{\omega} \, \complexExp \, \omega_0 \text{ con } \omega_0 \to 0
 \end{align*}
 
 \begin{mdframed}[style=DefinitionFrame]
@@ -329,6 +329,6 @@ Quedando el desarrollo en serie de la función dado por la antitransformada:
     \end{defn}
     \cusTi{Transformada de Fourier inversa}
     \begin{equation*}
-        \fx[x]{t} = \frac{1}{2 \, \pi} \int_{-\infty}^\infty \fx[X]{\omega} \, e^{\iu \, \omega \, t} \, \dif \omega = \ffourier{X}
+        \fx[x]{t} = \frac{1}{2 \, \pi} \int_{-\infty}^\infty \fx[X]{\omega} \, \complexExp \, \dif \omega = \ffourier{X}
     \end{equation*}
 \end{mdframed}

@@ -91,7 +91,7 @@ Mientras que la parte imaginaria, $\omega$, determina la frecuencia angular de l
 Evaluar $\sigma = 0$ resulta útil porque permite estudiar cómo responde el sistema a señales senoidales.
 
 El análisis de sistemas se facilita enormemente al estudiar su comportamiento frente a una señal compleja exponencial.
-La señal $\fx[x]{t} = e^{\iu \omega t}$ es una \emph{autofunción} de los sistemas LTI.
+La señal $\fx[x]{t} = \complexExp$ es una \emph{autofunción} de los sistemas LTI.
 Esto significa que la salida del sistema será la misma señal multiplicada por una constante compleja que depende de la frecuencia, pero no del tiempo.
 Esta constante es precisamente la función de transferencia, que describe cómo se modifican la amplitud y la fase de cada componente frecuencial.
 Y la expresión encontrada a partir de esta situación particular, es válida para cualquier señal de entrada.
@@ -100,7 +100,7 @@ Y la expresión encontrada a partir de esta situación particular, es válida pa
     \begin{prop}
         \label{prop:funcionDeTransferencia}
     \end{prop}
-    Si un sistema LTI es alimentado con una señal de entrada $\fx[x]{t} = e^{\iu \omega \, t}$ entonces
+    Si un sistema LTI es alimentado con una señal de entrada $\fx[x]{t} = \complexExp$ entonces
     \[
         \fx[H]{\iu \omega} = \frac{\fx[y]{t}}{\fx[x]{t}}
     \]
@@ -131,7 +131,7 @@ Podemos representar una señal senoidal simple de argumento real como una suma d
 
 A su vez, las señales reales pueden ser representadas por una suma de senoidales simples.
 En ese desarrollo, eventualmente podría haber sumandos que sean senos o cosenos de amplitud negativa.
-Pero por convención, es necesario reemplaar estos sumandos por el \textbf{coseno positivo} equivalente mediante un defasaje arbitrario.
+Pero por convención, es necesario reemplazar estos sumandos por el \textbf{coseno positivo} equivalente mediante un defasaje arbitrario.
 
 El espectro bilateral consiste en dos gráficos que representan la \textbf{magnitud} y la \textbf{fase} que tiene cada una de las exponenciales simples de diferente \textbf{frecuencia} que forman la señal.
 
@@ -262,7 +262,7 @@ De manera que para que se cumpla la igualdad, el espectro de frecuencias tiene q
     \[
         \fx[H]{\iu \omega} =
         \pulse{f \, T_0}{5}
-        \, e^\frac{\iu \pi \, f \, T_0}{4}
+        \, e^{- \iu \frac{\pi \, f \, T_0}{4}}
     \]
     
     \concept{Resolución:}
@@ -299,7 +299,7 @@ De manera que para que se cumpla la igualdad, el espectro de frecuencias tiene q
 
     La función de transferencia es:
     \[
-        \fx[H]{\iu \omega} = \pulse{\omega}{5 \, \omega_0} \, e^{-\frac{\iu \, \pi \, \omega}{4 \, \omega_0}}
+        \fx[H]{\iu \omega} = \pulse{\omega}{5 \, \omega_0} \, e^{- \iu \frac{\pi \, \omega}{4 \, \omega_0}}
     \]
     pues
     \[
@@ -310,10 +310,10 @@ De manera que para que se cumpla la igualdad, el espectro de frecuencias tiene q
             = \frac{1}{5} \, \frac{\omega}{2 \pi} \, \frac{2 \pi}{\omega_0}
             = \frac{\omega}{5 \, \omega_0}
             \\[1em]
-            & \frac{\iu \pi \, f \, T_0}{4}
-            = \frac{\iu \pi}{4} \, f \, T_0
-            = \frac{\iu \pi}{4} \, \frac{\omega}{2 \pi} \, \frac{2 \pi}{\omega_0}
-            = \frac{\iu \, \pi \, \omega}{4 \, \omega_0}
+            & \frac{\pi \, f \, T_0}{4}
+            = \frac{\pi}{4} \, f \, T_0
+            = \frac{\pi}{4} \, \frac{\omega}{2 \pi} \, \frac{2 \pi}{\omega_0}
+            = \frac{\pi \, \omega}{4 \, \omega_0}
         \end{aligned}
         \right.
     \]
@@ -451,7 +451,7 @@ En el capítulo \ref{chapter:convolucion} se muestra que esta función contiene 
 
 \section{Sistemas típicos}
 
-El procedimiento para determinar la función de transferencia consiste en aplicar al sistema una entrada de la forma \( \fx[x]{t} = e^{\iu \omega t} \).
+El procedimiento para determinar la función de transferencia consiste en aplicar al sistema una entrada de la forma \( \fx[x]{t} = \complexExp \).
 De esta forma, es posible obtener la salida correspondiente \( \fx[y]{t} \) para luego calcular el cociente
 \[
     \fx[H]{\iu \omega} = \frac{\fx[y]{t}}{\fx[x]{t}}
@@ -470,9 +470,9 @@ Este sistema \textbf{multiplica} la señal por una constante:
     \fx[y]{t} = C \, \fx[x]{t}
 \]
 
-Si $\fx[x]{t} = e^{\iu \omega t}$, la salida será
+Si $\fx[x]{t} = \complexExp$, la salida será
 \[
-    \fx[y]{t} = C \, e^{\iu \omega t}
+    \fx[y]{t} = C \, \complexExp
 \]
 luego, la \textbf{respuesta en frecuencia} es
 \[
@@ -491,12 +491,12 @@ Este sistema \textbf{desplaza en el tiempo} la señal una cantidad $t_0$ hacia e
     \fx[y]{t} = \fx[x]{t - t_0}
 \]
 
-Si $\fx[x]{t} = e^{\iu \omega t}$, la salida será
+Si $\fx[x]{t} = \complexExp$, la salida será
 \begin{align*}
     \fx[y]{t}
     & = e^{\iu \, \omega \, (t - t_0)}
     \\
-    & = e^{-\iu \, \omega \, t_0} \, e^{\iu \omega t}
+    & = e^{-\iu \, \omega \, t_0} \, \complexExp
 \end{align*}
 luego, la \textbf{respuesta en frecuencia} es
 \[
@@ -515,9 +515,9 @@ Este sistema \textbf{devuelve la derivada} de la señal:
     \fx[y]{t} = \frac{\dif}{\dif t} \fx[x]{t}
 \]
 
-Si $\fx[x]{t} = e^{\iu \omega t}$, la salida será
+Si $\fx[x]{t} = \complexExp$, la salida será
 \[
-    \fx[y]{t} = \iu \omega \, e^{\iu \omega t}
+    \fx[y]{t} = \iu \omega \, \complexExp
 \]
 luego, la \textbf{respuesta en frecuencia} es
 \[
@@ -536,9 +536,9 @@ Este sistema \textbf{devuelve la integral} de la señal:
     \fx[y]{t} = \int_{-\infty}^{t} \fx[x]{\tau} \, \dif \tau
 \]
 
-Si $\fx[x]{t} = e^{\iu \omega t}$, la salida será
+Si $\fx[x]{t} = \complexExp$, la salida será
 \[
-    \fx[y]{t} = \frac{1}{\iu \omega} \, e^{\iu \omega t}
+    \fx[y]{t} = \frac{1}{\iu \omega} \, \complexExp
 \]
 luego, la \textbf{respuesta en frecuencia} es
 \[
