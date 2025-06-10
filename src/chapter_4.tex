@@ -101,3 +101,103 @@ Por último, si los bloques están definidos a través de sus \textbf{respuestas
         &= \frac{(\iu \omega)^2 - 1}{\iu \omega + (\iu \omega)^3}
     \end{align*}
 \end{mdframed}
+
+\begin{mdframed}[style=ExampleFrame]
+    \begin{example}
+    \end{example}
+    Dado un sistema LTI descrito por el siguiente diagrama que muestra las respuestas al impulso individuales de cada componente:
+
+    \begin{center}
+        \def\svgwidth{\linewidth}
+        \input{./images/ej_2_diagramas_de_flujo_individuales.pdf_tex}
+    \end{center}
+
+    se pretende encontrar:
+
+    \begin{enumerate}
+        \item la respuesta al impulso por convolución,
+        \item el diagrama de operadores,
+        \item la respuesta al impulso por definición,
+        \item y la respuesta en frecuencia por definición.
+    \end{enumerate}
+
+    \concept{Respuesta al impulso por convolución:}
+
+    Para cualquier entrada, la salida va a estar dada por la convolución sucesiva de los distintos componentes:
+    \[
+        \fx[y]{t} = \fx[x]{t} * \fx[u]{t} * C \, \fx[\delta]{t} * \inBrackets{\fx[\delta']{t} - \fx[\delta]{t-4}}
+    \]
+    por lo que la respuesta impulsiva equivalente es
+    \[
+        \fx[h]{t} = \fx[u]{t} * C \, \fx[\delta]{t} * \inBrackets{\fx[\delta']{t} - \fx[\delta]{t-4}}
+    \]
+    y usando propiedades de convolución, queda
+    \begin{align*}
+        \fx[h]{t}
+        & = C \, \fx[u]{t} * \inBrackets{\fx[\delta']{t} - \fx[\delta]{t-4}}
+        \\
+        & = C \inBrackets{\fx[u]{t} * \fx[\delta']{t} - \fx[u]{t} * \fx[\delta]{t-4}}
+        \\
+        & = C \inBrackets{\fx[u']{t} * \fx[\delta]{t} - \fx[u]{t-4}}
+        \\
+        & = C \inBrackets{\fx[\delta]{t} * \fx[\delta]{t} - \fx[u]{t-4}}
+        \\
+        & = C \inBrackets{\fx[\delta]{t} - \fx[u]{t-4}}
+    \end{align*}
+
+    \concept{Diagrama de operadores:}
+
+    Para obtener el diagrama equivalente, reemplazamos cada respuesta impulsiva individual por las operaciones equivalentes desarrolladas en las sección \ref{sec:sistemasTipicos}:
+    Los puntos $P_1$, $P_2$, $P_3$ y $P_4$ serán de utilidad luego, para analizar la señal en cada proceso.
+
+    \begin{center}
+        \def\svgwidth{\linewidth}
+        \input{./images/ej_2_diagramas_de_flujo_operaciones.pdf_tex}
+    \end{center}
+
+    \concept{Respuesta al impulso por definición:}
+
+    Si inyectamos al sistema la señal
+    \[
+        \fx[x]{t} = \fx[\delta]{t}
+    \]
+    vemos que, luego de pasar por el integrador, la señal en $P_1$ será $\fx[u]{t}$.
+    Al multiplicarla por una constante, la señal en $P_2$ estará dada por $C \, \fx[u]{t}$.
+
+    Luego, hay una conexión en paralelo.
+    La rama de arriba retarda 4 unidades la señal que entra desde $P_2$, quedando $C \, \fx[u]{t-4}$ en $P_3$.
+    Y la rama de abajo deriva la señal que entra desde $P_2$, quedando $C \, \fx[\delta]{t}$ en $P_4$.
+
+    Finalmente, a la salida del sumador tendremos
+    \[
+        \fx[y]{t} = C \, \fx[\delta]{t} - C \, \fx[u]{t-4}
+    \]
+    y como esta es la salida cuando la entrada es el impulso, se trata de la respuesta al impulso.
+    Sacando factor común, queda:
+    \[
+        \fx[h]{t} = C \inBrackets{\fx[\delta]{t} - \fx[u]{t-4}}
+    \]
+
+    \concept{Respuesta en frecuencia por definición:}
+
+    Si inyectamos al sistema la señal
+    \[
+        \fx[x]{t} = \complexExp
+    \]
+    vemos que, luego de pasar por el integrador, la señal en $P_1$ será $\sfrac{\complexExp}{\iu \omega}$.
+    Al multiplicarla por una constante, la señal en $P_2$ estará dada por $\sfrac{C \, \complexExp}{\iu \omega}$.
+
+    Luego, está la conexión en paralelo.
+    La rama de arriba retarda 4 unidades la señal que entra desde $P_2$, quedando $\sfrac{C \, \complexExp \, e^{- \iu \omega 4}}{\iu \omega}$ en $P_3$.
+    Y la rama de abajo deriva la señal que entra desde $P_2$, quedando $C \, \complexExp$ en $P_4$.
+
+    Finalmente, a la salida del sumador tendremos
+    \[
+        \fx[y]{t} = C \, \complexExp - \frac{C \, \complexExp \, e^{- \iu \omega 4}}{\iu \omega}
+    \]
+
+    Dividiendo por $\fx[x]{t} = \complexExp$ se obtiene
+    \[
+        \fx[H]{\iu \omega} = \frac{\fx[y]{t}}{\fx[x]{t}} = C - \frac{C \, e^{- \iu \omega 4}}{\iu \omega}
+    \]
+\end{mdframed}
