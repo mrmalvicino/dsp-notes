@@ -1,52 +1,103 @@
-\chapter{Diagramas de flujo de señales}
+\chapter{Caracterización de sistemas}
 
-Los diagramas en bloques muestran el flujo de la señal a través de las distintas operaciones que conforman un sistema
-Permiten visualizar cómo se transforma la entrada en la salida mediante una secuencia de procesos
-
+Los diagramas en bloques muestran el flujo de la señal a través de las distintas operaciones que conforman un sistema.
+Permiten visualizar cómo se transforma la entrada en la salida mediante una secuencia de procesos.
 A partir de un diagrama de flujo, es posible obtener la respuesta al impulso o la respuesta en frecuencia del sistema completo.
-Cada bloque del diagrama puede representarse de distintas formas, equivalentes entre sí:
-
-\begin{itemize}
-    \item Por su \textbf{respuesta al impulso} individual $\fx[h_\ith]{t}$
-    \item Por su \textbf{respuesta en frecuencia} individual $\fx[H_\ith]{\iu \omega}$
-    \item Por la \textbf{operación que realiza} (multiplicación, retardo, derivación, integración, etc.)
-\end{itemize}
 
 Un diagrama de flujo compuesto por derivadores, integradores y sumadores puede transformarse en una ecuación diferencial.
-A la inversa, un sistema descrito por una ecuación diferencial lineal con coeficientes constantes tiene una representación equivalente en forma de diagrama de flujo.
+De manera inversa, un sistema descrito por una ecuación diferencial lineal con coeficientes constantes tiene una representación equivalente en forma de diagrama.
 
-\section{Respuesta en frecuencia}
+Cada bloque del diagrama puede representarse de distintas formas, equivalentes entre sí:
 
-Si la entrada al sistema es una exponencial compleja $e^{\iu \omega t}$ se recorre el diagrama reemplazando esta señal y aplicando las operaciones correspondientes.
-Como $e^{\iu \omega t}$ es autovector de los sistemas LTI, la salida será de la forma
-\[
-    \fx[y]{t} = \fx[H]{\iu \omega} \, e^{\iu \omega t}
-\]
-donde $\fx[H]{\iu \omega}$ es la respuesta en frecuencia del sistema completo.
+\begin{enumerate}
+    \item Por la \textbf{operación que realiza} en función del tiempo (multiplicación, retardo, derivación, integración, etc.).
+    \item Por su \textbf{respuesta en frecuencia} individual $\fx[H_\ith]{\iu \omega}$.
+    \item Por su \textbf{respuesta al impulso} individual $\fx[h_\ith]{t}$.
+\end{enumerate}
 
-\section{Composición en el dominio de la frecuencia}
+\section{Diagramas de flujo}
 
-Si cada bloque está representado por su respuesta en frecuencia $\fx[H_\ith]{\iu \omega}$, la respuesta en frecuencia total del sistema, $\fx[\sub{H}{eq}]{\iu \omega}$ , se obtiene:
+Los diagramas de bloques permiten visualizar cómo se procesa una señal dentro de un sistema.
+A partir de esta representación, es posible caracterizar el sistema de distintas maneras, según el enfoque que se adopte:
+
 \begin{itemize}
-    \item \textbf{Multiplicando} las respuestas en frecuencia de bloques en \textbf{serie},
-    \item \textbf{Sumando} las respuestas de bloques en \textbf{paralelo},
-    \item Aplicando las transformaciones correspondientes si hay \textbf{retroalimentaciones}.
+    \item Espectro frecuencial \textbf{por definición}, exitando el sistema con $\fx[x]{t} = \complexExp$.
+    \item Respuesta impulsiva \textbf{por definición}, exitando el sistema con $\fx[x]{t} = \fx[\delta]{t}$.
+    \item Espectro frecuencial \textbf{por composición} de sistemas individuales $\fx[H_\ith]{\iu \omega}$.
+    \item Respuesta impulsiva \textbf{por convolución} de sistemas individuales $\fx[h_\ith]{t}$.
 \end{itemize}
 
-\section{Respuesta al impulso}
+Cuando el diagrama muestra explícitamente las \textbf{operaciones} que realiza cada bloque (como derivación, integración o retardo), es posible obtener la respuesta en frecuencia y la respuesta impulsiva del sistema directamente \textbf{por definición}.
+Si en cambio el diagrama presenta las \textbf{respuestas en frecuencia individuales} de cada bloque, se puede determinar una respuesta en frecuencia equivalente mediante la \textbf{composición algebraica} de dichas funciones.
+Por último, si los bloques están definidos a través de sus \textbf{respuestas impulsivas individuales}, es posible obtener una respuesta impulsiva global mediante \textbf{convoluciones sucesivas}, siempre que el sistema no tenga retroalimentación.
 
-Si la entrada es $\fx[x]{t} = \fx[\delta]{t}$, se recorren los bloques con esta señal y se obtiene la salida $\fx[y]{t}$.
-Por definición, $\fx[y]{t} = \fx[h]{t}$ corresponde a la respuesta al impulso del sistema.
-Una vez obtenida, cualquier salida ante entrada arbitraria se calcula por convolución:
-\[
-    \fx[y]{t} = \fx[h]{t} * \fx[x]{t}
-\]
+\begin{mdframed}[style=ExampleFrame]
+    \begin{example}
+    \end{example}
+    Dado un sistema LTI descrito por la siguiente ecuación diferencial
+    \[
+        \deriv[^3]{t^3} \fx[y]{t} + \deriv{t} \fx[y]{t}
+        = \deriv[^2]{t^2} \fx[x]{t} - \fx[x]{t}
+    \]
+    se pretende encontrar:
 
-\section{Convolución entre bloques}
+    \begin{enumerate}
+        \item El diagrama de operadores,
+        \item La respuesta en frecuencia por definición,
+        \item El diagrama de rtas. en frecuencia individuales,
+        \item La respuesta en frecuencia por composición.
+    \end{enumerate}
 
-Es posible que cada bloque del diagrama está representado por su respuesta al impulso $\fx[h_\ith]{t}$.
-La respuesta impulsiva total del sistema $\fx[\sub{h}{eq}]{t}$ se obtiene mediante la convolución sucesiva de las respuestas individuales, respetando la estructura del diagrama.
-Finalmente, la salida para cualquier entrada $\fx[x]{t}$ se obtiene como
-\[
-    \fx[y]{t} = \fx[\sub{h}{eq}]{t} * \fx[x]{t}
-\]
+    \concept{Diagrama de operadores:}
+
+    Integrando la ecuación diferencial, se obtiene
+    \[
+        \fx[y]{t} = \deriv{t} \fx[x]{t} - \int_{-\infty}^{t} \fx[x]{\tau} \dif \tau - \deriv[^2]{t^2} \fx[y]{t}
+    \]
+
+    De manera que el diagrama de flujo es
+
+    \begin{center}
+        \def\svgwidth{\linewidth}
+        \input{./images/ej_1_diagramas_de_flujo_operaciones.pdf_tex}
+    \end{center}
+
+    \concept{Respuesta en frecuencia por definición:}
+
+    Al evaluar $\fx[x]{t} = \complexExp$ y $\fx[y]{t} = H \, \complexExp$ en la ecuación diferencial, se tiene
+    \begin{align*}
+        (\iu \omega)^3 \, H \, \complexExp + (\iu \omega) \, H \, \complexExp
+        & = (\iu \omega)^2 \, \complexExp - \complexExp
+        \\[1em]
+        (\iu \omega)^3 \, H + (\iu \omega) \, H
+        & = (\iu \omega)^2 - 1
+        \\[1em]
+        H
+        & = \frac{(\iu \omega)^2 - 1}{(\iu \omega)^3 + \iu \omega}
+    \end{align*}
+
+    \concept{Diagrama de rtas. en frecuencia individuales:}
+
+    Para obtener el diagrama equivalente, reemplazamos cada operación por las respuestas equivalentes obtenidas en las sección \ref{sec:sistemasTipicos}:
+
+    \begin{center}
+        \def\svgwidth{\linewidth}
+        \input{./images/ej_1_diagramas_de_flujo_individuales.pdf_tex}
+    \end{center}
+
+    \concept{Respuesta en frecuencia por composición:}
+
+    El subsistema de la izquierda tiene un derivador y un integrador en paralelo.
+    El subsistema de la derecha, tiene un derivador doble con retroalimentación.
+    Estos dos están conectados en cascada.
+    Usando las respuestas equivalentes obtenidas en las sección \ref{sec:InterconexionDeSistemas}, se obtiene:
+
+    \begin{align*}
+        H
+        &= \inParentheses{\iu \omega - \frac{1}{\iu \omega}} \frac{1}{1 + (\iu \omega)^2}
+        \\[1ex]
+        &= \frac{(\iu \omega)^2 - 1}{\iu \omega} \, \frac{1}{1 + (\iu \omega)^2}
+        \\[1ex]
+        &= \frac{(\iu \omega)^2 - 1}{\iu \omega + (\iu \omega)^3}
+    \end{align*}
+\end{mdframed}
