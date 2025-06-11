@@ -2,38 +2,27 @@
 
 \input{book_packages}
 \input{book_commands}
-
-% Numeraciones
-\newtheorem{defn}{{Definición}}[chapter]
-\newtheorem{prop}{{Propiedad}}[chapter]
-\newtheorem{example}{{Ejemplo}}[chapter]
-
-% Entornos de formato
-\newenvironment{formatI}{\vspace{1ex}\par\small\sffamily}
+\input{book_environments}
 
 \begin{document}
+	\pagestyle{fancy}
+	\fancyhf{}
+	\chead{\scriptsize \nouppercase \rightmark}
+	\cfoot{\scriptsize \thepage}
+	\pagenumbering{gobble}
+	\renewcommand{\headrulewidth}{0pt}
 
-    % Encabezado y pie de página
-    \pagestyle{fancy}
-    \fancyhf{}
-    \chead{\scriptsize \nouppercase \rightmark}
-    \cfoot{\scriptsize \thepage}
-    \pagenumbering{gobble}
-    \renewcommand{\headrulewidth}{0pt}
+	\frontmatter
+	\include{cover_page}
+	\include{preface}
+	\renewcommand{\spanishappendixname}{Anexo}
+	\tableofcontents
 
-    \frontmatter
-    % \includepdf{cover}
-    \include{cover_page}
-    \include{preface}
-    \renewcommand{\spanishappendixname}{Anexo}
-    \tableofcontents
-
-    \mainmatter
-    \pagenumbering{arabic}
-    \include{chapter_1}
-    \include{chapter_2}
-    \include{chapter_3}
-    \include{chapter_4}
-    \include{chapter_5}
-
+	\mainmatter
+	\pagenumbering{arabic}
+	\include{chapter_1}
+	\include{chapter_2}
+	\include{chapter_3}
+	\include{chapter_4}
+	\include{chapter_5}
 \end{document}
