@@ -7,3 +7,26 @@
 % Entorno de formato
 
 \newenvironment{formatI}{\vspace{1ex}\par\small\sffamily}
+
+% Entorno de numeración
+
+\newcounter{numitem}
+
+\NewDocumentEnvironment{numset}{}{
+    \setcounter{numitem}{0}
+}{
+    \setcounter{numitem}{0}
+}
+
+\NewDocumentEnvironment{numitem}{m}{
+	\refstepcounter{numitem}
+    \par
+    \medskip
+    \noindent
+    \textbf{\thenumitem. #1}
+    \par
+    \nobreak
+    \smallskip
+}{
+	\medskip\par
+}
