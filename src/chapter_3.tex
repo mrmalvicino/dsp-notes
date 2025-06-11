@@ -297,19 +297,145 @@ Para esto, hay que
         Pero en realidad, $t$ va a ser variable una vez computada la integral.
         Simplemente suponemos lo contrario para saber, \emph{gráficamente}, qué hay que integrar.
 
-        Teniendo esto en cuenta, se definen los intervalos de $t$ para los que
+        Teniendo esto en cuenta, se definen los intervalos $I_\ith$ de $t$ para los que
         \begin{itemize}
             \item las expresiones que se multiplican en la integral y
             \item los extremos de integración no cambian.
         \end{itemize}
+
+        De esta manera, la integral de convolución queda definida en $\Nth$ tramos:
+        \[
+            \fx[y]{t} =
+            \begin{cases}
+                \fx[y_1]{t} \text{si } t \in I_1
+                \\
+                \fx[y_2]{t} \text{si } t \in I_2
+                \\
+                \hfil \vdots \hfil
+                \\
+                \fx[y_\Nth]{t} \text{si } t \in I_\Nth
+            \end{cases}
+        \]
     \end{numitem}
 
     \begin{numitem}{Definir extremos de integración}
-        Considerar los subintervalos de $\tau$ para los que las funciones se solapan.
+        Considerar cómo se da el solapamiento en los intervalos definidos.
         Al desplazar $h$, uno o ambos extremos de integración pueden depender de $t$, que es constante para la integral.
-    \end{numitem}
-
-    \begin{numitem}{Plantear el resultado por tramos}
-        Para cada intervalo definido anteriormente, la función $\fx[y]{t}$ va a tomar una expresión distinta.
+        Para encontrar los extremos de integración, pensar qué área estaría calculando la integral si $t$ toma los extremos del intervalo.
     \end{numitem}
 \end{numset}
+
+\begin{mdframed}[style=ExampleFrame]
+    \begin{example}
+    \end{example}
+    Dado un sistema cuya respuesta al impulso es $t \, \pulse[1]{t}{2}$, calcular la salida cuando la entrada es $2 \, \fx[u]{t}$.
+
+    \concept{Resolución:}
+
+    Sea
+    \[
+        \fx[x]{t} = 2 \, \fx[u]{t}
+    \]
+    la señal de entrada y
+    \[
+        \fx[h]{t} = t \, \pulse[1]{t}{2}
+    \]
+    la respuesta al impulso del sistema.
+
+    \begin{numset}
+        \begin{numitem}{Cambio de dominio}
+            Primero es necesario cambiar el dominio de integración $t \longrightarrow \tau$ quedando
+            \begin{align*}
+                \fx[x]{\tau}
+                & =
+                \begin{cases}
+                    0 & \text{si } \tau < 0
+                    \\
+                    2 & \text{si } 0 < \tau
+                \end{cases}
+                \\[2ex]
+                \fx[h]{\tau}
+                & =
+                \begin{cases}
+                    \tau & \text{si } 0 < \tau < 2
+                    \\
+                    0 & \text{si } \tau \notin [0;2]
+                \end{cases}
+            \end{align*}
+        \end{numitem}
+
+        \begin{numitem}{Inversión y desplazamiento}
+            Para voltear y desplazar $h$, hay que reemplazar $\tau$ por $t - \tau$.
+            Notar que hay que modificar tanto la expresión de $h$ como el intervalo para el cual se define:
+            \[
+                0 < \tau < 2
+                \longrightarrow
+                0 < t - \tau < 2
+            \]
+
+            Como la variable de integración es $\tau$, $t$ debe ser tratada como una constante:
+            \begin{gather*}
+                - t < - \tau < 2 - t
+                \\
+                t > \tau > t - 2
+            \end{gather*}
+
+            Así, luego de voltear y desplazar $\fx[h]{\tau}$, queda
+            \[
+                \fx[h]{t-\tau}
+                =
+                \begin{cases}
+                    t-\tau & \text{si } t - 2 < \tau < t
+                    \\
+                    0 & \text{si } \tau \notin [t - 2;t]
+                \end{cases}
+            \]
+
+            En el siguiente gráfico, podemos visualizar $\fx[x]{\tau}$, $\fx[h]{\tau}$ y $\fx[h]{t-\tau}$ cuando $t=0$.
+            \begin{center}
+                \def\svgwidth{0.9\linewidth}
+                \input{./images/ej_1_convolucion.pdf_tex}
+            \end{center}
+        \end{numitem}
+
+        \begin{numitem}{Intervalo de $t$}
+            Si $t$ es menor a 0, la función $h$ va a estar tan desplazada hacia la izquierda que no va a solaparse con $x$.
+            Solo si $t$ toma valores mayores a cero el producto $\fx[x]{\tau} \, \fx[h]{t - \tau}$ va a ser distinto de cero.
+            Pero hay que tener en cuenta que el extremo inferior de integración va a cambiar en $t = 2$.
+            Por lo tanto, la convolución va a estar definida para los siguientes intervalos:
+            \[
+                \fx[y]{t} = \fx[x]{t} * \fx[h]{t} =
+                \begin{cases}
+                    \fx[y_1]{t} & \text{si } -\infty < t < 0
+                    \\[1ex]
+                    \fx[y_2]{t} & \text{si } 0 < t < 2
+                    \\[1ex]
+                    \fx[y_3]{t} & \text{si } 2 < t < +\infty
+                \end{cases}
+            \]
+            con $\fx[y_1]{t} = 0$ por no haber solapamiento entre $x$ y $h$.
+        \end{numitem}
+
+        \begin{numitem}{Extremos de las integrales}
+            Analizando los gráficos para el intervalo $0 < t < 2$.
+            Vemos que mientras $t$ vaya de 0 a 2, el extremo inferior de la integral es constantemente 0.
+            Mientras que el extremo superior, toma el valor de $t$.
+            
+            El área calculada para cada valor que tome $t$, va a ser aquella comprendida entre 0 y $t$.
+            \[
+                \fx[y_2]{t}
+                = \int_0^t 2 (t - \tau) \dif \tau
+                = t^2
+            \]
+
+            Por otra parte, para el intervalo $2 < t < +\infty$, ambos extremos de integración van a estar en función de $t$.
+            
+            El área calculada para cada valor que tome $t$, va a ser aquella delimitada por el largo del fragmento de recta:
+            \[
+                \fx[y_3]{t}
+                = \int_{t-2}^{t} 2 (t - \tau) \dif \tau
+                = 4
+            \]
+        \end{numitem}
+    \end{numset}
+\end{mdframed}
