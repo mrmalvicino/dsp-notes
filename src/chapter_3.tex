@@ -248,3 +248,68 @@ Si $\fx[x]{t} = \fx[u]{t}$ entonces $\fx[y]{t} = \fx[u]{t} * \fx[h]{t}$, luego
 \[
     \deriv{t} \fx[y]{t} = \deriv{t} \fx[u]{t} * \fx[h]{t} = \fx[\delta]{t} * \fx[h]{t} = \fx[h]{t}
 \]
+
+\section{Convolución gráfica}
+
+Es posible obtener una expresión para $\fx[y]{t} = \fx[x]{t} * \fx[h]{t}$ analizando las gráficas de $\fx[x]{t}$ y $\fx[h]{t}$ para calcular
+\[
+    \fx[y]{t} = \convol{x}
+\]
+
+Para esto, hay que
+
+\begin{numset}
+    \begin{numitem}{Cambiar el dominio de $t$ por $\tau$}
+        Generalmente, la integral de convolución está dada para una señal $\fx[x]{t}$ y una respuesta al impulso $\fx[h]{t}$.
+        El primer paso consiste en reescribir las funciones en función de $\tau$, ya que la integral se calcula respecto a esta variable:
+        \begin{align*}
+            \fx[x]{t} & \longrightarrow \fx[x]{\tau}
+            \\[1ex]
+            \fx[h]{t} & \longrightarrow \fx[h]{\tau}
+        \end{align*}
+    \end{numitem}
+
+    \begin{numitem}{Invertir y desplazar una de las funciones}
+        Luego, seleccionamos una de las funciones para invertirla y desplazarla.
+        Se puede elegir tanto $x$ como $h$.
+        Es recomendable elegir la más simple: aquella que esté acotada en tiempo o que sea constante.
+        Para ser consistente con la notación genérica, se voltea $h$ por motivos didácticos.
+        Esto implica hacer el siguiente reemplazo en $h$:
+        \[
+            \tau \longrightarrow t - \tau
+        \]
+
+        Este cambio va a afectar
+        \begin{itemize}
+            \item eventualmente la fórmula o expresión que tome $h$,
+            \item y definitivamente a los intervalos para los que esté definida la función.
+        \end{itemize}
+
+        Observar que la función volteada tiene que quedar definida para intervalos de $\tau$, como si $t$ fuese una constante.
+    \end{numitem}
+
+    \begin{numitem}{Definir intervalos de $t$}
+        ¿Qué es $t$?
+        Para la integral, $t$ es una constante.
+        Para resolver una convolución gráficamente, en el paso anterior pensamos a $t$ como un corrimiento de $h$ en el tiempo.
+        Pero no hay que perder de vista que, $t$, es en realidad la variable independiente que va a tener $\fx[y]{t}$, definida por trozos.
+        Es decir que, por motivos prácticos, vamos a calcular distintas integrales como si $t$ efectivamente estuviese variando y $h$ se estuviese moviendo.
+        Pero en realidad, $t$ va a ser variable una vez computada la integral.
+        Simplemente suponemos lo contrario para saber, \emph{gráficamente}, qué hay que integrar.
+
+        Teniendo esto en cuenta, se definen los intervalos de $t$ para los que
+        \begin{itemize}
+            \item las expresiones que se multiplican en la integral y
+            \item los extremos de integración no cambian.
+        \end{itemize}
+    \end{numitem}
+
+    \begin{numitem}{Definir extremos de integración}
+        Considerar los subintervalos de $\tau$ para los que las funciones se solapan.
+        Al desplazar $h$, uno o ambos extremos de integración pueden depender de $t$, que es constante para la integral.
+    \end{numitem}
+
+    \begin{numitem}{Plantear el resultado por tramos}
+        Para cada intervalo definido anteriormente, la función $\fx[y]{t}$ va a tomar una expresión distinta.
+    \end{numitem}
+\end{numset}
