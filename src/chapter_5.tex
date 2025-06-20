@@ -233,6 +233,53 @@ Aplicando $\fx[\cos]{\alpha \pm \beta} = \fx[\cos]{\alpha} \fx[\cos]{\beta} \mp 
     Observar que este desarrollo es equivalente a la ecuación \ref{eqn:FourierProy}, ya que $\fx[\sin]{\frac{\kth \, \pi}{2}}$ vale 0 para los $\kth$ pares y $\pm1$ para los $\kth$ impares.
 \end{mdframed}
 
+\begin{mdframed}[style=ExampleFrame]
+    \begin{example}
+    \end{example}
+    Determinar la serie de Fourier y el espectro de
+    \[
+        \fx[x]{t} = 2 + 4 \fx[\cos]{50 t + \frac{\pi}{2}} + 12 \fx[\cos]{100 t - \frac{\pi}{3}}
+    \]
+
+    \concept{Resolución}
+
+    A partir de la suma de un complejo con su conjugado, podemos expresar $\fx[x]{t}$ en sumas de exponenciales:
+    \begin{align*}
+        \fx[x]{t}
+        & = 2 + \frac{4}{2} \inBrackets{e^{\iu \inParentheses{50 t + \frac{\pi}{2}}} + e^{- \iu \inParentheses{50 t + \frac{\pi}{2}}}} +
+        \notag
+        \\
+        & \hfill \hspace{2cm}
+        + \frac{12}{2} \inBrackets{e^{\iu \inParentheses{100 t - \frac{\pi}{3}}} + e^{- \iu \inParentheses{100 t - \frac{\pi}{3}}}}
+        \\[2ex]
+        & = 2 + 2 \, e^{\iu \inParentheses{50 t + \frac{\pi}{2}}} + 2 \, e^{\iu \inParentheses{- 50 t - \frac{\pi}{2}}} +
+        \notag
+        \\
+        & \hfill \hspace{2.5cm}
+        + 6 \, e^{\iu \inParentheses{100 t - \frac{\pi}{3}}} + 6 \, e^{\iu \inParentheses{- 100 t + \frac{\pi}{3}}}
+    \end{align*}
+
+    La frecuencia fundamental es $\omega_0 = \radpers[50]$ luego
+    \begin{align*}
+        \fx[x]{t}
+        & = 2 + 2 \, e^{\iu \frac{\pi}{2}} \, e^{\iu \omega_0 t} + 2 \, e^{- \iu \frac{\pi}{2}} \, e^{- \iu \omega_0 t} +
+        \notag
+        \\
+        & \hfill \hspace{2.5cm}
+        + 6 \, e^{- \iu \frac{\pi}{3}} \, e^{\iu 2 \, \omega_0 \, t} + 6 \, e^{\iu \frac{\pi}{3}} \, e^{- \iu 2 \, \omega_0 \, t}
+        \\[2ex]
+        & = 2 \, e^0 + 2 \iu \, e^{\iu \omega_0 t} - 2 \, \iu \, e^{- \iu \omega_0 t} +
+        \\
+        & \hfill \hspace{0.5cm}
+        + (3 - \iu 3 \sqrt{3}) \, e^{\iu 2 \, \omega_0 \, t} + (3 + \iu 3 \sqrt{3}) \, e^{- \iu 2 \, \omega_0 \, t}
+    \end{align*}
+
+    Y el espectro es
+    \begin{center}
+        \includegraphics[width=\linewidth]{./images/ej_serie_fourier.png}
+    \end{center}
+\end{mdframed}
+
 \begin{mdframed}[style=PropertyFrame]
     \begin{prop}
     \end{prop}
