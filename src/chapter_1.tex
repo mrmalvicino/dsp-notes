@@ -20,6 +20,7 @@ La señal $\fx[x]{n}$ resultante representaría una secuencia de valores obtenid
 
 \begin{mdframed}[style=DefinitionFrame]
     \begin{defn}
+        \label{defn:funcPeriodCont}
     \end{defn}
     \cusTi{Función periódica continua}
     \cusTe{$x: \setR \longrightarrow \setC$ es una función periódica si y solo si}
@@ -31,13 +32,13 @@ La señal $\fx[x]{n}$ resultante representaría una secuencia de valores obtenid
 
 Si $\fx[x]{t}$ está dada por una suma de $\nth$ señales periódicas
 \[
-    \fx[x]{t} = \fx[x_1]{t} + \fx[x_2]{t} + \fx[x_\nth]{t}
+    \fx[x]{t} = \fx[x_1]{t} + \fx[x_2]{t} + \dots + \fx[x_\nth]{t}
 \]
 entonces $\fx[x]{t}$ va a ser periódica si
 \[
     \frac{T_2}{T_1} \in \setQ \, , \quad \frac{T_3}{T_2} \in \setQ \quad \cdots \quad \frac{T_\nth}{T_{\nth - 1}} \in \setQ
 \]
-donde $T_1, T_2 \dots T_\nth$ son los períodos de $\fx[x_1]{t}$, $\fx[x_2]{t}$ y $\fx[x_\nth]{t}$ respectivamente.
+donde $T_1, T_2 \dots T_\nth$ son los períodos de $\fx[x_1]{t} , \, \fx[x_2]{t} \dots \fx[x_\nth]{t}$ respectivamente.
 
 El período fundamental $T_0$ de $\fx[x]{t}$ va a ser el mínimo tiempo en que todas completen un ciclo entero:
 \[
@@ -50,7 +51,7 @@ Siguiendo el mismo razonamiento, la frecuencia fundamental $\omega_0$ de $\fx[x]
 \]
 
 No confundir $T_\ith$ con el período del $\ith$-esimo armónico.
-Eventualmente puede representar lo mismo pero probablemente no lo haga, ya que depende del orden de los sumandos.
+Eventualmente puede representar lo mismo pero probablemente no lo haga.
 
 \section{Señales periódicas discretas}
 
