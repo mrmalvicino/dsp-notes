@@ -2,7 +2,7 @@
 
 \section{Serie de Fourier}
 
-Las \emph{condiciones de Dirichlet} son suficientes (pero no necesarias) para que una función $\fx[x]{t}$ de período $T_0$ tenga desarrollo en series de Fourier.
+Las \emph{condiciones de Dirichlet} son suficientes (pero no necesarias) para que una función periódica (Def. \ref{defn:funcPeriodCont}) de período $T_0$ tenga desarrollo en series de Fourier.
 
 \begin{numset}
     \begin{numitem}{Integrabilidad en el período:}
@@ -34,6 +34,53 @@ Las \emph{condiciones de Dirichlet} son suficientes (pero no necesarias) para qu
     \[
         c_\kth = \frac{1}{T_0} \int_{T_0} \fx[x]{t} \, e^{-\iu \, \kth \, \omega_0 \, t} \, \dif t
     \]
+\end{mdframed}
+
+\begin{mdframed}[style=ExampleFrame]
+    \begin{example}
+    \end{example}
+    Determinar la serie de Fourier y el espectro de
+    \[
+        \fx[x]{t} = 2 + 4 \fx[\cos]{50 t + \frac{\pi}{2}} + 12 \fx[\cos]{100 t - \frac{\pi}{3}}
+    \]
+
+    \concept{Resolución}
+
+    A partir de la suma de un complejo con su conjugado, podemos expresar $\fx[x]{t}$ en sumas de exponenciales:
+    \begin{align*}
+        \fx[x]{t}
+        & = 2 + \frac{4}{2} \inBrackets{e^{\iu \inParentheses{50 t + \frac{\pi}{2}}} + e^{- \iu \inParentheses{50 t + \frac{\pi}{2}}}} +
+        \notag
+        \\
+        & \hfill \hspace{2cm}
+        + \frac{12}{2} \inBrackets{e^{\iu \inParentheses{100 t - \frac{\pi}{3}}} + e^{- \iu \inParentheses{100 t - \frac{\pi}{3}}}}
+        \\[2ex]
+        & = 2 + 2 \, e^{\iu \inParentheses{50 t + \frac{\pi}{2}}} + 2 \, e^{\iu \inParentheses{- 50 t - \frac{\pi}{2}}} +
+        \notag
+        \\
+        & \hfill \hspace{2.5cm}
+        + 6 \, e^{\iu \inParentheses{100 t - \frac{\pi}{3}}} + 6 \, e^{\iu \inParentheses{- 100 t + \frac{\pi}{3}}}
+    \end{align*}
+
+    La frecuencia fundamental es $\omega_0 = \radpers[50]$ luego
+    \begin{align*}
+        \fx[x]{t}
+        & = 2 + 2 \, e^{\iu \frac{\pi}{2}} \, e^{\iu \omega_0 t} + 2 \, e^{- \iu \frac{\pi}{2}} \, e^{- \iu \omega_0 t} +
+        \notag
+        \\
+        & \hfill \hspace{2.5cm}
+        + 6 \, e^{- \iu \frac{\pi}{3}} \, e^{\iu 2 \, \omega_0 \, t} + 6 \, e^{\iu \frac{\pi}{3}} \, e^{- \iu 2 \, \omega_0 \, t}
+        \\[2ex]
+        & = 2 \, e^0 + 2 \iu \, e^{\iu \omega_0 t} - 2 \, \iu \, e^{- \iu \omega_0 t} +
+        \\
+        & \hfill \hspace{0.5cm}
+        + (3 - \iu 3 \sqrt{3}) \, e^{\iu 2 \, \omega_0 \, t} + (3 + \iu 3 \sqrt{3}) \, e^{- \iu 2 \, \omega_0 \, t}
+    \end{align*}
+
+    Y el espectro es
+    \begin{center}
+        \includegraphics[width=\linewidth]{./images/ej_serie_fourier.png}
+    \end{center}
 \end{mdframed}
 
 Reacomodando la sumatoria de la definición \ref{defn:FourierSerieExp} según
@@ -142,6 +189,37 @@ Aplicando $\fx[\cos]{\alpha \pm \beta} = \fx[\cos]{\alpha} \fx[\cos]{\beta} \mp 
 \]
 \end{mdframed}
 
+\section{Coeficientes de Fourier típicos}
+
+\concept{Pulso rectangular}
+
+Para un pulso rectangular genérico
+\[
+    \fx[x]{t} = A \, \fx[\Pi]{\frac{t-t_0}{\tau}}
+\]
+los coeficientes están dados, según la definición \ref{defn:FourierSerieExp}, como sigue:
+\begin{align*}
+    c_\kth &= \frac{1}{T_0} \int_{T_0} \fx[x]{t} \, e^{-\iu \, \kth \, \omega_0 \, t} \, \dif t
+    \\[1ex]
+    &= \frac{A}{T_0} \int_{-\frac{\tau}{2}}^{\frac{\tau}{2}} e^{-\iu \, \kth \, \omega_0 \, t} \, \dif t
+    \\[1ex]
+    &= \frac{A}{T_0} \barrow{\dfrac{e^{-\iu \, \kth \, \omega_0 \, t}}{-\iu \, \kth \, \omega_0}}{-\frac{\tau}{2}}{\frac{\tau}{2}}
+    \\[1ex]
+    &= \frac{A}{-2 \, \pi \, \iu \, \kth } \inParentheses{ e^{ -\iu \, \omega_0 \, \kth \frac{\tau}{2}} - e^{ \iu \, \omega_0 \, \kth \frac{\tau}{2}} }
+    \\[1ex]
+    &= \frac{A}{\pi \, \kth} \, \fx[\sin]{\frac{\omega_0 \, \kth \, \tau}{2}}
+    \\[1ex]
+    &= \frac{A}{\pi \, \kth} \, \fx[\sin]{\frac{\pi \, \kth \, \tau}{T_0}}
+    \\[1ex]
+    &= \frac{A \, \tau}{T_0} \cdot
+    \frac{ \fx[\sin]{\dfrac{\pi \, \kth \, \tau}{T_0}} }{ \dfrac{\pi \, \kth \, \tau}{T_0} }
+\end{align*}
+luego
+\begin{equation}
+    c_\kth = \frac{A \, \tau}{T_0} \, \fx[\sinc]{\frac{\pi \, \kth \, \tau}{T_0}}
+    \label{eqn:ckPulso}
+\end{equation}
+
 \begin{mdframed}[style=ExampleFrame]
     \begin{example}
     \end{example}
@@ -185,35 +263,7 @@ Aplicando $\fx[\cos]{\alpha \pm \beta} = \fx[\cos]{\alpha} \fx[\cos]{\beta} \mp 
         \label{eqn:FourierProy}
     \end{equation}
 
-    Para un pulso rectangular genérico
-    \[
-        \fx[x]{t} = A \, \fx[\Pi]{\frac{t-t_0}{\tau}}
-    \]
-    
-    los coeficientes están dados según la definición \ref{defn:FourierSerieExp} como sigue:
-    \begin{align*}
-        c_\kth &= \frac{1}{T_0} \int_{T_0} \fx[x]{t} \, e^{-\iu \, \kth \, \omega_0 \, t} \, \dif t
-        \\[1ex]
-        &= \frac{A}{T_0} \int_{-\frac{\tau}{2}}^{\frac{\tau}{2}} e^{-\iu \, \kth \, \omega_0 \, t} \, \dif t
-        \\[1ex]
-        &= \frac{A}{T_0} \barrow{\dfrac{e^{-\iu \, \kth \, \omega_0 \, t}}{-\iu \, \kth \, \omega_0}}{-\frac{\tau}{2}}{\frac{\tau}{2}}
-        \\[1ex]
-        &= \frac{A}{-2 \, \pi \, \iu \, \kth } \inParentheses{ e^{ -\iu \, \omega_0 \, \kth \frac{\tau}{2}} - e^{ \iu \, \omega_0 \, \kth \frac{\tau}{2}} }
-        \\[1ex]
-        &= \frac{A}{\pi \, \kth} \, \fx[\sin]{\frac{\omega_0 \, \kth \, \tau}{2}}
-        \\[1ex]
-        &= \frac{A}{\pi \, \kth} \, \fx[\sin]{\frac{\pi \, \kth \, \tau}{T_0}}
-        \\[1ex]
-        &= \frac{A \, \tau}{T_0} \cdot
-        \frac{ \fx[\sin]{\dfrac{\pi \, \kth \, \tau}{T_0}} }{ \dfrac{\pi \, \kth \, \tau}{T_0} }
-    \end{align*}
-
-    Esto es
-    \[
-        c_\kth = \frac{A \, \tau}{T_0} \, \fx[\sinc]{\frac{\pi \, \kth \, \tau}{T_0}}
-    \]
-
-    Particularmente si $A=1$, $T_0=2\,\pi$, $\tau=\pi$ queda
+    Reemplazando $A=1$, $T_0=2\,\pi$, $\tau=\pi$ en la ecuación \ref{eqn:ckPulso} obtenida para los $c_\kth$ de un pulso, queda
     \[
         c_\kth = \frac{ \fx[\sin]{\frac{\kth \, \pi}{2}} }{\kth \, \pi}
     \]
@@ -233,52 +283,7 @@ Aplicando $\fx[\cos]{\alpha \pm \beta} = \fx[\cos]{\alpha} \fx[\cos]{\beta} \mp 
     Observar que este desarrollo es equivalente a la ecuación \ref{eqn:FourierProy}, ya que $\fx[\sin]{\frac{\kth \, \pi}{2}}$ vale 0 para los $\kth$ pares y $\pm1$ para los $\kth$ impares.
 \end{mdframed}
 
-\begin{mdframed}[style=ExampleFrame]
-    \begin{example}
-    \end{example}
-    Determinar la serie de Fourier y el espectro de
-    \[
-        \fx[x]{t} = 2 + 4 \fx[\cos]{50 t + \frac{\pi}{2}} + 12 \fx[\cos]{100 t - \frac{\pi}{3}}
-    \]
-
-    \concept{Resolución}
-
-    A partir de la suma de un complejo con su conjugado, podemos expresar $\fx[x]{t}$ en sumas de exponenciales:
-    \begin{align*}
-        \fx[x]{t}
-        & = 2 + \frac{4}{2} \inBrackets{e^{\iu \inParentheses{50 t + \frac{\pi}{2}}} + e^{- \iu \inParentheses{50 t + \frac{\pi}{2}}}} +
-        \notag
-        \\
-        & \hfill \hspace{2cm}
-        + \frac{12}{2} \inBrackets{e^{\iu \inParentheses{100 t - \frac{\pi}{3}}} + e^{- \iu \inParentheses{100 t - \frac{\pi}{3}}}}
-        \\[2ex]
-        & = 2 + 2 \, e^{\iu \inParentheses{50 t + \frac{\pi}{2}}} + 2 \, e^{\iu \inParentheses{- 50 t - \frac{\pi}{2}}} +
-        \notag
-        \\
-        & \hfill \hspace{2.5cm}
-        + 6 \, e^{\iu \inParentheses{100 t - \frac{\pi}{3}}} + 6 \, e^{\iu \inParentheses{- 100 t + \frac{\pi}{3}}}
-    \end{align*}
-
-    La frecuencia fundamental es $\omega_0 = \radpers[50]$ luego
-    \begin{align*}
-        \fx[x]{t}
-        & = 2 + 2 \, e^{\iu \frac{\pi}{2}} \, e^{\iu \omega_0 t} + 2 \, e^{- \iu \frac{\pi}{2}} \, e^{- \iu \omega_0 t} +
-        \notag
-        \\
-        & \hfill \hspace{2.5cm}
-        + 6 \, e^{- \iu \frac{\pi}{3}} \, e^{\iu 2 \, \omega_0 \, t} + 6 \, e^{\iu \frac{\pi}{3}} \, e^{- \iu 2 \, \omega_0 \, t}
-        \\[2ex]
-        & = 2 \, e^0 + 2 \iu \, e^{\iu \omega_0 t} - 2 \, \iu \, e^{- \iu \omega_0 t} +
-        \\
-        & \hfill \hspace{0.5cm}
-        + (3 - \iu 3 \sqrt{3}) \, e^{\iu 2 \, \omega_0 \, t} + (3 + \iu 3 \sqrt{3}) \, e^{- \iu 2 \, \omega_0 \, t}
-    \end{align*}
-
-    Y el espectro es
-    \begin{center}
-        \includegraphics[width=\linewidth]{./images/ej_serie_fourier.png}
-    \end{center}
-\end{mdframed}
+\section{Propiedades de la serie de Fourier}
 
 \begin{mdframed}[style=PropertyFrame]
     \begin{prop}
@@ -289,7 +294,7 @@ Aplicando $\fx[\cos]{\alpha \pm \beta} = \fx[\cos]{\alpha} \fx[\cos]{\beta} \mp 
     \]
 \end{mdframed}
 
-\section{La finalidad de la exponencial compleja}
+\section{El rol de la exponencial compleja}
 
 Para una función $\fx[x]{t}$ real, el coeficiente complejo $c_0$ resulta ser el valor promedio de la misma:
 \[
@@ -341,10 +346,10 @@ mientras que todos los otros términos se anulan como se mencionó anteriormente
 
 Formalmente, entendemos que los coeficientes de Fourier están definidos como tal por ser el producto interno entre la función que se está aproximando y un subespacio de funciones integrables.
 
-\section{Transformada de Fourier}
+\section{La transformada y su inversa}
 
 La transformada de Fourier extiende el concepto de serie de Fourier a funciones no periódicas.
-Permite descomponer señales en una superposición continua de exponenciales complejas de diferentes frecuencias.
+Permite descomponer señales en una superposición \textbf{continua} de exponenciales complejas.
 
 Para inferir la transformada de Fourier de manera intuitiva, es preciso considerar en la definición \ref{defn:FourierSerieExp} el siguiente cambio de variable
 \[
