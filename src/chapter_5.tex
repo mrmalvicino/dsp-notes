@@ -1,8 +1,29 @@
-\chapter{Transformada de Fourier}
+\chapter{Serie y transformada de Fourier}
 
-\section{Serie de Fourier}
+Ambas herramientas permiten descomponer una señal en componentes senoidales, revelando su contenido en frecuencia.
+Esta perspectiva frecuencial es especialmente útil cuando se analiza el comportamiento de sistemas LIT.
+Permite estudiar cómo cada frecuencia es procesada por un sistema de forma independiente.
 
-Las \emph{condiciones de Dirichlet} son suficientes (pero no necesarias) para que una función periódica (Def. \ref{defn:funcPeriodCont}) de período $T_0$ tenga desarrollo en series de Fourier.
+Las series de Fourier permiten representar funciones \textbf{periódicas} como una suma infinita de exponenciales complejas.
+Los coeficientes de los sumandos van a comprender un espectro frecuencial \textbf{discreto} dado por armónicos.
+
+La transformada de Fourier es una transformación lineal que generaliza este concepto hacia señales \textbf{no periódicas}.
+Esta herramienta extiende la idea de las series a un espectro frecuencial \textbf{continuo}, mediante integrales en lugar de series.
+La transformada inversa permite reconstruir la señal original.
+
+\section{Condiciones de Dirichlet}
+
+La única condición suficiente y necesaria para que la serie de Fourier converja es
+\[
+    \fx[x]{t} \in \squaredL
+\]
+osea, que la energía en un período sea finita:
+\[
+    \int_0^{T_0} \norm{\fx[x]{t}}^2 \dif t < \infty
+\]
+
+Por otro lado, las condiciones de Dirichlet son suficientes, pero no necesarias.
+Estas son:
 
 \begin{numset}
     \begin{numitem}{Integrabilidad en el período:}
@@ -21,6 +42,18 @@ Las \emph{condiciones de Dirichlet} son suficientes (pero no necesarias) para qu
         Es decir, no puede oscilar infinitamente en un intervalo finito.
     \end{numitem}
 \end{numset}
+
+\section{Serie de Fourier}
+
+La \emph{serie de Fourier} es una herramienta matemática que permite desarrollar una función periódica (Def. \ref{defn:funcPeriodCont}) como una suma infinita de senos y cosenos armónicos.
+Esta descomposición resulta particularmente útil en el análisis de señales, ya que permite estudiar su comportamiento en el dominio de la frecuencia.
+
+Desde un punto de vista matemático, el desarrollo en series de Fourier se basa en la idea de \emph{proyección ortogonal} en un espacio de funciones.
+La familia de exponenciales complejas actúa como una base ortonormal.
+En este contexto, los coeficientes de la serie se obtienen mediante el \emph{producto interno} entre la señal y cada una de esas funciones base.
+A medida que más términos se suman, mejor se aproxima la señal.
+La calidad de la aproximación se puede medir mediante el \emph{error cuadrático medio}.
+Al proyectar ortogonalmente, este error se minimiza, lo que garantiza que la serie de Fourier es la mejor aproximación posible.
 
 \begin{mdframed}[style=DefinitionFrame]
     \begin{defn}
