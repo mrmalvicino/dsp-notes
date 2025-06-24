@@ -332,54 +332,93 @@ luego
 La transformada de Fourier extiende el concepto de serie de Fourier a funciones no periódicas.
 Permite descomponer señales en una superposición \textbf{continua} de exponenciales complejas.
 
-Para inferir la transformada de Fourier de manera intuitiva, es preciso considerar en la definición \ref{defn:FourierSerieExp} el siguiente cambio de variable
+Se tiene una señal $\fx[x]{t}$ arbitraria, de duración finita, extendible por cero fuera de su dominio, pero no periódica:
+
+\begin{center}
+    \def\svgwidth{0.8\linewidth}
+    \input{./images/transformada_fourier_1.pdf_tex}
+\end{center}
+
+Como $\fx[x]{t}$ no es periódica, no tiene desarrollo en series de Fourier.
+Pero podemos definir $\fx[\tilde{x}]{t}$ como la extensión periódica de $\fx[x]{t}$:
+
+\begin{center}
+    \def\svgwidth{0.8\linewidth}
+    \input{./images/transformada_fourier_2.pdf_tex}
+\end{center}
+
+La serie de Fourier de $\fx[\tilde{x}]{t}$ converge, por tener período $T_0$ y ser $\squaredL$.
+Al calcularla, considerar en la definición \ref{defn:FourierSerieExp} el cambio de variable
 \[
     \omega = \kth \, \omega_0
 \]
-tanto para el desarrollo en serie de Fourier
+tanto para la serie, que quedaría dada por
 \begin{equation}
-    \fx[x]{t}
+    \fx[\tilde{x}]{t}
     = \sum_{\kth=-\infty}^\infty
     c_\kth \, \complexExp
     \label{eqn:serieFourierOmega}
 \end{equation}
-como para la expresión de los coeficientes
-\[
-    c_\kth =
+como para la expresión de los coeficientes:
+\begin{equation}
+    \tilde{c_\kth} =
     \frac{1}{T_0}
     \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \fx[x]{t} \, e^{- \iu \omega t}
     \, \dif t
-\]
+    \label{eqn:coefFourierOmega}
+\end{equation}
 
-Pero queremos contemplar la posibilidad de que la función $\fx[x]{t}$ a desarrollar sea de duración finita, extendible por cero fuera de su dominio, pero sin tener que ser periódica.
-Además, $\omega$ debería poder tomar cualquier valor real, mientras que a partir de $k \, \omega_0$ solo es posible obtener los armónicos, que son frecuencias discretas.
-Para sortear ambas cuestiones, podemos asumir que el período de $\fx[x]{t}$ es
+Reemplazando la ecuación \ref{eqn:coefFourierOmega} en la ecuación \ref{eqn:serieFourierOmega}, queda
 \[
-    T_0 \to \infty
+    \fx[\tilde{x}]{t}
+    = \sum_{\kth=-\infty}^\infty
+    \inBrackets{
+    \frac{1}{T_0}
+    \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \fx[x]{t} \, e^{- \iu \omega t}
+    \, \dif t
+    }
+    \, \complexExp
 \]
 
-Aplicando este límite, se tiene
-\begin{equation}
-    \lim_{T_0 \to \infty} c_\kth =
+Y dado que
+\[
+    \fx[x]{t} = \lim_{T_0 \to \infty} \fx[\tilde{x}]{t}
+\]
+inferimos que $\fx[x]{t}$ va a estar dada por:
+\[
+    \fx[x]{t}
+    = \sum_{\kth=-\infty}^\infty
+    \inBrackets{ \frac{\omega_0}{2 \pi} \int_{-\infty}^{\infty} \fx[x]{\tau} \, e^{- \iu \omega \tau} \, \dif \tau }
+    \, \complexExp
+    \quad \text{con } \omega_0 \to 0
+\]
+
+En la serie de $\fx[\tilde{x}]{t}$, $\omega = k \, \omega_0$ solo puede generar sumandos armónicos (múltiplos de $\omega_0$).
+Pero en la serie de $\fx[x]{t}$, $\omega$ puede tomar cualquier valor real, dado que $\omega_0 \to 0$.
+Por lo tanto, los coeficientes de $\fx[x]{t}$ son continuos y están dados por
+\[
+    c_\kth =
     \frac{\omega_0}{2 \pi}
     \int_{-\infty}^\infty \fx[x]{t} \, e^{- \iu \omega t}
     \, \dif t
     \quad \text{con } \omega_0 \to 0
-    \label{eqn:coefFourierOmega}
-\end{equation}
+\]
 
-Quedando definido el \emph{espectro frecuencial} como el límite de los coeficientes de Fourier escalados
+Quedando definido el \emph{espectro frecuencial} de $\fx[x]{t}$ como el límite de los coeficientes de $\fx[\tilde{x}]{t}$ escalados:
 
 \begin{mdframed}[style=DefinitionFrame]
     \begin{defn}
     \end{defn}
     \cusTi{Espectro frecuencial}
+
+    El espectro de frecuencias de $\fx[x]{t}$ es
     \[
-        \fx[X]{\omega} = \lim_{T_0 \to \infty} T_0 \, c_k
+        \fx[X]{\omega} = \lim_{T_0 \to \infty} \tilde{c_k} \, T_0
     \]
+    donde $\tilde{c_k}$ son los coeficientes de Fourier de la extensión periódica de $\fx[x]{t}$.
 \end{mdframed}
 
-Su expresión está definida por la transformada de Fourier:
+Esta definición es una motivación heurística que conecta la serie de Fourier con la transformada de Fourier, cuya definición formal es:
 
 \begin{mdframed}[style=DefinitionFrame]
     \begin{defn}
@@ -392,15 +431,6 @@ Su expresión está definida por la transformada de Fourier:
         = \fx[X]{\omega}
     \]
 \end{mdframed}
-
-Al reemplazar la expresión obtenida para los coeficientes de la ecuación \ref{eqn:coefFourierOmega} en el desarrollo en series de Fourier de la ecuación \ref{eqn:serieFourierOmega}, se tiene:
-\[
-    \fx[x]{t}
-    = \sum_{\kth=-\infty}^\infty
-    \inBrackets{ \frac{\omega_0}{2 \pi} \int_{-\infty}^{\infty} \fx[x]{\tau} \, e^{- \iu \omega \tau} \, \dif \tau }
-    \, \complexExp
-    \quad \text{con } \omega_0 \to 0
-\]
 
 Cuando $T_0 \to \infty$, el espaciado entre frecuencias $\omega_0 = \frac{2\pi}{T_0}$ tiende a cero.
 La suma sobre frecuencias discretas $\omega = k \, \omega_0$ se aproxima a una integral sobre el dominio continuo $\omega \in \setR$.
