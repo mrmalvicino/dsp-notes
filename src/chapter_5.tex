@@ -327,58 +327,6 @@ luego
     \]
 \end{mdframed}
 
-\section{El rol de la exponencial compleja}
-
-Para una función $\fx[x]{t}$ real, el coeficiente complejo $c_0$ resulta ser el valor promedio de la misma:
-\[
-    c_0 = \frac{1}{T_0} \int_{T_0} \fx[x]{t} \, \dif t
-\]
-
-Si se reemplaza $\fx[x]{t}$ por su desarrollo en serie (Def. \ref{defn:FourierSerieExp}), se obtiene
-\begin{align}
-    c_0
-    &= \frac{1}{T_0} \int_{T_0} \inParentheses{\sum_{\kth=-\infty}^\infty c_\kth \, e^{\iu \, \kth \, \omega_0 \, t}} \dif t
-    \notag
-    \\[1ex]
-    &= \frac{1}{T_0} \int_{T_0} \inBrackets{\dots c_{-1} \, e^{\iu \inParentheses{-1} \, \omega_0 \, t} + c_0 \, e^0 + c_1 \, \, e^{\iu \inParentheses{1} \, \omega_0 \, t} \dots} \dif t
-    \label{eqn:coeficientes}
-    \\[1ex]
-    &= \cdots \frac{1}{T_0} \int_{T_0} c_{-1} \, e^{- \iu \, \omega_0 \, t} \dif t
-    + c_0
-    + \frac{1}{T_0} \int_{T_0} c_1 \, \, e^{\iu \omega_0 \, t} \dif t \dots
-    \notag
-\end{align}
-poniéndose en evidencia que la única integral no nula es
-\[
-    \frac{1}{T_0} \int_{T_0} c_0 \, e^0 \, \dif t = c_0
-\]
-ya que las demás son integrales de funciones periódicas evaluadas en un período, como por ejemplo lo sería
-\[
-    \int_0^{2\pi} \fx[\sin]{t} \, \dif t = 0
-\]
-
-Multiplicando a la ecuación \ref{eqn:coeficientes} el término $e^{-\iu \, \kth \, \omega_0 \, t}$ se consigue anular todos los sumandos quedando solamente el $k$-ésimo.
-Esto se observa aplicando distributiva:
-\begin{align*}
-    c_\kth &=
-    \scale{0.95}{
-    \frac{1}{T_0} \int_{T_0} \inBrackets{\dots c_{-1} \, e^{-\iu \, \omega_0 \, t} + c_0 + c_1 \, \, e^{\iu \, \omega_0 \, t} \dots} e^{-\iu \, \kth \, \omega_0 \, t} \dif t
-    }
-    \\[1ex]
-    &= 
-    \scale{0.95}{
-    \frac{1}{T_0} \int_{T_0} \inBrackets{\dots c_{-1} \, e^{-\iu \, \omega_0 \, t \inParentheses{1 + k}} + c_0 \, e^{-\iu \, \kth \, \omega_0 \, t} + c_1 \, \, e^{\iu \, \omega_0 \, t \inParentheses{1 - k}} \dots} \dif t
-    }
-\end{align*}
-
-De esta forma, podemos verificar que para cualquier $k$ dado, el respectivo término exponencial se simplifica quedando
-\[
-    \frac{1}{T_0} \int_{T_0} c_k \, e^0 \, \dif t = c_k
-\]
-mientras que todos los otros términos se anulan como se mencionó anteriormente.
-
-Formalmente, entendemos que los coeficientes de Fourier están definidos como tal por ser el producto interno entre la función que se está aproximando y un subespacio de funciones integrables.
-
 \section{La transformada y su inversa}
 
 La transformada de Fourier extiende el concepto de serie de Fourier a funciones no periódicas.
