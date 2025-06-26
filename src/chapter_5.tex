@@ -77,7 +77,7 @@ Al proyectar ortogonalmente, este error se minimiza, lo que garantiza que la ser
         \fx[x]{t} = 2 + 4 \fx[\cos]{50 t + \frac{\pi}{2}} + 12 \fx[\cos]{100 t - \frac{\pi}{3}}
     \]
 
-    \concept{Resolución}
+    \concept{Resolución:}
 
     A partir de la suma de un complejo con su conjugado, podemos expresar $\fx[x]{t}$ en sumas de exponenciales:
     \begin{align*}
@@ -224,7 +224,7 @@ Aplicando $\fx[\cos]{\alpha \pm \beta} = \fx[\cos]{\alpha} \fx[\cos]{\beta} \mp 
 
 \section{Coeficientes de Fourier típicos}
 
-\concept{Pulso rectangular}
+\subsection{Tren de pulsos rectangulares}
 
 Para un pulso rectangular genérico
 \[
@@ -385,13 +385,14 @@ Y dado que
     \fx[x]{t} = \lim_{T_0 \to \infty} \fx[\tilde{x}]{t}
 \]
 inferimos que $\fx[x]{t}$ va a estar dada por:
-\[
+\begin{equation}
     \fx[x]{t}
-    = \sum_{\kth=-\infty}^\infty
+    = \lim_{\omega_0 \to 0}
+    \sum_{\kth=-\infty}^\infty
     \inBrackets{ \frac{\omega_0}{2 \pi} \int_{-\infty}^{\infty} \fx[x]{\tau} \, e^{- \iu \omega \tau} \, \dif \tau }
     \, \complexExp
-    \quad \text{con } \omega_0 \to 0
-\]
+    \label{eqn:serieFourierNoPeriodica}
+\end{equation}
 
 En la serie de $\fx[\tilde{x}]{t}$, $\omega = k \, \omega_0$ solo puede generar sumandos armónicos (múltiplos de $\omega_0$).
 Pero en la serie de $\fx[x]{t}$, $\omega$ puede tomar cualquier valor real, dado que $\omega_0 \to 0$.
@@ -408,6 +409,7 @@ Quedando definido el \emph{espectro frecuencial} de $\fx[x]{t}$ como el límite 
 
 \begin{mdframed}[style=DefinitionFrame]
     \begin{defn}
+        \label{defn:espectroFourier}
     \end{defn}
     \cusTi{Espectro frecuencial}
 
@@ -426,15 +428,14 @@ Esta definición es una motivación heurística que conecta la serie de Fourier 
     \end{defn}
     \cusTi{Transformada de Fourier}
     \[
-        \fourier{x}
+        \fourier{\fx[x]{t}}
         = \int_{-\infty}^\infty \fx[x]{t} \, e^{- \iu \omega t} \, \dif t
         = \fx[X]{\omega}
     \]
 \end{mdframed}
 
-Cuando $T_0 \to \infty$, el espaciado entre frecuencias $\omega_0 = \frac{2\pi}{T_0}$ tiende a cero.
-La suma sobre frecuencias discretas $\omega = k \, \omega_0$ se aproxima a una integral sobre el dominio continuo $\omega \in \setR$.
-Y el paso $\omega_0$ juega el papel de $\dif \omega$ en el límite de Riemann, que da origen a la transformada de Fourier inversa.
+En la ecuación \ref{eqn:serieFourierNoPeriodica}, la suma sobre frecuencias discretas $\omega = k \, \omega_0$ se aproxima a una integral sobre el dominio continuo $\omega \in \setR$.
+Y $\omega_0$ juega el papel de $\dif \omega$ en el límite de Riemann, que da origen a la transformada inversa.
 
 \begin{mdframed}[style=DefinitionFrame]
     \begin{defn}
@@ -442,8 +443,290 @@ Y el paso $\omega_0$ juega el papel de $\dif \omega$ en el límite de Riemann, q
     \end{defn}
     \cusTi{Transformada de Fourier inversa}
     \[
-        \ffourier{X}
+        \ffourier{\fx[X]{\omega}}
         = \frac{1}{2 \, \pi} \int_{-\infty}^\infty \fx[X]{\omega} \, \complexExp \, \dif \omega
         = \fx[x]{t}
     \]
 \end{mdframed}
+
+Tanto la transformada como su inversa se pueden expresar en términos de $f$ en vez de $\omega$, según la relación
+\[
+    \begin{cases}
+        \omega &= 2 \, \pi \, f
+        \\
+        \dif \omega &= 2 \, \pi \, \dif f
+    \end{cases}
+\]
+
+\section{Propiedades de la transformada}
+
+\subsection{Superposición}
+
+Debido a que la transformada de Fourier es una transformación lineal, se verifica que:
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{prop}
+    \end{prop}
+    Dada la señal
+    \[
+        \fx[x]{t} = a_1 \, \fx[x_1]{t} + a_2 \, \fx[x_2]{t} + \dots + a_\nth \, \fx[x_\nth]{t}
+    \]
+    con $a_1, a_2 \dots a_\nth$ constantes, su transformada de Fourier estará dada por
+    \[
+        \fx[X]{\omega} = a_1 \, \fx[X_1]{\omega} + a_2 \, \fx[X_2]{\omega} + \dots + a_\nth \, \fx[X_\nth]{\omega}
+    \]
+\end{mdframed}
+
+\subsection{Desplazamiento en tiempo}
+
+La transformada de una función desplazada en tiempo está dada, por definición, por
+\[
+    \fourier{\fx[x]{t - t_0}}
+    = \int_{-\infty}^\infty \fx[x]{t - t_0} \, e^{- \iu \omega t} \, \dif t
+\]
+
+Haciendo el cambio de variable
+\[
+    \begin{cases}
+        u = t - t_0 & \implies t = u + t_0
+        \\
+        \deriv[u]{t} = 1 & \implies \dif t = \dif u
+    \end{cases}
+\]
+se tiene
+\begin{align*}
+    \fourier{\fx[x]{t - t_0}}
+    & = \int_{-\infty}^{\infty} \fx[x]{u} \, e^{- \iu \omega (u + t_0)} \dif u
+    \\[1ex]
+    & = \int_{-\infty}^{\infty} \fx[x]{u} \, e^{- \iu \omega u} \, e^{- \iu \omega t_0} \dif u
+    \\[1ex]
+    & = e^{- \iu \omega t_0} \, \int_{-\infty}^{\infty} \fx[x]{u} \, e^{- \iu \omega u} \dif u
+\end{align*}
+
+Obteniendo así:
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{prop}
+    \end{prop}
+    \[
+        \fourier{\fx[x]{t - t_0}} = \fourier{\fx[x]{t}} \, e^{- \iu \omega t_0}
+    \]
+\end{mdframed}
+
+\begin{mdframed}[style=ExampleFrame]
+    \begin{example}
+    \end{example}
+    Obtener la transformada de Fourier de
+    \[
+        \fx[x]{t} = A \, \pulse[- \frac{t_0}{2}]{t}{t_0} - A \, \pulse[\frac{t_0}{2}]{t}{t_0} % TODO: Redefinir comando \pulse
+    \]
+
+    \concept{Resolución:}
+
+    Sea
+    \[
+        \fx[x]{t} = \fx[x_1]{t} + \fx[x_2]{t}
+    \]
+    tal que
+    \begin{gather*}
+        \fx[x_1]{t} = A \, \pulse[- \frac{t_0}{2}]{t}{t_0} % TODO: Redefinir comando \pulse
+        \\[1ex]
+        \fx[x_2]{t} = - A \, \pulse[\frac{t_0}{2}]{t}{t_0}
+    \end{gather*}
+
+    La transformada del pulso de la izquierda es
+    \[
+        \fx[X_1]{f} = A \, t_0 \, \fx[\sinc]{\pi f t_0} \, e^{\iu \omega \frac{t_0}{2}}
+    \]
+    y la transformada del pulso de la derecha es
+    \[
+        \fx[X_2]{f} = - A \, t_0 \, \fx[\sinc]{\pi f t_0} \, e^{- \iu \omega \frac{t_0}{2}}
+    \]
+    de manera que la transformada de $\fx[x]{t}$ es
+    \begin{align*}
+        \fx[X]{f}
+        & = \fx[X_1]{f} + \fx[X_2]{f}
+        \\[1ex]
+        & = A \, t_0 \, \fx[\sinc]{\pi f t_0} \inParentheses{e^{\iu \omega \frac{t_0}{2}} - e^{- \iu \omega \frac{t_0}{2}}}
+        \\[1ex]
+        & = A \, t_0 \, \fx[\sinc]{\pi f t_0} \inParentheses{e^{\iu \pi f t_0} - e^{- \iu \pi f t_0}}
+        \\[1ex]
+        & = 2 \iu \, A \, t_0 \, \fx[\sinc]{\pi f t_0} \, \fx[\sin]{\pi f t_0}
+        \\[1ex]
+        & = 2 \iu \, A \, \pi \, f \, t_0^2 \, \fx[\sinc^2]{\pi f t_0}
+        \\[1ex]
+        & = \iu \, A \, \omega \, t_0^2 \, \fx[\sinc^2]{\frac{\omega \, t_0}{2}}
+    \end{align*}
+\end{mdframed}
+
+\subsection{Teorema de modulación}
+
+La transformada inversa de una función desplazada en frecuencia está dada, por definición, por
+\[
+    \ffourier{\fx[X]{\omega - \omega_c}}
+    = \frac{1}{2 \, \pi} \int_{-\infty}^\infty \fx[X]{\omega - \omega_c} \, \complexExp \, \dif \omega
+\]
+
+Haciendo el cambio de variable
+\[
+    \begin{cases}
+        u = \omega - \omega_c & \implies \omega = u + \omega_c
+        \\
+        \deriv[u]{\omega} = 1 & \implies \dif \omega = \dif u
+    \end{cases}
+\]
+se tiene
+\begin{align*}
+    \ffourier{\fx[X]{\omega - \omega_c}}
+    & = \frac{1}{2 \, \pi} \int_{-\infty}^\infty \fx[X]{u} \, e^{\iu (u + \omega_c) t} \, \dif u
+    \\[1ex]
+    & = \frac{1}{2 \, \pi} \int_{-\infty}^\infty \fx[X]{u} \, e^{\iu u t} \, e^{\iu \omega_c t} \, \dif u
+    \\[1ex]
+    & =  e^{\iu \omega_c t} \, \frac{1}{2 \, \pi} \int_{-\infty}^\infty \fx[X]{u} \, e^{\iu u t} \, \dif u
+\end{align*}
+
+Obteniendo así:
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{prop}
+    \end{prop}
+    \[
+        \ffourier{\fx[X]{\omega - \omega_c}} = \ffourier{\fx[X]{\omega}} \, e^{\iu \omega_c t}
+    \]
+\end{mdframed}
+
+Que es equivalente a la siguiente expresión, obtenida al aplicar la transformada a ambos miembros de la igualdad:
+\[
+    \fx[X]{\omega - \omega_c} = \fourier{\fx[x]{t} \, e^{\iu \omega_c t}}
+\]
+
+\begin{mdframed}[style=ExampleFrame]
+    \begin{example}
+    \end{example}
+    Obtener la transformada de Fourier de
+    \[
+        \fx[x]{t} = 10 \, \pulse[70]{t}{140} \, \fx[\cos]{\frac{\pi}{10} t}
+    \]
+
+    \concept{Resolución:}
+
+    Primero vamos a reescribir la señal en términos de exponenciales complejas:
+    \begin{align*}
+        \fx[x]{t} &= 5 \, \pulse[70]{t}{140} \, \inParentheses{e^{\iu \frac{\pi}{10} t} + e^{- \iu \frac{\pi}{10} t}}
+        \\
+        \fx[x]{t} &= \fx[p]{t} \, e^{\iu \frac{\pi}{10} t} + \fx[p]{t} \, e^{- \iu \frac{\pi}{10} t}
+    \end{align*}
+
+    donde
+    \[
+        \fx[p]{t} = 5 \, \pulse[70]{t}{140}
+    \]
+
+    Por superposición, la transformada de $\fx[x]{t}$ va a estar dada por
+    \[
+        \fx[X]{\omega} = \fx[X_1]{\omega} + \fx[X_2]{\omega}
+    \]
+    donde
+    \[
+        \begin{cases}
+            \fx[X_1]{\omega} = \fourier{\fx[p]{t} \, e^{\iu \frac{\pi}{10} t}}
+            \\
+            \fx[X_2]{\omega} = \fourier{\fx[p]{t} \, e^{- \iu \frac{\pi}{10} t}}
+        \end{cases}
+    \]
+
+    Notar, según el teorema de modulación, que
+    \[
+        \begin{cases}
+            \fx[P]{\omega - \frac{\pi}{10}} = \fourier{\fx[p]{t} \, e^{\iu \frac{\pi}{10} t}}
+            \\
+            \fx[P]{\omega + \frac{\pi}{10}} = \fourier{\fx[p]{t} \, e^{- \iu \frac{\pi}{10} t}}
+        \end{cases}
+    \]
+    luego
+    \[
+        \begin{cases}
+            \fx[X_1]{\omega} = \fx[P]{\omega - \frac{\pi}{10}}
+            \\
+            \fx[X_2]{\omega} = \fx[P]{\omega + \frac{\pi}{10}}
+        \end{cases}
+    \]
+    donde $\fx[P]{\omega} = \fourier{\fx[p]{t}}$ está dado por:
+    \[
+        \fx[P]{\omega} = 700 \fx[\sinc]{70 \, \omega} \, e^{- \iu 70 \, \omega}
+    \]
+
+    Finalmente, $\fourier{\fx[x]{t}}$ es
+    \[
+        \fx[X]{\omega}
+        = \fx[P]{\omega - \frac{\pi}{10}} + \fx[P]{\omega + \frac{\pi}{10}}
+    \]
+    \begin{multline*}
+        \fx[X]{\omega}
+        = 700 \fx[\sinc]{70 \, \omega - 7 \pi} \, e^{- \iu (70 \, \omega - 7 \pi)} +
+        \\
+        + 700 \fx[\sinc]{70 \, \omega + 7 \pi} \, e^{- \iu (70 \, \omega + 7 \pi)}
+    \end{multline*}
+\end{mdframed}
+
+\subsection{Dualidad}
+
+La transformada inversa con $t \longrightarrow -t$ es
+\[
+    \fx[x]{-t}
+    = \frac{1}{2 \, \pi}
+    \int_{-\infty}^\infty \fx[X]{\omega} \, e^{- \iu \omega t}
+    \, \dif \omega
+\]
+
+Cambiando $t \longrightarrow \omega$ y $\omega \longrightarrow t$ simultáneamente queda
+\[
+    \fx[x]{-\omega}
+    = \frac{1}{2 \, \pi}
+    \int_{-\infty}^\infty \fx[X]{t} \, e^{- \iu \omega t}
+    \, \dif t
+\]
+donde
+\[
+    \int_{-\infty}^\infty \fx[X]{t} \, e^{- \iu \omega t}
+    \, \dif t
+    = \fourier{\fx[X]{t}}
+\]
+
+\begin{mdframed}[style=PropertyFrame]
+    \begin{prop}
+    \end{prop}
+    \[
+        \fourier{\fx[x]{t}} = \fx[X]{\omega}
+        \iff
+        \fourier{\fx[X]{t}} = 2 \, \pi \, \fx[x]{-\omega}
+    \]
+\end{mdframed}
+
+\section{Transformadas de Fourier típicas}
+
+\subsection{Pulso rectangular}
+
+En la ecuación \ref{eqn:ckPulso} se obtuvieron los coeficientes de un tren de pulsos de ancho $\tau$ y altura $A$:
+\[
+    \tilde{c_\kth} = \frac{A \, \tau}{T_0} \, \fx[\sinc]{\pi \, \kth \, f_0 \, \tau}
+\]
+
+Según la definición \ref{defn:espectroFourier}, podemos obtener la transformada de un solo pulso a partir del límite de los coeficientes escalados por $T_0$.
+Esto es:
+\[
+    \fx[X]{f} = A \, \tau \, \fx[\sinc]{\pi f \tau}
+\]
+o bien, en radianes:
+\[
+    \fx[X]{\omega} = A \, \tau \, \fx[\sinc]{\frac{\omega \tau}{2}}
+\]
+
+Observar que $X \in \setR$ para todas las frecuencias.
+Por este motivo, podríamos representarlo con un solo gráfico:
+
+% TODO: Gráfico de X(f). Requiere desarrollar funcionalidad en dsp-package.
+
+O bien graficar su espectro bilateral:
+
+% TODO: Gráficos de |X(f)| y fase(X(f)). Requiere desarrollar funcionalidad en dsp-package.
